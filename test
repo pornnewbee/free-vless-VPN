@@ -16,6 +16,7 @@ dns:
     - tls://dns.google:853
 proxies:
   - {name: free, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
+  - {name: def, server: freenodes.pusytroller.cf, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
 proxy-groups:
   - name: 🚀 节点选择
     type: select
@@ -33,6 +34,7 @@ proxy-groups:
     type: select
     proxies:
       - free
+      - def
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
