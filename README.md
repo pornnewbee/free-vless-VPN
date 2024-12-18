@@ -6,5 +6,6 @@ subscribe link: 订阅长期有效。
 
 # 优选节点
 ```
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=freenodes.pusytroller.cf&path=%2F%3Fed%3D2560#免费不死节点
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=freenodes.pusytroller.cf&path=%2F%3Fed%3D2560#优选路线
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.hagou-inc.workers.dev&path=%2F%3Fed%3D2560#超时是因为请求用满
 ```
