@@ -11,4 +11,5 @@ vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.h74647329.workers.dev&path=%2F%3Fed%3D2560#优选3
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.admin-906.workers.dev&path=%2F%3Fed%3D2560#优选4
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.2-5e8.workers.dev&path=%2F%3Fed%3D2560#优选5
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.xijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#优选6
 ```
