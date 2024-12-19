@@ -49,12 +49,12 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - 优选路线
-      - 超时是因为请求用满
-      - 优选3
-      - 优选4
-      - 优选5
-      - 优选6
+      - main
+      - n2
+      - n3
+      - n4
+      - n5
+      - n6
   - name: 📲 电报消息
     type: select
     proxies:
