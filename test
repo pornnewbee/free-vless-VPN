@@ -15,8 +15,12 @@ dns:
     - tls://1.0.0.1:853
     - tls://dns.google:853
 proxies:
-  - {name: free, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
-  - {name: def, server: freenodes.pusytroller.cf, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
+  - {name: 优选路线, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
+  - {name: 超时是因为请求用满, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.hagou-inc.workers.dev}}}
+  - {name: 优选3, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.h74647329.workers.dev}}}
+  - {name: 优选4, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.admin-906.workers.dev}}}
+  - {name: 优选5, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.2-5e8.workers.dev}}}
+  - {name: 优选6, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.xijinpingnmsl.workers.dev}}}
 proxy-groups:
   - name: 🚀 节点选择
     type: select
@@ -33,15 +37,24 @@ proxy-groups:
   - name: 🚀 手动切换
     type: select
     proxies:
-      - free
-      - def
+      - 优选路线
+      - 超时是因为请求用满
+      - 优选3
+      - 优选4
+      - 优选5
+      - 优选6
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
     proxies:
-      - free
+      - 优选路线
+      - 超时是因为请求用满
+      - 优选3
+      - 优选4
+      - 优选5
+      - 优选6
   - name: 📲 电报消息
     type: select
     proxies:
@@ -3479,6 +3492,7 @@ rules:
   - DOMAIN-SUFFIX,buzzhand.com,🚀 节点选择
   - DOMAIN-SUFFIX,buzzhand.net,🚀 节点选择
   - DOMAIN-SUFFIX,buzzorange.com,🚀 节点选择
+  - DOMAIN-SUFFIX,buzzsprout.com,🚀 节点选择
   - DOMAIN-SUFFIX,bvpn.com,🚀 节点选择
   - DOMAIN-SUFFIX,bwbx.io,🚀 节点选择
   - DOMAIN-SUFFIX,bwgyhw.com,🚀 节点选择
@@ -4314,6 +4328,7 @@ rules:
   - DOMAIN-SUFFIX,fa.gov.tw,🚀 节点选择
   - DOMAIN-SUFFIX,facebook.br,🚀 节点选择
   - DOMAIN-SUFFIX,facebook.com,🚀 节点选择
+  - DOMAIN-SUFFIX,facebook.de,🚀 节点选择
   - DOMAIN-SUFFIX,facebook.design,🚀 节点选择
   - DOMAIN-SUFFIX,facebook.hu,🚀 节点选择
   - DOMAIN-SUFFIX,facebook.in,🚀 节点选择
@@ -5559,6 +5574,7 @@ rules:
   - DOMAIN-SUFFIX,iuksky.com,🚀 节点选择
   - DOMAIN-SUFFIX,ivacy.com,🚀 节点选择
   - DOMAIN-SUFFIX,iverycd.com,🚀 节点选择
+  - DOMAIN-SUFFIX,ivonblog.com,🚀 节点选择
   - DOMAIN-SUFFIX,ivpn.net,🚀 节点选择
   - DOMAIN-SUFFIX,iwara.tv,🚀 节点选择
   - DOMAIN-SUFFIX,ixquick.com,🚀 节点选择
@@ -5575,6 +5591,7 @@ rules:
   - DOMAIN-SUFFIX,jamaat.org,🚀 节点选择
   - DOMAIN-SUFFIX,jamestown.org,🚀 节点选择
   - DOMAIN-SUFFIX,jamyangnorbu.com,🚀 节点选择
+  - DOMAIN-SUFFIX,jan.ai,🚀 节点选择
   - DOMAIN-SUFFIX,jandyx.com,🚀 节点选择
   - DOMAIN-SUFFIX,janwongphoto.com,🚀 节点选择
   - DOMAIN-SUFFIX,japan-whores.com,🚀 节点选择
@@ -6045,6 +6062,7 @@ rules:
   - DOMAIN-SUFFIX,meshrep.com,🚀 节点选择
   - DOMAIN-SUFFIX,mesotw.com,🚀 节点选择
   - DOMAIN-SUFFIX,messenger.com,🚀 节点选择
+  - DOMAIN-SUFFIX,meta.com,🚀 节点选择
   - DOMAIN-SUFFIX,metacafe.com,🚀 节点选择
   - DOMAIN-SUFFIX,metafilter.com,🚀 节点选择
   - DOMAIN-SUFFIX,metart.com,🚀 节点选择
@@ -6649,6 +6667,7 @@ rules:
   - DOMAIN-SUFFIX,partypoker.com,🚀 节点选择
   - DOMAIN-SUFFIX,passion.com,🚀 节点选择
   - DOMAIN-SUFFIX,passiontimes.hk,🚀 节点选择
+  - DOMAIN-SUFFIX,passwords.google,🚀 节点选择
   - DOMAIN-SUFFIX,paste.ee,🚀 节点选择
   - DOMAIN-SUFFIX,pastebin.com,🚀 节点选择
   - DOMAIN-SUFFIX,pastie.org,🚀 节点选择
@@ -6682,8 +6701,6 @@ rules:
   - DOMAIN-SUFFIX,pen.io,🚀 节点选择
   - DOMAIN-SUFFIX,penchinese.com,🚀 节点选择
   - DOMAIN-SUFFIX,penchinese.net,🚀 节点选择
-  - DOMAIN-SUFFIX,pengyulong.com,🚀 节点选择
-  - DOMAIN-SUFFIX,penisbot.com,🚀 节点选择
   - DOMAIN-SUFFIX,pentalogic.net,🚀 节点选择
   - DOMAIN-SUFFIX,penthouse.com,🚀 节点选择
   - DOMAIN-SUFFIX,pentoy.hk,🚀 节点选择
@@ -6700,7 +6717,6 @@ rules:
   - DOMAIN-SUFFIX,phapluan.org,🚀 节点选择
   - DOMAIN-SUFFIX,phayul.com,🚀 节点选择
   - DOMAIN-SUFFIX,philborges.com,🚀 节点选择
-  - DOMAIN-SUFFIX,philly.com,🚀 节点选择
   - DOMAIN-SUFFIX,phmsociety.org,🚀 节点选择
   - DOMAIN-SUFFIX,phncdn.com,🚀 节点选择
   - DOMAIN-SUFFIX,phonegap.com,🚀 节点选择
@@ -6845,7 +6861,6 @@ rules:
   - DOMAIN-SUFFIX,provpnaccounts.com,🚀 节点选择
   - DOMAIN-SUFFIX,proxfree.com,🚀 节点选择
   - DOMAIN-SUFFIX,proxifier.com,🚀 节点选择
-  - DOMAIN-SUFFIX,proxlet.com,🚀 节点选择
   - DOMAIN-SUFFIX,proxomitron.info,🚀 节点选择
   - DOMAIN-SUFFIX,proxpn.com,🚀 节点选择
   - DOMAIN-SUFFIX,proxyanonimo.es,🚀 节点选择
@@ -6912,7 +6927,6 @@ rules:
   - DOMAIN-SUFFIX,qkshare.com,🚀 节点选择
   - DOMAIN-SUFFIX,qmzdd.com,🚀 节点选择
   - DOMAIN-SUFFIX,qoos.com,🚀 节点选择
-  - DOMAIN-SUFFIX,qooza.hk,🚀 节点选择
   - DOMAIN-SUFFIX,qpoe.com,🚀 节点选择
   - DOMAIN-SUFFIX,qq.co.za,🚀 节点选择
   - DOMAIN-SUFFIX,qstatus.com,🚀 节点选择
@@ -6954,13 +6968,11 @@ rules:
   - DOMAIN-SUFFIX,raizoji.or.jp,🚀 节点选择
   - DOMAIN-SUFFIX,ramcity.com.au,🚀 节点选择
   - DOMAIN-SUFFIX,rangwang.biz,🚀 节点选择
-  - DOMAIN-SUFFIX,rangzen.com,🚀 节点选择
   - DOMAIN-SUFFIX,rangzen.net,🚀 节点选择
   - DOMAIN-SUFFIX,rangzen.org,🚀 节点选择
   - DOMAIN-SUFFIX,ranxiang.com,🚀 节点选择
   - DOMAIN-SUFFIX,ranyunfei.com,🚀 节点选择
   - DOMAIN-SUFFIX,rapbull.net,🚀 节点选择
-  - DOMAIN-SUFFIX,rapidgator.net,🚀 节点选择
   - DOMAIN-SUFFIX,rapidmoviez.com,🚀 节点选择
   - DOMAIN-SUFFIX,rapidvpn.com,🚀 节点选择
   - DOMAIN-SUFFIX,rarbgprx.org,🚀 节点选择
@@ -7802,6 +7814,7 @@ rules:
   - DOMAIN-SUFFIX,ticket.com.tw,🚀 节点选择
   - DOMAIN-SUFFIX,tigervpn.com,🚀 节点选择
   - DOMAIN-SUFFIX,tiktok.com,🚀 节点选择
+  - DOMAIN-SUFFIX,tiktokv.com,🚀 节点选择
   - DOMAIN-SUFFIX,tiltbrush.com,🚀 节点选择
   - DOMAIN-SUFFIX,timdir.com,🚀 节点选择
   - DOMAIN-SUFFIX,time.com,🚀 节点选择
@@ -7861,6 +7874,7 @@ rules:
   - DOMAIN-SUFFIX,torrentproject.se,🚀 节点选择
   - DOMAIN-SUFFIX,torrenty.org,🚀 节点选择
   - DOMAIN-SUFFIX,torrentz.eu,🚀 节点选择
+  - DOMAIN-SUFFIX,tortoisesvn.net,🚀 节点选择
   - DOMAIN-SUFFIX,torvpn.com,🚀 节点选择
   - DOMAIN-SUFFIX,totalvpn.com,🚀 节点选择
   - DOMAIN-SUFFIX,toutiaoabc.com,🚀 节点选择
