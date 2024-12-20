@@ -1,7 +1,7 @@
 # 免费订阅 free-sub
 
 subscribe link: 订阅长期有效。
-```[https://url.v1.mk/sub?target=clash&url=https%3A%2F%2Fgithub.com%2Fpornnewbee%2Ffree-vless-VPN%2Fraw%2Frefs%2Fheads%2Fmain%2FClash.yml&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2FACL4SSR%2FACL4SSR%2Fmaster%2FClash%2Fconfig%2FACL4SSR_Online_Full.ini&emoji=true&list=false&xudp=false&udp=false&tfo=false&expand=true&scv=false&fdn=false&new_name=true](https://url.v1.mk/sub?target=clash&url=https%3A%2F%2Fgithub.com%2Fpornnewbee%2Ffree-vless-VPN%2Fraw%2Frefs%2Fheads%2Fmain%2Ftemp.yml&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2FACL4SSR%2FACL4SSR%2Fmaster%2FClash%2Fconfig%2FACL4SSR_Online_Full.ini&filename=%E5%85%8D%E8%B4%B9%E8%AE%A2%E9%98%85%E9%95%BF%E6%9C%9F%E6%9C%89%E6%95%88&emoji=false&list=false&xudp=false&udp=false&tfo=false&expand=true&scv=false&fdn=false&new_name=true)```
+```https://url.v1.mk/sub?target=clash&url=https%3A%2F%2Fgithub.com%2Fpornnewbee%2Ffree-vless-VPN%2Fraw%2Frefs%2Fheads%2Fmain%2Ftemp.yml&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2FACL4SSR%2FACL4SSR%2Fmaster%2FClash%2Fconfig%2FACL4SSR_Online_Full.ini&filename=%E5%85%8D%E8%B4%B9%E8%AE%A2%E9%98%85%E9%95%BF%E6%9C%9F%E6%9C%89%E6%95%88&emoji=false&list=false&xudp=false&udp=false&tfo=false&expand=true&scv=false&fdn=false&new_name=true```
 
 
 # 优选节点
