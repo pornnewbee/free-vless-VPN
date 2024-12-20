@@ -67,6 +67,7 @@ proxy-groups:
   - name: 🚀 节点选择
     type: select
     proxies:
+      - ♻️ 自动选择
       - 🇭🇰 香港节点
       - 🇨🇳 台湾节点
       - 🇸🇬 狮城节点
@@ -126,10 +127,65 @@ proxy-groups:
       - Shopify 6
       - Epicgames 6
       - Visa CN 6
+  - name: ♻️ 自动选择
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - 优选路线
+      - FBI 超时是因为请求用满
+      - Visa
+      - Visa HK
+      - WTO
+      - Shopify
+      - Epicgames
+      - Visa CN
+      - 优选路线2
+      - FBI 2
+      - Visa 2
+      - Visa HK 2
+      - WTO 2
+      - Shopify 2
+      - Epicgames 2
+      - Visa CN 2
+      - 优选路线3
+      - FBI 3
+      - Visa 3
+      - Visa HK 3
+      - WTO 3
+      - Shopify 3
+      - Epicgames 3
+      - Visa CN 3
+      - 优选路线4
+      - FBI 4
+      - Visa 4
+      - Visa HK 4
+      - WTO 4
+      - Shopify 4
+      - Epicgames 4
+      - Visa CN 4
+      - 优选路线5
+      - FBI 5
+      - Visa 5
+      - Visa HK 5
+      - WTO 5
+      - Shopify 5
+      - Epicgames 5
+      - Visa CN 5
+      - 优选路线6
+      - FBI 6
+      - Visa 6
+      - Visa HK 6
+      - WTO 6
+      - Shopify 6
+      - Epicgames 6
+      - Visa CN 6
   - name: 📲 电报消息
     type: select
     proxies:
       - 🚀 节点选择
+      - ♻️ 自动选择
       - 🇸🇬 狮城节点
       - 🇭🇰 香港节点
       - 🇨🇳 台湾节点
@@ -142,6 +198,7 @@ proxy-groups:
     type: select
     proxies:
       - 🚀 节点选择
+      - ♻️ 自动选择
       - 🇸🇬 狮城节点
       - 🇭🇰 香港节点
       - 🇨🇳 台湾节点
@@ -154,6 +211,7 @@ proxy-groups:
     type: select
     proxies:
       - 🚀 节点选择
+      - ♻️ 自动选择
       - 🇸🇬 狮城节点
       - 🇭🇰 香港节点
       - 🇨🇳 台湾节点
@@ -167,6 +225,7 @@ proxy-groups:
     proxies:
       - 🎥 奈飞节点
       - 🚀 节点选择
+      - ♻️ 自动选择
       - 🇸🇬 狮城节点
       - 🇭🇰 香港节点
       - 🇨🇳 台湾节点
@@ -192,6 +251,7 @@ proxy-groups:
     type: select
     proxies:
       - 🚀 节点选择
+      - ♻️ 自动选择
       - 🇭🇰 香港节点
       - 🇨🇳 台湾节点
       - 🇸🇬 狮城节点
@@ -286,11 +346,13 @@ proxy-groups:
     proxies:
       - DIRECT
       - 🚀 节点选择
+      - ♻️ 自动选择
   - name: 🎯 全球直连
     type: select
     proxies:
       - DIRECT
       - 🚀 节点选择
+      - ♻️ 自动选择
   - name: 🛑 广告拦截
     type: select
     proxies:
@@ -305,6 +367,7 @@ proxy-groups:
     type: select
     proxies:
       - 🚀 节点选择
+      - ♻️ 自动选择
       - DIRECT
       - 🇭🇰 香港节点
       - 🇨🇳 台湾节点
@@ -314,32 +377,50 @@ proxy-groups:
       - 🇰🇷 韩国节点
       - 🚀 手动切换
   - name: 🇭🇰 香港节点
-    type: select
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
     proxies:
-      - 🇭🇰 Visa HK
-      - 🇭🇰 Visa HK 2
-      - 🇭🇰 Visa HK 3
-      - 🇭🇰 Visa HK 4
-      - 🇭🇰 Visa HK 5
-      - 🇭🇰 Visa HK 6
+      - Visa HK
+      - Visa HK 2
+      - Visa HK 3
+      - Visa HK 4
+      - Visa HK 5
+      - Visa HK 6
   - name: 🇯🇵 日本节点
-    type: select
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
     proxies:
       - DIRECT
   - name: 🇺🇲 美国节点
-    type: select
-    proxies:
-      - DIRECT
-  - name: 🇸🇬 狮城节点
-    type: select
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 150
     proxies:
       - DIRECT
   - name: 🇨🇳 台湾节点
-    type: select
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - DIRECT
+  - name: 🇸🇬 狮城节点
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
     proxies:
       - DIRECT
   - name: 🇰🇷 韩国节点
-    type: select
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
     proxies:
       - DIRECT
   - name: 🎥 奈飞节点
