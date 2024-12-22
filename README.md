@@ -8,7 +8,7 @@ subscribe link: 订阅长期有效。
 ```
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=freenodes.pusytroller.cf&path=%2F%3Fed%3D2560#优选路线
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.fbi.gov:2095?encryption=none&security=none&fp=randomized&type=ws&host=freenodes.pusytroller.cf&path=%2F%3Fed%3D2560#FBI 超时是因为请求用满
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=freenodes.pusytroller.cf&path=%2F%3Fed%3D2560#Visa
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=freenodes.pusytroller.cf&path=%2F%3Fed%3D2560#Visa 北京时间每天上午8点恢复
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com.hk:2095?encryption=none&security=none&fp=randomized&type=ws&host=freenodes.pusytroller.cf&path=%2F%3Fed%3D2560#Visa HK
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.wto.org:2095?encryption=none&security=none&fp=randomized&type=ws&host=freenodes.pusytroller.cf&path=%2F%3Fed%3D2560#WTO
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@shopify.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=freenodes.pusytroller.cf&path=%2F%3Fed%3D2560#Shopify
@@ -54,4 +54,12 @@ vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.wto.org:2095?encryption=none&se
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@shopify.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.xijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#Shopify 6
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.epicgames.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.xijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#Epicgames 6
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@visa.cn:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.xijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#Visa CN 6
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.20241222.workers.dev&path=%2F%3Fed%3D2560#优选路线7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.fbi.gov:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.20241222.workers.dev&path=%2F%3Fed%3D2560#FBI 7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.20241222.workers.dev&path=%2F%3Fed%3D2560#Visa 7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com.hk:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.20241222.workers.dev&path=%2F%3Fed%3D2560#Visa HK 7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.wto.org:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.20241222.workers.dev&path=%2F%3Fed%3D2560#WTO 7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@shopify.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.20241222.workers.dev&path=%2F%3Fed%3D2560#Shopify 7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.epicgames.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.20241222.workers.dev&path=%2F%3Fed%3D2560#Epicgames 7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@visa.cn:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingcloudflare.20241222.workers.dev&path=%2F%3Fed%3D2560#Visa CN 7
 ```
