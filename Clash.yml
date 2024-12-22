@@ -17,7 +17,7 @@ dns:
 proxies:
   - {name: 优选路线, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
   - {name: FBI 超时是因为请求用满, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
-  - {name: Visa, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
+  - {name: Visa 北京时间每天上午8点恢复, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
   - {name: Visa HK, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
   - {name: WTO, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
   - {name: Shopify, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
@@ -63,6 +63,14 @@ proxies:
   - {name: Shopify 6, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.xijinpingnmsl.workers.dev}}}
   - {name: Epicgames 6, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.xijinpingnmsl.workers.dev}}}
   - {name: Visa CN 6, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.xijinpingnmsl.workers.dev}}}
+  - {name: 优选路线7, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241222.workers.dev}}}
+  - {name: FBI 7, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241222.workers.dev}}}
+  - {name: Visa 7, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241222.workers.dev}}}
+  - {name: Visa HK 7, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241222.workers.dev}}}
+  - {name: WTO 7, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241222.workers.dev}}}
+  - {name: Shopify 7, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241222.workers.dev}}}
+  - {name: Epicgames 7, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241222.workers.dev}}}
+  - {name: Visa CN 7, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241222.workers.dev}}}
 proxy-groups:
   - name: 🚀 节点选择
     type: select
@@ -81,7 +89,7 @@ proxy-groups:
     proxies:
       - 优选路线
       - FBI 超时是因为请求用满
-      - Visa
+      - Visa 北京时间每天上午8点恢复
       - Visa HK
       - WTO
       - Shopify
@@ -127,6 +135,14 @@ proxy-groups:
       - Shopify 6
       - Epicgames 6
       - Visa CN 6
+      - 优选路线7
+      - FBI 7
+      - Visa 7
+      - Visa HK 7
+      - WTO 7
+      - Shopify 7
+      - Epicgames 7
+      - Visa CN 7
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -135,7 +151,7 @@ proxy-groups:
     proxies:
       - 优选路线
       - FBI 超时是因为请求用满
-      - Visa
+      - Visa 北京时间每天上午8点恢复
       - Visa HK
       - WTO
       - Shopify
@@ -181,6 +197,14 @@ proxy-groups:
       - Shopify 6
       - Epicgames 6
       - Visa CN 6
+      - 优选路线7
+      - FBI 7
+      - Visa 7
+      - Visa HK 7
+      - WTO 7
+      - Shopify 7
+      - Epicgames 7
+      - Visa CN 7
   - name: 📲 电报消息
     type: select
     proxies:
@@ -388,6 +412,7 @@ proxy-groups:
       - Visa HK 4
       - Visa HK 5
       - Visa HK 6
+      - Visa HK 7
   - name: 🇯🇵 日本节点
     type: url-test
     url: http://www.gstatic.com/generate_204
