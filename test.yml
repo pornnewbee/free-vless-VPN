@@ -15,12 +15,14 @@ dns:
     - tls://1.0.0.1:853
     - tls://dns.google:853
 proxies:
-  - {name: main, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
-  - {name: n2, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.hagou-inc.workers.dev}}}
-  - {name: n3, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.h74647329.workers.dev}}}
-  - {name: n4, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.admin-906.workers.dev}}}
-  - {name: n5, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.2-5e8.workers.dev}}}
-  - {name: n6, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.xijinpingnmsl.workers.dev}}}
+  - {name: auto, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
+  - {name: FBI, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
+  - {name: Visa, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
+  - {name: Visa HK, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
+  - {name: WTO, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
+  - {name: Shopify, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
+  - {name: Epicgames, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
+  - {name: Visa CN, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
 proxy-groups:
   - name: 🚀 节点选择
     type: select
@@ -37,24 +39,26 @@ proxy-groups:
   - name: 🚀 手动切换
     type: select
     proxies:
-      - main
-      - n2
-      - n3
-      - n4
-      - n5
-      - n6
+      - auto
+      - Visa
+      - Visa HK
+      - WTO
+      - Shopify
+      - Epicgames
+      - Visa CN
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
     proxies:
-      - main
-      - n2
-      - n3
-      - n4
-      - n5
-      - n6
+      - auto
+      - Visa
+      - Visa HK
+      - WTO
+      - Shopify
+      - Epicgames
+      - Visa CN
   - name: 📲 电报消息
     type: select
     proxies:
