@@ -14,14 +14,14 @@ vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.wto.org:2095?encryption=none&se
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@shopify.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=freenodes.pusytroller.cf&path=%2F%3Fed%3D2560#Shopify
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.epicgames.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=freenodes.pusytroller.cf&path=%2F%3Fed%3D2560#Epicgames
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@visa.cn:2095?encryption=none&security=none&fp=randomized&type=ws&host=freenodes.pusytroller.cf&path=%2F%3Fed%3D2560#Visa CN
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=xijinping.xijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#优选路线2
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.fbi.gov:2095?encryption=none&security=none&fp=randomized&type=ws&host=xijinping.xijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#FBI 2
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=xijinping.xijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#Visa 2
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com.hk:2095?encryption=none&security=none&fp=randomized&type=ws&host=xijinping.xijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#Visa HK 2
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.wto.org:2095?encryption=none&security=none&fp=randomized&type=ws&host=xijinping.xijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#WTO 2
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@shopify.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=xijinping.xijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#Shopify 2
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.epicgames.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=xijinping.xijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#Epicgames 2
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@visa.cn:2095?encryption=none&security=none&fp=randomized&type=ws&host=xijinping.xijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#Visa CN 2
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=nmsl.fuckingxijinping.workers.dev&path=%2F%3Fed%3D2560#优选路线2
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.fbi.gov:2095?encryption=none&security=none&fp=randomized&type=ws&host=nmsl.fuckingxijinping.workers.dev&path=%2F%3Fed%3D2560#FBI 2
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=nmsl.fuckingxijinping.workers.dev&path=%2F%3Fed%3D2560#Visa 2
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com.hk:2095?encryption=none&security=none&fp=randomized&type=ws&host=nmsl.fuckingxijinping.workers.dev&path=%2F%3Fed%3D2560#Visa HK 2
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.wto.org:2095?encryption=none&security=none&fp=randomized&type=ws&host=nmsl.fuckingxijinping.workers.dev&path=%2F%3Fed%3D2560#WTO 2
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@shopify.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=nmsl.fuckingxijinping.workers.dev&path=%2F%3Fed%3D2560#Shopify 2
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.epicgames.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=nmsl.fuckingxijinping.workers.dev&path=%2F%3Fed%3D2560#Epicgames 2
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@visa.cn:2095?encryption=none&security=none&fp=randomized&type=ws&host=nmsl.fuckingxijinping.workers.dev&path=%2F%3Fed%3D2560#Visa CN 2
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckxijinping.fuckyourmom.workers.dev&path=%2F%3Fed%3D2560#优选路线3
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.fbi.gov:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckxijinping.fuckyourmom.workers.dev&path=%2F%3Fed%3D2560#FBI 3
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckxijinping.fuckyourmom.workers.dev&path=%2F%3Fed%3D2560#Visa 3
