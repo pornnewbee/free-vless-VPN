@@ -46,14 +46,14 @@ vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.wto.org:2095?encryption=none&se
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@shopify.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=xijinpingnmsl.s4ar.workers.dev&path=%2F%3Fed%3D2560#Shopify 6
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.epicgames.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=xijinpingnmsl.s4ar.workers.dev&path=%2F%3Fed%3D2560#Epicgames 6
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@visa.cn:2095?encryption=none&security=none&fp=randomized&type=ws&host=xijinpingnmsl.s4ar.workers.dev&path=%2F%3Fed%3D2560#Visa CN 6
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.sbxijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#优选路线7
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.fbi.gov:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.sbxijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#FBI 7
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.sbxijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#Visa 7
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com.hk:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.sbxijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#Visa HK 7
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.wto.org:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.sbxijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#WTO 7
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@shopify.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.sbxijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#Shopify 7
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.epicgames.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.sbxijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#Epicgames 7
-vless://d342d11e-d424-4583-b36e-524ab1f0afa4@visa.cn:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.sbxijinpingnmsl.workers.dev&path=%2F%3Fed%3D2560#Visa CN 7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.cnm-xijinping.workers.dev&path=%2F%3Fed%3D2560#优选路线7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.fbi.gov:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.cnm-xijinping.workers.dev&path=%2F%3Fed%3D2560#FBI 7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.cnm-xijinping.workers.dev&path=%2F%3Fed%3D2560#Visa 7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com.hk:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.cnm-xijinping.workers.dev&path=%2F%3Fed%3D2560#Visa HK 7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.wto.org:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.cnm-xijinping.workers.dev&path=%2F%3Fed%3D2560#WTO 7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@shopify.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.cnm-xijinping.workers.dev&path=%2F%3Fed%3D2560#Shopify 7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.epicgames.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.cnm-xijinping.workers.dev&path=%2F%3Fed%3D2560#Epicgames 7
+vless://d342d11e-d424-4583-b36e-524ab1f0afa4@visa.cn:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.cnm-xijinping.workers.dev&path=%2F%3Fed%3D2560#Visa CN 7
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@cf.090227.xyz:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.sweetasshole.workers.dev&path=%2F%3Fed%3D2560#优选路线8
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.fbi.gov:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.sweetasshole.workers.dev&path=%2F%3Fed%3D2560#FBI 8
 vless://d342d11e-d424-4583-b36e-524ab1f0afa4@www.visa.com:2095?encryption=none&security=none&fp=randomized&type=ws&host=fuckingxijinping.sweetasshole.workers.dev&path=%2F%3Fed%3D2560#Visa 8
