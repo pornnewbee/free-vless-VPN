@@ -96,7 +96,7 @@ proxy-groups:
     type: select
     proxies:
       - 优选路线 订阅可以随意分享
-      - FBI 超时是因为请求用满
+      - FBI 超时是因为请求次数用完
       - Visa 北京时间每天上午8点恢复
       - Visa HK
       - WTO
@@ -166,7 +166,7 @@ proxy-groups:
     tolerance: 50
     proxies:
       - 优选路线 订阅可以随意分享
-      - FBI 超时是因为请求用满
+      - FBI 超时是因为请求次数用完
       - Visa 北京时间每天上午8点恢复
       - Visa HK
       - WTO
