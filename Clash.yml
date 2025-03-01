@@ -16,69 +16,69 @@ dns:
     - tls://dns.google:853
 proxies:
   - {name: 优选路线 订阅可以随意分享, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
-  - {name: FBI 超时是因为请求用满, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
+  - {name: FBI 超时是因为请求次数用完, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
   - {name: Visa 北京时间每天上午8点恢复, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
   - {name: Visa HK, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
   - {name: WTO, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
   - {name: Shopify, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
   - {name: Epicgames, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
   - {name: Visa CN, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: freenodes.pusytroller.cf}}}
-  - {name: 优选路线2, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: nmsl.fuckingxijinping.workers.dev}}}
-  - {name: FBI 2, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: nmsl.fuckingxijinping.workers.dev}}}
-  - {name: Visa 2, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: nmsl.fuckingxijinping.workers.dev}}}
-  - {name: Visa HK 2, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: nmsl.fuckingxijinping.workers.dev}}}
-  - {name: WTO 2, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: nmsl.fuckingxijinping.workers.dev}}}
-  - {name: Shopify 2, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: nmsl.fuckingxijinping.workers.dev}}}
-  - {name: Epicgames 2, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: nmsl.fuckingxijinping.workers.dev}}}
-  - {name: Visa CN 2, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: nmsl.fuckingxijinping.workers.dev}}}
-  - {name: 优选路线3, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
-  - {name: FBI 3, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
-  - {name: Visa 3, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
-  - {name: Visa HK 3, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
-  - {name: WTO 3, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
-  - {name: Shopify 3, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
-  - {name: Epicgames 3, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
-  - {name: Visa CN 3, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckxijinping.fuckyourmom.workers.dev}}}
-  - {name: 优选路线5, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.2-5e8.workers.dev}}}
-  - {name: FBI 5, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.2-5e8.workers.dev}}}
-  - {name: Visa 5, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.2-5e8.workers.dev}}}
-  - {name: Visa HK 5, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.2-5e8.workers.dev}}}
-  - {name: WTO 5, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.2-5e8.workers.dev}}}
-  - {name: Shopify 5, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.2-5e8.workers.dev}}}
-  - {name: Epicgames 5, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.2-5e8.workers.dev}}}
-  - {name: Visa CN 5, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.2-5e8.workers.dev}}}
-  - {name: 优选路线6, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: xijinpingnmsl.s4ar.workers.dev}}}
-  - {name: FBI 6, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: xijinpingnmsl.s4ar.workers.dev}}}
-  - {name: Visa 6, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: xijinpingnmsl.s4ar.workers.dev}}}
-  - {name: Visa HK 6, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: xijinpingnmsl.s4ar.workers.dev}}}
-  - {name: WTO 6, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: xijinpingnmsl.s4ar.workers.dev}}}
-  - {name: Shopify 6, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: xijinpingnmsl.s4ar.workers.dev}}}
-  - {name: Epicgames 6, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: xijinpingnmsl.s4ar.workers.dev}}}
-  - {name: Visa CN 6, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: xijinpingnmsl.s4ar.workers.dev}}}
-  - {name: 优选路线7, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.cnm-xijinping.workers.dev}}}
-  - {name: FBI 7, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.cnm-xijinping.workers.dev}}}
-  - {name: Visa 7, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.cnm-xijinping.workers.dev}}}
-  - {name: Visa HK 7, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.cnm-xijinping.workers.dev}}}
-  - {name: WTO 7, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.cnm-xijinping.workers.dev}}}
-  - {name: Shopify 7, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.cnm-xijinping.workers.dev}}}
-  - {name: Epicgames 7, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.cnm-xijinping.workers.dev}}}
-  - {name: Visa CN 7, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.cnm-xijinping.workers.dev}}}
-  - {name: 优选路线8, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
-  - {name: FBI 8, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
-  - {name: Visa 8, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
-  - {name: Visa HK 8, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
-  - {name: WTO 8, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
-  - {name: Shopify 8, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
-  - {name: Epicgames 8, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
-  - {name: Visa CN 8, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
-  - {name: 优选路线9, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
-  - {name: FBI 9, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
-  - {name: Visa 9, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
-  - {name: Visa HK 9, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
-  - {name: WTO 9, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
-  - {name: Shopify 9, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
-  - {name: Epicgames 9, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
-  - {name: Visa CN 9, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
+  - {name: 优选路线2, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.yourmom-2e5.workers.dev}}}
+  - {name: FBI 2, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.yourmom-2e5.workers.dev}}}
+  - {name: Visa 2, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.yourmom-2e5.workers.dev}}}
+  - {name: Visa HK 2, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.yourmom-2e5.workers.dev}}}
+  - {name: WTO 2, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.yourmom-2e5.workers.dev}}}
+  - {name: Shopify 2, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.yourmom-2e5.workers.dev}}}
+  - {name: Epicgames 2, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.yourmom-2e5.workers.dev}}}
+  - {name: Visa CN 2, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.yourmom-2e5.workers.dev}}}
+  - {name: 优选路线3, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.dark-mouse-d67e.workers.dev}}}
+  - {name: FBI 3, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.dark-mouse-d67e.workers.dev}}}
+  - {name: Visa 3, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.dark-mouse-d67e.workers.dev}}}
+  - {name: Visa HK 3, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.dark-mouse-d67e.workers.dev}}}
+  - {name: WTO 3, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.dark-mouse-d67e.workers.dev}}}
+  - {name: Shopify 3, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.dark-mouse-d67e.workers.dev}}}
+  - {name: Epicgames 3, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.dark-mouse-d67e.workers.dev}}}
+  - {name: Visa CN 3, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.dark-mouse-d67e.workers.dev}}}
+  - {name: 优选路线4, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.asshole-afc.workers.dev}}}
+  - {name: FBI 4, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.asshole-afc.workers.dev}}}
+  - {name: Visa 4, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.asshole-afc.workers.dev}}}
+  - {name: Visa HK 4, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.asshole-afc.workers.dev}}}
+  - {name: WTO 4, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.asshole-afc.workers.dev}}}
+  - {name: Shopify 4, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.asshole-afc.workers.dev}}}
+  - {name: Epicgames 4, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.asshole-afc.workers.dev}}}
+  - {name: Visa CN 4, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.asshole-afc.workers.dev}}}
+  - {name: 优选路线5, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.ceo-a6b.workers.dev}}}
+  - {name: FBI 5, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.ceo-a6b.workers.dev}}}
+  - {name: Visa 5, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.ceo-a6b.workers.dev}}}
+  - {name: Visa HK 5, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.ceo-a6b.workers.dev}}}
+  - {name: WTO 5, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.ceo-a6b.workers.dev}}}
+  - {name: Shopify 5, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.ceo-a6b.workers.dev}}}
+  - {name: Epicgames 5, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.ceo-a6b.workers.dev}}}
+  - {name: Visa CN 5, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.ceo-a6b.workers.dev}}}
+  - {name: 优选路线6, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.rapid-frog-9ce1.workers.dev}}}
+  - {name: FBI 6, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.rapid-frog-9ce1.workers.dev}}}
+  - {name: Visa 6, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.rapid-frog-9ce1.workers.dev}}}
+  - {name: Visa HK 6, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.rapid-frog-9ce1.workers.dev}}}
+  - {name: WTO 6, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.rapid-frog-9ce1.workers.dev}}}
+  - {name: Shopify 6, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.rapid-frog-9ce1.workers.dev}}}
+  - {name: Epicgames 6, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.rapid-frog-9ce1.workers.dev}}}
+  - {name: Visa CN 6, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.rapid-frog-9ce1.workers.dev}}}
+  - {name: 优选路线7, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
+  - {name: FBI 7, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
+  - {name: Visa 7, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
+  - {name: Visa HK 7, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
+  - {name: WTO 7, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
+  - {name: Shopify 7, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
+  - {name: Epicgames 7, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
+  - {name: Visa CN 7, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.xijinpingbigsb.workers.dev}}}
+  - {name: 优选路线8, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
+  - {name: FBI 8, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
+  - {name: Visa 8, server: www.visa.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
+  - {name: Visa HK 8, server: www.visa.com.hk, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
+  - {name: WTO 8, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
+  - {name: Shopify 8, server: shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
+  - {name: Epicgames 8, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
+  - {name: Visa CN 8, server: visa.cn, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingcloudflare.20241225.workers.dev}}}
 proxy-groups:
   - name: 🚀 节点选择
     type: select
@@ -96,7 +96,7 @@ proxy-groups:
     type: select
     proxies:
       - 优选路线 订阅可以随意分享
-      - FBI 超时是因为请求用满
+      - FBI 超时是因为请求次数用完
       - Visa 北京时间每天上午8点恢复
       - Visa HK
       - WTO
@@ -119,6 +119,14 @@ proxy-groups:
       - Shopify 3
       - Epicgames 3
       - Visa CN 3
+      - 优选路线4
+      - FBI 4
+      - Visa 4
+      - Visa HK 4
+      - WTO 4
+      - Shopify 4
+      - Epicgames 4
+      - Visa CN 4
       - 优选路线5
       - FBI 5
       - Visa 5
@@ -151,14 +159,6 @@ proxy-groups:
       - Shopify 8
       - Epicgames 8
       - Visa CN 8
-      - 优选路线9
-      - FBI 9
-      - Visa 9
-      - Visa HK 9
-      - WTO 9
-      - Shopify 9
-      - Epicgames 9
-      - Visa CN 9
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -166,7 +166,7 @@ proxy-groups:
     tolerance: 50
     proxies:
       - 优选路线 订阅可以随意分享
-      - FBI 超时是因为请求用满
+      - FBI 超时是因为请求次数用完
       - Visa 北京时间每天上午8点恢复
       - Visa HK
       - WTO
@@ -189,6 +189,14 @@ proxy-groups:
       - Shopify 3
       - Epicgames 3
       - Visa CN 3
+      - 优选路线4
+      - FBI 4
+      - Visa 4
+      - Visa HK 4
+      - WTO 4
+      - Shopify 4
+      - Epicgames 4
+      - Visa CN 4
       - 优选路线5
       - FBI 5
       - Visa 5
@@ -213,6 +221,14 @@ proxy-groups:
       - Shopify 7
       - Epicgames 7
       - Visa CN 7
+      - 优选路线8
+      - FBI 8
+      - Visa 8
+      - Visa HK 8
+      - WTO 8
+      - Shopify 8
+      - Epicgames 8
+      - Visa CN 8
   - name: 📲 电报消息
     type: select
     proxies:
