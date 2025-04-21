@@ -95,8 +95,8 @@ proxy-groups:
   - name: 🚀 手动切换
     type: select
     proxies:
-      - Cloudflare Support
-      - FBI 超时是因为请求次数用完
+      - 剩余流量：9999G
+      - 套餐到期：2025-12-31
       - Cloudflare ns 每天早八点恢复
       - Cloudflare developers
       - WTO
@@ -165,8 +165,8 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - Cloudflare Support
-      - FBI 超时是因为请求次数用完
+      - 剩余流量：9999G
+      - 套餐到期：2025-12-31
       - Cloudflare ns 每天早八点恢复
       - Cloudflare developers
       - WTO
