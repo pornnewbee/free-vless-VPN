@@ -31,7 +31,7 @@ proxies:
   - {name: Namemc 2, server: namemc.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.cnmxijinping.workers.dev}}}
   - {name: Epicgames 2, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.cnmxijinping.workers.dev}}}
   - {name: IT Army 2, server: itarmy.com.ua, port: 2095, client-fingerprint: randomized, type: vless, uuid: d342d11e-d424-4583-b36e-524ab1f0afa4, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/?ed=2560", headers: {Host: fuckingxijinping.cnmxijinping.workers.dev}}}
-  proxy-groups:
+proxy-groups:
   - name: 🚀 节点选择
     type: select
     proxies:
