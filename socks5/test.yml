@@ -277,7 +277,126 @@ proxy-groups:
     interval: 300
     tolerance: 50
     proxies:
-      - 自动优选
+      - Temu
+        - Shopify
+        - FBI
+        - Csgo
+        - Epicgames
+        - Cloudflare Support
+        - Cloudflare blog
+        - Cloudflare ns
+        - Cloudflare Developers
+        - Openai
+        - IT Army
+        - Udemy
+        - Npmjs
+        - Cdnjs
+        - Stackoverflow
+        - Temu 1
+        - Shopify 1
+        - FBI 1
+        - Csgo 1
+        - Epicgames 1
+        - Cloudflare Support 1
+        - Cloudflare blog 1
+        - Cloudflare ns 1
+        - Cloudflare Developers 1
+        - Openai 1
+        - IT Army 1
+        - Udemy 1
+        - Npmjs 1
+        - Cdnjs 1
+        - Stackoverflow 1
+        - Temu 2
+        - Shopify 2
+        - FBI 2
+        - Csgo 2
+        - Epicgames 2
+        - Cloudflare Support 2
+        - Cloudflare blog 2
+        - Cloudflare ns 2
+        - Cloudflare Developers 2
+        - Openai 2
+        - IT Army 2
+        - Udemy 2
+        - Npmjs 2
+        - Cdnjs 2
+        - Stackoverflow 2
+        - Temu 3
+        - Shopify 3
+        - FBI 3
+        - Csgo 3
+        - Epicgames 3
+        - Cloudflare Support 3
+        - Cloudflare blog 3
+        - Cloudflare ns 3
+        - Cloudflare Developers 3
+        - Openai 3
+        - IT Army 3
+        - Udemy 3
+        - Npmjs 3
+        - Cdnjs 3
+        - Stackoverflow 3
+        - Temu 4
+        - Shopify 4
+        - FBI 4
+        - Csgo 4
+        - Epicgames 4
+        - Cloudflare Support 4
+        - Cloudflare blog 4
+        - Cloudflare ns 4
+        - Cloudflare Developers 4
+        - Openai 4
+        - IT Army 4
+        - Udemy 4
+        - Npmjs 4
+        - Cdnjs 4
+        - Stackoverflow 4
+        - Temu 5
+        - Shopify 5
+        - FBI 5
+        - Csgo 5
+        - Epicgames 5
+        - Cloudflare Support 5
+        - Cloudflare blog 5
+        - Cloudflare ns 5
+        - Cloudflare Developers 5
+        - Openai 5
+        - IT Army 5
+        - Udemy 5
+        - Npmjs 5
+        - Cdnjs 5
+        - Stackoverflow 5
+        - Temu 6
+        - Shopify 6
+        - FBI 6
+        - Csgo 6
+        - Epicgames 6
+        - Cloudflare Support 6
+        - Cloudflare blog 6
+        - Cloudflare ns 6
+        - Cloudflare Developers 6
+        - Openai 6
+        - IT Army 6
+        - Udemy 6
+        - Npmjs 6
+        - Cdnjs 6
+        - Stackoverflow 6
+        - Temu 7
+        - Shopify 7
+        - FBI 7
+        - Csgo 7
+        - Epicgames 7
+        - Cloudflare Support 7
+        - Cloudflare blog 7
+        - Cloudflare ns 7
+        - Cloudflare Developers 7
+        - Openai 7
+        - IT Army 7
+        - Udemy 7
+        - Npmjs 7
+        - Cdnjs 7
+        - Stackoverflow 7
   - name: 📲 电报消息
     type: select
     proxies:
