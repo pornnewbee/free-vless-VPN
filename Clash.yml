@@ -12,7 +12,7 @@ dns:
   fallback:
     - tls://1.0.0.1:853
 proxies:
-  - {name: 自动优选, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/", headers: {Host: 114514.pusytroller.cf}}}
+  - {name: 自动优选 订阅可以公开分享, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/", headers: {Host: 114514.pusytroller.cf}}}
   - {name: Linux do, server: linux.do, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/", headers: {Host: 114514.pusytroller.cf}}} 
   - {name: Temu, server: www.temu.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/", headers: {Host: 114514.pusytroller.cf}}}
   - {name: namemc, server: namemc.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: "/", headers: {Host: 114514.pusytroller.cf}}}
