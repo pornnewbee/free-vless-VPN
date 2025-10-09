@@ -2,7 +2,7 @@
 
 subscribe link: 订阅长期有效。
 ```https://v1.mk/fcFdn8x```
-```https://ghfast.top/https://github.com/pornnewbee/free-vless-VPN/raw/refs/heads/main/Clash.yml```
+```https://sub.pusytroller.cf```
 
 
 # 优选节点
