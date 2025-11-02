@@ -18,7 +18,7 @@ proxies:
   - {name: 自动优选订阅可公开分享, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.rapid-frog-9ce1.workers.dev}}}
   - {name: Linux do, server: linux.do, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.rapid-frog-9ce1.workers.dev}}}
   - {name: Temu, server: www.temu.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.rapid-frog-9ce1.workers.dev}}}
-  - {name: namemc, server: namemc.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.rapid-frog-9ce1.workers.dev}}}
+  - {name: Cloudflare Docs, server: docs.cloudflare.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.rapid-frog-9ce1.workers.dev}}}
   - {name: itarmy.com.ua, server: itarmy.com.ua, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.rapid-frog-9ce1.workers.dev}}}
   - {name: Shopify, server: www.shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.rapid-frog-9ce1.workers.dev}}}
   - {name: FBI, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.rapid-frog-9ce1.workers.dev}}}
@@ -43,7 +43,7 @@ proxy-groups:
       - 自动优选订阅可公开分享
       - Linux do
       - Temu
-      - namemc
+      - Cloudflare Docs
       - itarmy.com.ua
       - Shopify
       - FBI
@@ -68,7 +68,7 @@ proxy-groups:
       - 自动优选订阅可公开分享
       - Linux do
       - Temu
-      - namemc
+      - Cloudflare Docs
       - itarmy.com.ua
       - Shopify
       - FBI
@@ -93,7 +93,7 @@ proxy-groups:
       - 自动优选订阅可公开分享
       - Linux do
       - Temu
-      - namemc
+      - Cloudflare Docs
       - itarmy.com.ua
       - Shopify
       - FBI
@@ -117,7 +117,7 @@ proxy-groups:
       - 自动优选订阅可公开分享
       - Linux do
       - Temu
-      - namemc
+      - Cloudflare Docs
       - itarmy.com.ua
       - Shopify
       - FBI
@@ -141,7 +141,7 @@ proxy-groups:
       - 自动优选订阅可公开分享
       - Linux do
       - Temu
-      - namemc
+      - Cloudflare Docs
       - itarmy.com.ua
       - Shopify
       - FBI
@@ -165,7 +165,7 @@ proxy-groups:
       - 自动优选订阅可公开分享
       - Linux do
       - Temu
-      - namemc
+      - Cloudflare Docs
       - itarmy.com.ua
       - Shopify
       - FBI
@@ -190,7 +190,7 @@ proxy-groups:
       - 自动优选订阅可公开分享
       - Linux do
       - Temu
-      - namemc
+      - Cloudflare Docs
       - itarmy.com.ua
       - Shopify
       - FBI
@@ -231,7 +231,7 @@ proxy-groups:
       - 自动优选订阅可公开分享
       - Linux do
       - Temu
-      - namemc
+      - Cloudflare Docs
       - itarmy.com.ua
       - Shopify
       - FBI
