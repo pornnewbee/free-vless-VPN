@@ -16,7 +16,7 @@ dns:
     - tls://dns.google:853
 proxies:
   - {name: 自动优选订阅可公开分享, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.fuckfangbingxingmom.workers.dev}}}
-  - {name: Linux do, server: linux.do, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.fuckfangbingxingmom.workers.dev}}}
+  - {name: Cloudflare DNS, server: cloudflare-dns.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.fuckfangbingxingmom.workers.dev}}}
   - {name: Temu, server: www.temu.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.fuckfangbingxingmom.workers.dev}}}
   - {name: Cloudflare Docs, server: docs.cloudflare.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.fuckfangbingxingmom.workers.dev}}}
   - {name: itarmy.com.ua, server: itarmy.com.ua, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.fuckfangbingxingmom.workers.dev}}}
@@ -41,7 +41,7 @@ proxy-groups:
       - ♻️ 自动选择
       - DIRECT
       - 自动优选订阅可公开分享
-      - Linux do
+      - Cloudflare DNS
       - Temu
       - Cloudflare Docs
       - itarmy.com.ua
@@ -66,7 +66,7 @@ proxy-groups:
     tolerance: 50
     proxies:
       - 自动优选订阅可公开分享
-      - Linux do
+      - Cloudflare DNS
       - Temu
       - Cloudflare Docs
       - itarmy.com.ua
@@ -91,7 +91,7 @@ proxy-groups:
       - ♻️ 自动选择
       - 🎯 全球直连
       - 自动优选订阅可公开分享
-      - Linux do
+      - Cloudflare DNS
       - Temu
       - Cloudflare Docs
       - itarmy.com.ua
@@ -115,7 +115,7 @@ proxy-groups:
       - 🚀 节点选择
       - 🎯 全球直连
       - 自动优选订阅可公开分享
-      - Linux do
+      - Cloudflare DNS
       - Temu
       - Cloudflare Docs
       - itarmy.com.ua
@@ -139,7 +139,7 @@ proxy-groups:
       - 🎯 全球直连
       - 🚀 节点选择
       - 自动优选订阅可公开分享
-      - Linux do
+      - Cloudflare DNS
       - Temu
       - Cloudflare Docs
       - itarmy.com.ua
@@ -163,7 +163,7 @@ proxy-groups:
       - 🚀 节点选择
       - 🎯 全球直连
       - 自动优选订阅可公开分享
-      - Linux do
+      - Cloudflare DNS
       - Temu
       - Cloudflare Docs
       - itarmy.com.ua
@@ -188,7 +188,7 @@ proxy-groups:
       - 🎯 全球直连
       - ♻️ 自动选择
       - 自动优选订阅可公开分享
-      - Linux do
+      - Cloudflare DNS
       - Temu
       - Cloudflare Docs
       - itarmy.com.ua
@@ -229,7 +229,7 @@ proxy-groups:
       - 🎯 全球直连
       - ♻️ 自动选择
       - 自动优选订阅可公开分享
-      - Linux do
+      - Cloudflare DNS
       - Temu
       - Cloudflare Docs
       - itarmy.com.ua
@@ -3762,3 +3762,8 @@ rules:
   - IP-CIDR,101.199.196.0/22,🎯 全球直连,no-resolve
   - GEOIP,CN,🎯 全球直连
   - MATCH,🐟 漏网之鱼
+
+
+
+
+
