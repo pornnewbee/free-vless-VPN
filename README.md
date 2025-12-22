@@ -14,3 +14,7 @@ subscribe link: 订阅长期有效。
 | **iPhone/iPad**  | [Karing](https://apps.apple.com/us/app/karing/id6472431552)<br>[Shadowrocket](https://apps.apple.com/us/app/shadowrocket/id932747118)<br>（需海外Apple ID） |
 
 ---
+
+Buymeacoffe/Sponsor/打赏
+XMR
+49UP9rrnTKj4s4Y6is1LweKzF5V3hCAioao75qJG24525BoACWRb8ss5qS9KfaBaTAK77SRYksPHNdX3eWwiPJ1p3h6buJh
