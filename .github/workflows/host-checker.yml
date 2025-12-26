@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pyyaml httpx
+          pip install pyyaml httpx requests
       - name: Check all YAML hosts
         run: |
           import yaml
