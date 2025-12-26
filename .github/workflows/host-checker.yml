@@ -1,26 +1,47 @@
-- name: Check all YAML hosts
-  run: |
-    import yaml
-    import httpx
-    import pathlib
+name: Check YAML Hosts
 
-    base_path = pathlib.Path("./nodes")
-    yml_files = base_path.glob("*.yml")
+on:
+  workflow_dispatch:
 
-    for yml_file in yml_files:
-        try:
-            with open(yml_file, "r", encoding="utf-8") as f:
-                data = yaml.safe_load(f)
-            host = data.get("ws-opts", {}).get("headers", {}).get("Host")
-            if not host:
-                print(f"{yml_file}: no host found")
-                continue
-            url = f"https://{host}"
-            try:
-                r = httpx.get(url, timeout=10)
-                print(f"{yml_file}: {host} -> {r.status_code}")
-            except Exception as e:
-                print(f"{yml_file}: {host} -> error: {e}")
-        except Exception as e:
-            print(f"{yml_file}: failed to read -> {e}")
-  shell: python
+jobs:
+  check-hosts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml httpx
+      - name: Check all YAML hosts
+        run: |
+          import yaml
+          import httpx
+          import pathlib
+      
+          base_path = pathlib.Path("./nodes")
+          yml_files = base_path.glob("*.yml")
+      
+          for yml_file in yml_files:
+              try:
+                  with open(yml_file, "r", encoding="utf-8") as f:
+                      data = yaml.safe_load(f)
+                  host = data.get("ws-opts", {}).get("headers", {}).get("Host")
+                  if not host:
+                      print(f"{yml_file}: no host found")
+                      continue
+                  url = f"https://{host}"
+                  try:
+                      r = httpx.get(url, timeout=10)
+                      print(f"{yml_file}: {host} -> {r.status_code}")
+                  except Exception as e:
+                      print(f"{yml_file}: {host} -> error: {e}")
+              except Exception as e:
+                  print(f"{yml_file}: failed to read -> {e}")
+        shell: python
