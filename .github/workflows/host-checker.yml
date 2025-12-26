@@ -24,24 +24,29 @@ jobs:
           import yaml
           import httpx
           import pathlib
-      
+          
           base_path = pathlib.Path("./nodes")
           yml_files = base_path.glob("*.yml")
-      
+          
           for yml_file in yml_files:
               try:
                   with open(yml_file, "r", encoding="utf-8") as f:
                       data = yaml.safe_load(f)
-                  host = data.get("ws-opts", {}).get("headers", {}).get("Host")
-                  if not host:
-                      print(f"{yml_file}: no host found")
+                  proxies = data.get("proxies", [])
+                  if not proxies:
+                      print(f"{yml_file}: no proxies found")
                       continue
-                  url = f"https://{host}"
-                  try:
-                      r = httpx.get(url, timeout=10)
-                      print(f"{yml_file}: {host} -> {r.status_code}")
-                  except Exception as e:
-                      print(f"{yml_file}: {host} -> error: {e}")
+                  for proxy in proxies:
+                      host = proxy.get("ws-opts", {}).get("headers", {}).get("Host")
+                      if not host:
+                          print(f"{yml_file}: proxy {proxy.get('name', 'unknown')} has no host")
+                          continue
+                      url = f"https://{host}"
+                      try:
+                          r = httpx.get(url, timeout=10)
+                          print(f"{yml_file}: {host} -> {r.status_code}")
+                      except Exception as e:
+                          print(f"{yml_file}: {host} -> error: {e}")
               except Exception as e:
                   print(f"{yml_file}: failed to read -> {e}")
         shell: python
