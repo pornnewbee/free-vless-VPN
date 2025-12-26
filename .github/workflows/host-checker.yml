@@ -26,13 +26,19 @@ jobs:
           from pathlib import Path
           
           node_dir = "nodes"
+          
           for yml_file in Path(node_dir).glob("*.yml"):
               with open(yml_file, "r", encoding="utf-8") as f:
                   data = yaml.safe_load(f)
-              hosts = set()  # 去重
-              # 假设 yml 文件结构里 host 在 data["host"]
-              for entry in data:
-                  hosts.add(entry["host"])  # 去重
+          
+              hosts = set()
+          
+              # data['proxies'] 是列表，每个 item 是字典，里面的 server 就是 host
+              if "proxies" in data and isinstance(data["proxies"], list):
+                  for proxy in data["proxies"]:
+                      server = proxy.get("server")
+                      if server:
+                          hosts.add(server)  # 去重
           
               for host in hosts:
                   try:
