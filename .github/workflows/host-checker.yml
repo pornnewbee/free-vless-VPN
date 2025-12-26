@@ -22,31 +22,22 @@ jobs:
       - name: Check all YAML hosts
         run: |
           import yaml
-          import httpx
-          import pathlib
+          import requests
+          from pathlib import Path
           
-          base_path = pathlib.Path("./nodes")
-          yml_files = base_path.glob("*.yml")
+          node_dir = "nodes"
+          for yml_file in Path(node_dir).glob("*.yml"):
+              with open(yml_file, "r", encoding="utf-8") as f:
+                  data = yaml.safe_load(f)
+              hosts = set()  # 去重
+              # 假设 yml 文件结构里 host 在 data["host"]
+              for entry in data:
+                  hosts.add(entry["host"])  # 去重
           
-          for yml_file in yml_files:
-              try:
-                  with open(yml_file, "r", encoding="utf-8") as f:
-                      data = yaml.safe_load(f)
-                  proxies = data.get("proxies", [])
-                  if not proxies:
-                      print(f"{yml_file}: no proxies found")
-                      continue
-                  for proxy in proxies:
-                      host = proxy.get("ws-opts", {}).get("headers", {}).get("Host")
-                      if not host:
-                          print(f"{yml_file}: proxy {proxy.get('name', 'unknown')} has no host")
-                          continue
-                      url = f"https://{host}"
-                      try:
-                          r = httpx.get(url, timeout=10)
-                          print(f"{yml_file}: {host} -> {r.status_code}")
-                      except Exception as e:
-                          print(f"{yml_file}: {host} -> error: {e}")
-              except Exception as e:
-                  print(f"{yml_file}: failed to read -> {e}")
+              for host in hosts:
+                  try:
+                      resp = requests.get(f"https://{host}", timeout=5)
+                      print(f"{yml_file.name}: {host} -> {resp.status_code}")
+                  except Exception as e:
+                      print(f"{yml_file.name}: {host} -> error {e}")
         shell: python
