@@ -24,26 +24,42 @@ jobs:
           import yaml
           import requests
           from pathlib import Path
-          
+      
           node_dir = "nodes"
-          
+      
           for yml_file in Path(node_dir).glob("*.yml"):
               with open(yml_file, "r", encoding="utf-8") as f:
                   data = yaml.safe_load(f)
-          
+      
               hosts = set()
-          
-              # data['proxies'] 是列表，每个 item 是字典，里面的 server 就是 host
-              if "proxies" in data and isinstance(data["proxies"], list):
-                  for proxy in data["proxies"]:
-                      server = proxy.get("server")
-                      if server:
-                          hosts.add(server)  # 去重
-          
+      
+              proxies = data.get("proxies", [])
+              if not isinstance(proxies, list):
+                  print(f"{yml_file.name}: proxies is not a list")
+                  continue
+      
+              for proxy in proxies:
+                  host = (
+                      proxy
+                      .get("ws-opts", {})
+                      .get("headers", {})
+                      .get("Host")
+                  )
+                  if host:
+                      hosts.add(host)  # 去重
+      
+              if not hosts:
+                  print(f"{yml_file.name}: no Host found")
+                  continue
+      
               for host in hosts:
                   try:
-                      resp = requests.get(f"https://{host}", timeout=5)
-                      print(f"{yml_file.name}: {host} -> {resp.status_code}")
+                      r = requests.get(
+                          f"https://{host}",
+                          timeout=5,
+                          headers={"User-Agent": "host-check"}
+                      )
+                      print(f"{yml_file.name}: {host} -> {r.status_code}")
                   except Exception as e:
-                      print(f"{yml_file.name}: {host} -> error {e}")
+                      print(f"{yml_file.name}: {host} -> error: {e}")
         shell: python
