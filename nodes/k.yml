@@ -15,7 +15,7 @@ dns:
     - tls://1.0.0.1:853
     - tls://dns.google:853
 proxies:
-  - {name: 自动优选订阅可公开分享, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.cnm-sbfangbinxing-nmsl.workers.dev}}}
+  - {name: 自动优选订阅可公开分享, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: cnm-fangbinxing-nmsl.cnm-fangbinxing-nmsl-966.workers.dev}}}
   - {name: Cloudflare DNS, server: cloudflare-dns.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.cnm-sbfangbinxing-nmsl.workers.dev}}}
   - {name: Temu, server: www.temu.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.cnm-sbfangbinxing-nmsl.workers.dev}}}
   - {name: Cloudflare Docs, server: docs.cloudflare.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.cnm-sbfangbinxing-nmsl.workers.dev}}}
