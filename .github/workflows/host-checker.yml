@@ -19,25 +19,46 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pyyaml httpx requests
-      - name: Check all YAML hosts
+      - name: Check all YAML hosts (WebSocket handshake)
         run: |
           import yaml
-          import requests
+          import httpx
+          import base64
+          import os
           from pathlib import Path
       
           node_dir = "nodes"
       
-          for yml_file in Path(node_dir).glob("*.yml"):
+          def ws_handshake(host):
+              key = base64.b64encode(os.urandom(16)).decode()
+              headers = {
+                  "Host": host,
+                  "Connection": "Upgrade",
+                  "Upgrade": "websocket",
+                  "Sec-WebSocket-Version": "13",
+                  "Sec-WebSocket-Key": key,
+                  "User-Agent": "ws-check"
+              }
+      
+              url = "http://cloudflare-dns.com:2095/"
+      
+              try:
+                  with httpx.Client(timeout=5) as client:
+                      r = client.get(url, headers=headers)
+                      return r.status_code
+              except Exception as e:
+                  return f"error: {e}"
+      
+          for yml_file in sorted(Path(node_dir).glob("*.yml")):
               with open(yml_file, "r", encoding="utf-8") as f:
                   data = yaml.safe_load(f)
-      
-              hosts = set()
       
               proxies = data.get("proxies", [])
               if not isinstance(proxies, list):
                   print(f"{yml_file.name}: proxies is not a list")
                   continue
       
+              host = None
               for proxy in proxies:
                   host = (
                       proxy
@@ -46,20 +67,16 @@ jobs:
                       .get("Host")
                   )
                   if host:
-                      hosts.add(host)  # 去重
+                      break   # 每个文件只取一个
       
-              if not hosts:
+              if not host:
                   print(f"{yml_file.name}: no Host found")
                   continue
       
-              for host in hosts:
-                  try:
-                      r = requests.get(
-                          f"https://{host}",
-                          timeout=5,
-                          headers={"User-Agent": "host-check"}
-                      )
-                      print(f"{yml_file.name}: {host} -> {r.status_code}")
-                  except Exception as e:
-                      print(f"{yml_file.name}: {host} -> error: {e}")
+              status = ws_handshake(host)
+      
+              if status == 101:
+                  print(f"{yml_file.name}: {host} -> ✅ WS OK (101)")
+              else:
+                  print(f"{yml_file.name}: {host} -> ❌ {status}")
         shell: python
