@@ -51,7 +51,7 @@ jobs:
                       r = c.get(url, headers=headers)
                       return r.status_code
               except Exception as e:
-                  return f"error"
+                  return f"error: {e}"
 
           print("=== WS handshake results ===")
 
@@ -69,8 +69,19 @@ jobs:
                   continue
 
               status = ws_handshake(host)
+
+              # 格式化输出
+              if status == 101:
+                  out = f"✅ WS OK (101)"
+              elif status == 403:
+                  out = "❌ 403"
+              elif status == 429:
+                  out = "❌ 429"
+              else:
+                  out = f"❌ {status}"
+
+              print(f"{yml.name}: {host} -> {out}")
               results[host] = status
-              print(f"{yml.name}: {host} -> {status}")
 
           with open(OUT_FILE, "w") as f:
               json.dump(results, f, indent=2)
