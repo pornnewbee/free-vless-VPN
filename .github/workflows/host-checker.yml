@@ -91,8 +91,8 @@ jobs:
       # =========================
       - name: Step 2 - Collect A record IPs
         run: |
-          DOMAINS="m.10099.com.cn app.10099.com.cn"
-          ROUNDS=40
+          DOMAINS="m.10099.com.cn app.10099.com.cn www.10099.com.cn"
+          ROUNDS=20
 
           rm -f ips.txt
           touch ips.txt
