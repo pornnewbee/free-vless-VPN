@@ -118,22 +118,24 @@ jobs:
         run: |
           import random, socket, time, json
           from pathlib import Path
-
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+          
           TEST_TIMES = 5
           PORT = 80
           PATH = "/"
+          MAX_THREADS = 10
           WS_RESULTS_FILE = "ws_results.json"
-
+          
           # 加载 Step 1 的 ws_results.json
           ws_results = json.load(open(WS_RESULTS_FILE))
-
+          
+          # IP 列表
           ips = [i.strip() for i in open("ips.txt") if i.strip()]
-
           if not ips:
               raise RuntimeError("No IPs available")
-
-          print("=== Host + random IP HTTP + TCP status test ===")
-
+          
+          print("=== Host + random IP HTTP + TCP parallel test ===")
+          
           def http_tcp_test(host, ip, port=80, timeout=5):
               try:
                   s = socket.create_connection((ip, port), timeout=timeout)
@@ -146,7 +148,7 @@ jobs:
                   s.sendall(req.encode())
                   data = s.recv(128)
                   s.close()
-
+          
                   if not data:
                       return "no_response"
                   if b"HTTP/" in data:
@@ -158,33 +160,39 @@ jobs:
                   return "timeout"
               except Exception as e:
                   return f"error:{e}"
-
-          final_results = {}
-
-          # 按 Step1 ws_results.json 的顺序遍历
-          for host in ws_results:
-              status = ws_results[host]
-
-              # 如果 Step1 WS 是 403，跳过
-              if status == 403:
+          
+          # -----------------------------
+          # 1. 分配 host -> IP
+          # -----------------------------
+          host_ip_map = {}
+          available_ips = ips.copy()
+          
+          for host, ws_status in ws_results.items():
+              if ws_status == 403:
                   print(f"[SKIP] {host} (403 in WS)")
                   continue
-
-              ip = random.choice(ips)
-              print(f"\nHost: {host}")
-              print(f"IP: {ip}")
-
+              if not available_ips:
+                  print(f"No more IPs available, stop assigning for {host}")
+                  break
+              ip = random.choice(available_ips)
+              available_ips.remove(ip)
+              host_ip_map[host] = ip
+          
+          # -----------------------------
+          # 2. 批量并行测试
+          # -----------------------------
+          final_results = {}
+          
+          def test_host(host, ip):
               results = []
               for i in range(TEST_TIMES):
                   r = http_tcp_test(host, ip)
                   results.append(r)
-                  print(f"  try {i+1}: {r}")
-                  time.sleep(1)
-
+                  time.sleep(1)  # 可根据需要调整
               has_success = any(r == "success" for r in results)
               has_rst = any(r == "tcp_rst" for r in results)
               has_timeout = any(r == "timeout" for r in results)
-
+          
               if has_success:
                   final_status = "success"
                   icon = "✅"
@@ -200,16 +208,17 @@ jobs:
               else:
                   final_status = "unknown/no_response/error only"
                   icon = "❌"
-
+          
               print(f"{icon} Summary for {host} @ {ip}: {final_status}")
-
-              # 保存结果
-              final_results[host] = {
-                  "ip": ip,
-                  "status": final_status,
-                  "tries": results
-              }
-
-          # 输出 JSON 方便后续分析
+              return host, {"ip": ip, "status": final_status, "tries": results}
+          
+          # 使用线程池并行执行
+          with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+              futures = [executor.submit(test_host, h, ip) for h, ip in host_ip_map.items()]
+              for future in as_completed(futures):
+                  host, result = future.result()
+                  final_results[host] = result
+          
+          # 输出 JSON
           with open("host_test_results.json", "w") as f:
               json.dump(final_results, f, indent=2)
