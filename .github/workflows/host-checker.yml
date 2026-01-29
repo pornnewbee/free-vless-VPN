@@ -116,23 +116,23 @@ jobs:
       - name: Step 3 - Host with random IP test
         shell: python
         run: |
-          import json, random, socket, time
+          import random, socket, time
 
           TEST_TIMES = 5
           PORT = 80
           PATH = "/"
-
-          ws_results = json.load(open("ws_results.json"))
+          
           ips = [i.strip() for i in open("ips.txt") if i.strip()]
-
+          hosts = [i.strip() for i in open("hosts.txt") if i.strip()]
+          
           if not ips:
               raise RuntimeError("No IPs available")
-
-          print("=== Host + random IP test ===")
-
-          def test(host, ip):
+          
+          print("=== Host + random IP HTTP + TCP status test ===")
+          
+          def http_tcp_test(host, ip, port=80, timeout=5):
               try:
-                  s = socket.create_connection((ip, PORT), timeout=5)
+                  s = socket.create_connection((ip, port), timeout=timeout)
                   req = (
                       f"GET {PATH} HTTP/1.1\r\n"
                       f"Host: {host}\r\n"
@@ -140,26 +140,47 @@ jobs:
                       f"Connection: close\r\n\r\n"
                   )
                   s.sendall(req.encode())
-                  data = s.recv(64)
+                  data = s.recv(128)
                   s.close()
+          
                   if not data:
                       return "no_response"
                   if b"HTTP/" in data:
-                      return data.split(b"\r\n", 1)[0].decode(errors="ignore")
+                      return "success"
                   return "unknown"
+              except (ConnectionRefusedError, ConnectionResetError):
+                  return "tcp_rst"
+              except socket.timeout:
+                  return "timeout"
               except Exception:
                   return "error"
-
-          for host, status in ws_results.items():
-              if status == 403:
-                  print(f"[SKIP] {host} (403 in WS)")
-                  continue
-
+          
+          for host in hosts:
               ip = random.choice(ips)
               print(f"\nHost: {host}")
               print(f"IP: {ip}")
-
+          
+              results = []
               for i in range(TEST_TIMES):
-                  r = test(host, ip)
+                  r = http_tcp_test(host, ip)
+                  results.append(r)
                   print(f"  try {i+1}: {r}")
                   time.sleep(1)
+          
+              # 统计最终状态
+              has_success = any(r == "success" for r in results)
+              has_rst = any(r == "tcp_rst" for r in results)
+              has_timeout = any(r == "timeout" for r in results)
+          
+              if has_success:
+                  final_status = "success"
+              elif has_rst and has_timeout:
+                  final_status = "tcp_rst + timeout"
+              elif has_rst:
+                  final_status = "tcp_rst only"
+              elif has_timeout:
+                  final_status = "timeout only"
+              else:
+                  final_status = "unknown/no_response/error only"
+          
+              print(f"Summary for {host} @ {ip}: {final_status}")
