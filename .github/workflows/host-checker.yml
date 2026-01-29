@@ -116,20 +116,24 @@ jobs:
       - name: Step 3 - Host with random IP test
         shell: python
         run: |
-          import random, socket, time
+          import random, socket, time, json
+          from pathlib import Path
 
           TEST_TIMES = 5
           PORT = 80
           PATH = "/"
-          
+          WS_RESULTS_FILE = "ws_results.json"
+
+          # 加载 Step 1 的 ws_results.json
+          ws_results = json.load(open(WS_RESULTS_FILE))
+
           ips = [i.strip() for i in open("ips.txt") if i.strip()]
-          hosts = [i.strip() for i in open("hosts.txt") if i.strip()]
-          
+
           if not ips:
               raise RuntimeError("No IPs available")
-          
+
           print("=== Host + random IP HTTP + TCP status test ===")
-          
+
           def http_tcp_test(host, ip, port=80, timeout=5):
               try:
                   s = socket.create_connection((ip, port), timeout=timeout)
@@ -142,7 +146,7 @@ jobs:
                   s.sendall(req.encode())
                   data = s.recv(128)
                   s.close()
-          
+
                   if not data:
                       return "no_response"
                   if b"HTTP/" in data:
@@ -152,35 +156,60 @@ jobs:
                   return "tcp_rst"
               except socket.timeout:
                   return "timeout"
-              except Exception:
-                  return "error"
-          
-          for host in hosts:
+              except Exception as e:
+                  return f"error:{e}"
+
+          final_results = {}
+
+          # 按 Step1 ws_results.json 的顺序遍历
+          for host in ws_results:
+              status = ws_results[host]
+
+              # 如果 Step1 WS 是 403，跳过
+              if status == 403:
+                  print(f"[SKIP] {host} (403 in WS)")
+                  continue
+
               ip = random.choice(ips)
               print(f"\nHost: {host}")
               print(f"IP: {ip}")
-          
+
               results = []
               for i in range(TEST_TIMES):
                   r = http_tcp_test(host, ip)
                   results.append(r)
                   print(f"  try {i+1}: {r}")
                   time.sleep(1)
-          
-              # 统计最终状态
+
               has_success = any(r == "success" for r in results)
               has_rst = any(r == "tcp_rst" for r in results)
               has_timeout = any(r == "timeout" for r in results)
-          
+
               if has_success:
                   final_status = "success"
+                  icon = "✅"
               elif has_rst and has_timeout:
                   final_status = "tcp_rst + timeout"
+                  icon = "❌"
               elif has_rst:
                   final_status = "tcp_rst only"
+                  icon = "❌"
               elif has_timeout:
                   final_status = "timeout only"
+                  icon = "❌"
               else:
                   final_status = "unknown/no_response/error only"
-          
-              print(f"Summary for {host} @ {ip}: {final_status}")
+                  icon = "❌"
+
+              print(f"{icon} Summary for {host} @ {ip}: {final_status}")
+
+              # 保存结果
+              final_results[host] = {
+                  "ip": ip,
+                  "status": final_status,
+                  "tries": results
+              }
+
+          # 输出 JSON 方便后续分析
+          with open("host_test_results.json", "w") as f:
+              json.dump(final_results, f, indent=2)
