@@ -1,10 +1,10 @@
-name: Check YAML Hosts + IP Pool + GFW Test
+name: WS Host + DNS IP + GFW Test
 
 on:
   workflow_dispatch:
 
 jobs:
-  check-hosts:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,32 +19,21 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pyyaml httpx requests
+          pip install pyyaml httpx
 
-      - name: Run WS check + DNS collect + IP test
+      # =========================
+      # STEP 1: WS 初步测试
+      # =========================
+      - name: Step 1 - WS handshake test
         shell: python
         run: |
-          import yaml
-          import httpx
-          import base64
-          import os
-          import random
-          import socket
-          import time
+          import yaml, httpx, base64, os, json
           from pathlib import Path
-          import subprocess
-          import re
 
           NODE_DIR = "nodes"
-          DNS_DOMAINS = ["m.10099.com.cn", "app.10099.com.cn"]
-          DNS_ROUNDS = 40
-          TEST_TIMES = 5
-          TEST_PORT = 80
-          TEST_PATH = "/"
+          OUT_FILE = "ws_results.json"
 
-          print("=== [1] WebSocket handshake check ===")
-
-          ws_results = {}  # host -> status
+          results = {}
 
           def ws_handshake(host):
               key = base64.b64encode(os.urandom(16)).decode()
@@ -58,28 +47,21 @@ jobs:
               }
               url = "http://cloudflare-dns.com:2095/"
               try:
-                  with httpx.Client(timeout=5) as client:
-                      r = client.get(url, headers=headers)
+                  with httpx.Client(timeout=5) as c:
+                      r = c.get(url, headers=headers)
                       return r.status_code
               except Exception as e:
-                  return f"error: {e}"
+                  return f"error"
 
-          for yml_file in sorted(Path(NODE_DIR).glob("*.yml")):
-              with open(yml_file, "r", encoding="utf-8") as f:
-                  data = yaml.safe_load(f)
+          print("=== WS handshake results ===")
 
+          for yml in sorted(Path(NODE_DIR).glob("*.yml")):
+              data = yaml.safe_load(open(yml, encoding="utf-8"))
               proxies = data.get("proxies", [])
-              if not isinstance(proxies, list):
-                  continue
-
               host = None
-              for proxy in proxies:
-                  host = (
-                      proxy
-                      .get("ws-opts", {})
-                      .get("headers", {})
-                      .get("Host")
-                  )
+
+              for p in proxies:
+                  host = p.get("ws-opts", {}).get("headers", {}).get("Host")
                   if host:
                       break
 
@@ -87,69 +69,86 @@ jobs:
                   continue
 
               status = ws_handshake(host)
-              ws_results[host] = status
+              results[host] = status
+              print(f"{yml.name}: {host} -> {status}")
 
-              print(f"{yml_file.name}: {host} -> {status}")
+          with open(OUT_FILE, "w") as f:
+              json.dump(results, f, indent=2)
 
-          print("\n=== [2] Collect A records ===")
+      # =========================
+      # STEP 2: 收集 A 记录 IP
+      # =========================
+      - name: Step 2 - Collect A record IPs
+        run: |
+          DOMAINS="m.10099.com.cn app.10099.com.cn"
+          ROUNDS=40
 
-          ip_set = set()
-          ip_re = re.compile(r"^\d+\.\d+\.\d+\.\d+$")
+          rm -f ips.txt
+          touch ips.txt
 
-          for i in range(DNS_ROUNDS):
-              for d in DNS_DOMAINS:
-                  try:
-                      out = subprocess.check_output(
-                          ["dig", d, "A", "+short"],
-                          text=True,
-                          timeout=5
-                      )
-                      for line in out.splitlines():
-                          if ip_re.match(line.strip()):
-                              ip_set.add(line.strip())
-                  except Exception:
-                      pass
-              time.sleep(1)
+          for i in $(seq 1 $ROUNDS); do
+            for d in $DOMAINS; do
+              dig $d A +short | grep -E '^[0-9.]+' >> ips.txt
+            done
+            sleep 1
+          done
 
-          ip_list = sorted(ip_set)
-          print(f"Collected {len(ip_list)} IPs")
-          for ip in ip_list:
-              print("IP:", ip)
+          sort -u ips.txt -o ips.txt
 
-          if not ip_list:
-              raise RuntimeError("No IP collected, aborting")
+          echo "=== Collected IPs ==="
+          cat ips.txt
+          echo "Total IPs: $(wc -l < ips.txt)"
 
-          print("\n=== [3] Host + random IP test (5 times each) ===")
+      # =========================
+      # STEP 3: Host + IP 实测
+      # =========================
+      - name: Step 3 - Host with random IP test
+        shell: python
+        run: |
+          import json, random, socket, time
 
-          def test_host_ip(host, ip):
+          TEST_TIMES = 5
+          PORT = 80
+          PATH = "/"
+
+          ws_results = json.load(open("ws_results.json"))
+          ips = [i.strip() for i in open("ips.txt") if i.strip()]
+
+          if not ips:
+              raise RuntimeError("No IPs available")
+
+          print("=== Host + random IP test ===")
+
+          def test(host, ip):
               try:
-                  with socket.create_connection((ip, TEST_PORT), timeout=5) as s:
-                      req = (
-                          f"GET {TEST_PATH} HTTP/1.1\r\n"
-                          f"Host: {host}\r\n"
-                          f"User-Agent: gfw-test\r\n"
-                          f"Connection: close\r\n\r\n"
-                      )
-                      s.sendall(req.encode())
-                      data = s.recv(64)
-                      if not data:
-                          return "no_response"
-                      if b"HTTP/" in data:
-                          return data.split(b"\r\n", 1)[0].decode(errors="ignore")
-                      return "unknown"
-              except Exception as e:
-                  return f"error"
+                  s = socket.create_connection((ip, PORT), timeout=5)
+                  req = (
+                      f"GET {PATH} HTTP/1.1\r\n"
+                      f"Host: {host}\r\n"
+                      f"User-Agent: gfw-test\r\n"
+                      f"Connection: close\r\n\r\n"
+                  )
+                  s.sendall(req.encode())
+                  data = s.recv(64)
+                  s.close()
+                  if not data:
+                      return "no_response"
+                  if b"HTTP/" in data:
+                      return data.split(b"\r\n", 1)[0].decode(errors="ignore")
+                  return "unknown"
+              except Exception:
+                  return "error"
 
           for host, status in ws_results.items():
               if status == 403:
-                  print(f"[SKIP] {host} (403 in WS check)")
+                  print(f"[SKIP] {host} (403 in WS)")
                   continue
 
-              ip = random.choice(ip_list)
+              ip = random.choice(ips)
               print(f"\nHost: {host}")
-              print(f"Using IP: {ip}")
+              print(f"IP: {ip}")
 
               for i in range(TEST_TIMES):
-                  r = test_host_ip(host, ip)
+                  r = test(host, ip)
                   print(f"  try {i+1}: {r}")
                   time.sleep(1)
