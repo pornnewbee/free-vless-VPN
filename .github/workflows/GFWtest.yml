@@ -1,0 +1,224 @@
+name: GFW Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml httpx
+
+      # =========================
+      # STEP 1: Extract WS Host (no handshake)
+      # =========================
+      - name: Step 1 - Extract WS hosts only
+        shell: python
+        run: |
+          import yaml, json
+          from pathlib import Path
+
+          NODE_DIR = "nodes"
+          OUT_FILE = "ws_results.json"
+
+          results = {}
+
+          print("=== Extracting WS hosts only ===")
+
+          for yml in sorted(Path(NODE_DIR).glob("*.yml")):
+              data = yaml.safe_load(open(yml, encoding="utf-8"))
+              proxies = data.get("proxies", [])
+              host = None
+
+              for p in proxies:
+                  host = p.get("ws-opts", {}).get("headers", {}).get("Host")
+                  if host:
+                      break
+
+              if not host:
+                  continue
+
+              print(f"{yml.name}: {host}")
+              results[host] = None  # 不检测状态，先占位
+
+          with open(OUT_FILE, "w") as f:
+              json.dump(results, f, indent=2)
+
+      # =========================
+      # STEP 2: Collect A record IPs
+      # =========================
+      - name: Step 2 - Collect A record IPs
+        run: |
+          DOMAINS="m.10099.com.cn app.10099.com.cn www.10099.com.cn"
+          ROUNDS=5
+      
+          rm -f ips.txt
+          touch ips.txt
+      
+          for i in $(seq 1 $ROUNDS); do
+            for d in $DOMAINS; do
+              dig @1.1.1.1 $d A +short | grep -E '^[0-9.]+' >> ips.txt
+            done
+            sleep 1
+          done
+      
+          sort -u ips.txt -o ips.txt
+      
+          echo "=== Collected IPs ==="
+          cat ips.txt
+          echo "Total IPs: $(wc -l < ips.txt)"
+
+      # =========================
+      # STEP 3: Host + IP 实测
+      # =========================
+      - name: Step 3 - Host with random IP test (ordered)
+        shell: python
+        run: |
+          import random, socket, time, json
+          from pathlib import Path
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+
+          TEST_TIMES = 5
+          PORT = 80
+          PATH = "/"
+          TIMEOUT = 5
+          MAX_THREADS = 10
+
+          WS_RESULTS_FILE = "ws_results.json"
+          IPS_FILE = "ips.txt"
+          OUTPUT_FILE = "host_test_results.json"
+
+          # -----------------------------
+          # Load inputs
+          # -----------------------------
+          ws_results = json.load(open(WS_RESULTS_FILE))
+          ips = [i.strip() for i in open(IPS_FILE) if i.strip()]
+
+          if not ips:
+              raise RuntimeError("No IPs available")
+
+          print("=== Step 3: Host + random IP HTTP/TCP test ===")
+
+          # -----------------------------
+          # Low-level HTTP over TCP test
+          # -----------------------------
+          def http_tcp_test(host, ip, port=PORT, timeout=TIMEOUT):
+              try:
+                  s = socket.create_connection((ip, port), timeout=timeout)
+                  req = (
+                      f"GET {PATH} HTTP/1.1\r\n"
+                      f"Host: {host}\r\n"
+                      f"User-Agent: gfw-test\r\n"
+                      f"Connection: close\r\n\r\n"
+                  )
+                  s.sendall(req.encode())
+                  data = s.recv(128)
+                  s.close()
+
+                  if not data:
+                      return "no_response"
+                  if b"HTTP/" in data:
+                      return "success"
+                  return "unknown"
+
+              except (ConnectionRefusedError, ConnectionResetError):
+                  return "tcp_rst"
+              except socket.timeout:
+                  return "timeout"
+              except Exception as e:
+                  return f"error:{e}"
+
+          # -----------------------------
+          # Assign host -> random IP (保持 YAML 顺序)
+          # -----------------------------
+          host_ip_map = {}
+          available_ips = ips.copy()
+
+          ordered_hosts = list(ws_results.keys())
+
+          for host in ordered_hosts:
+              if not available_ips:
+                  print("[WARN] No more IPs available")
+                  break
+              ip = random.choice(available_ips)
+              available_ips.remove(ip)
+              host_ip_map[host] = ip
+
+          # -----------------------------
+          # Test logic per host
+          # -----------------------------
+          def test_host(host, ip):
+              results = []
+
+              for i in range(TEST_TIMES):
+                  r = http_tcp_test(host, ip)
+                  results.append(r)
+                  time.sleep(1)
+
+                  # 第一次就没 success，直接判 blocked
+                  if i == 0 and r != "success":
+                      break
+
+              success_count = results.count("success")
+              has_rst = any(r == "tcp_rst" for r in results)
+              has_timeout = any(r == "timeout" for r in results)
+
+              # -----------------------------
+              # Final classification
+              # -----------------------------
+              if success_count == TEST_TIMES:
+                  final_status = "success_all"
+                  icon = "🟢"
+
+              elif success_count >= 1:
+                  if has_rst and has_timeout:
+                      final_status = "partial_rst + timeout"
+                  elif has_rst:
+                      final_status = "partial_rst"
+                  elif has_timeout:
+                      final_status = "partial_timeout"
+                  else:
+                      final_status = "partial_unknown"
+                  icon = "🟡"
+
+              else:
+                  final_status = "blocked"
+                  icon = "🔴"
+
+              print(f"{icon} Summary for {host} @ {ip}: {final_status}")
+
+              return host, {
+                  "ip": ip,
+                  "status": final_status,
+                  "tries": results
+              }
+
+          # -----------------------------
+          # Parallel execution (按 YAML 顺序输出)
+          # -----------------------------
+          final_results = {}
+
+          # 先用 executor.map 保证顺序（executor.map 按输入顺序返回结果）
+          with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+              for host, result in zip(ordered_hosts, executor.map(lambda h: test_host(h, host_ip_map[h]), ordered_hosts)):
+                  final_results[host] = result[1]  # result = (host, dict)
+
+          # -----------------------------
+          # Save result
+          # -----------------------------
+          with open(OUTPUT_FILE, "w") as f:
+              json.dump(final_results, f, indent=2)
+
+          print(f"\nSaved results to {OUTPUT_FILE}")
