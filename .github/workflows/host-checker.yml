@@ -113,30 +113,37 @@ jobs:
       # =========================
       # STEP 3: Host + IP 实测
       # =========================
-      - name: Step 3 - Host with random IP test
+      - name: Step 3 - Host with random IP test (optimized)
         shell: python
         run: |
           import random, socket, time, json
-          from pathlib import Path
           from concurrent.futures import ThreadPoolExecutor, as_completed
-          
+      
           TEST_TIMES = 5
           PORT = 80
           PATH = "/"
+          TIMEOUT = 5
           MAX_THREADS = 10
+      
           WS_RESULTS_FILE = "ws_results.json"
-          
-          # 加载 Step 1 的 ws_results.json
+          IPS_FILE = "ips.txt"
+          OUTPUT_FILE = "host_test_results.json"
+      
+          # -----------------------------
+          # Load inputs
+          # -----------------------------
           ws_results = json.load(open(WS_RESULTS_FILE))
-          
-          # IP 列表
-          ips = [i.strip() for i in open("ips.txt") if i.strip()]
+          ips = [i.strip() for i in open(IPS_FILE) if i.strip()]
+      
           if not ips:
               raise RuntimeError("No IPs available")
-          
-          print("=== Host + random IP HTTP + TCP parallel test ===")
-          
-          def http_tcp_test(host, ip, port=80, timeout=5):
+      
+          print("=== Step 3: Host + random IP HTTP/TCP test ===")
+      
+          # -----------------------------
+          # Low-level HTTP over TCP test
+          # -----------------------------
+          def http_tcp_test(host, ip, port=PORT, timeout=TIMEOUT):
               try:
                   s = socket.create_connection((ip, port), timeout=timeout)
                   req = (
@@ -148,77 +155,106 @@ jobs:
                   s.sendall(req.encode())
                   data = s.recv(128)
                   s.close()
-          
+      
                   if not data:
                       return "no_response"
                   if b"HTTP/" in data:
                       return "success"
                   return "unknown"
+      
               except (ConnectionRefusedError, ConnectionResetError):
                   return "tcp_rst"
               except socket.timeout:
                   return "timeout"
               except Exception as e:
                   return f"error:{e}"
-          
+      
           # -----------------------------
-          # 1. 分配 host -> IP
+          # Assign host -> random IP
           # -----------------------------
           host_ip_map = {}
           available_ips = ips.copy()
-          
+      
           for host, ws_status in ws_results.items():
               if ws_status == 403:
                   print(f"[SKIP] {host} (403 in WS)")
                   continue
+      
               if not available_ips:
-                  print(f"No more IPs available, stop assigning for {host}")
+                  print("[WARN] No more IPs available")
                   break
+      
               ip = random.choice(available_ips)
               available_ips.remove(ip)
               host_ip_map[host] = ip
-          
+      
           # -----------------------------
-          # 2. 批量并行测试
+          # Test logic per host
           # -----------------------------
-          final_results = {}
-          
           def test_host(host, ip):
               results = []
+      
               for i in range(TEST_TIMES):
                   r = http_tcp_test(host, ip)
                   results.append(r)
-                  time.sleep(1)  # 可根据需要调整
-              has_success = any(r == "success" for r in results)
+                  time.sleep(1)
+      
+                  # 第一次就没 success，直接判 blocked
+                  if i == 0 and r != "success":
+                      break
+      
+              success_count = results.count("success")
               has_rst = any(r == "tcp_rst" for r in results)
               has_timeout = any(r == "timeout" for r in results)
-          
-              if has_success:
-                  final_status = "success"
-                  icon = "✅"
-              elif has_rst and has_timeout:
-                  final_status = "tcp_rst + timeout"
-                  icon = "❌"
-              elif has_rst:
-                  final_status = "tcp_rst only"
-                  icon = "❌"
-              elif has_timeout:
-                  final_status = "timeout only"
-                  icon = "❌"
+      
+              # -----------------------------
+              # Final classification
+              # -----------------------------
+              if success_count == TEST_TIMES:
+                  final_status = "success_all"
+                  icon = "🟢"
+      
+              elif success_count >= 1:
+                  if has_rst and has_timeout:
+                      final_status = "partial_rst + timeout"
+                  elif has_rst:
+                      final_status = "partial_rst"
+                  elif has_timeout:
+                      final_status = "partial_timeout"
+                  else:
+                      final_status = "partial_unknown"
+                  icon = "🟡"
+      
               else:
-                  final_status = "unknown/no_response/error only"
-                  icon = "❌"
-          
+                  final_status = "blocked"
+                  icon = "🔴"
+      
               print(f"{icon} Summary for {host} @ {ip}: {final_status}")
-              return host, {"ip": ip, "status": final_status, "tries": results}
-          
-          # 使用线程池并行执行
+      
+              return host, {
+                  "ip": ip,
+                  "status": final_status,
+                  "tries": results
+              }
+      
+          # -----------------------------
+          # Parallel execution
+          # -----------------------------
+          final_results = {}
+      
           with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
-              futures = [executor.submit(test_host, h, ip) for h, ip in host_ip_map.items()]
+              futures = [
+                  executor.submit(test_host, host, ip)
+                  for host, ip in host_ip_map.items()
+              ]
               for future in as_completed(futures):
                   host, result = future.result()
                   final_results[host] = result
-          
-          # 输出 JSON
-          with open("host_test_results.json", "w") as f:
+      
+          # -----------------------------
+          # Save result
+          # -----------------------------
+          with open(OUTPUT_FILE, "w") as f:
               json.dump(final_results, f, indent=2)
+      
+          print(f"\nSaved results to {OUTPUT_FILE}")
