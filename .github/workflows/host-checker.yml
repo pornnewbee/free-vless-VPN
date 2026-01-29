@@ -93,19 +93,19 @@ jobs:
         run: |
           DOMAINS="m.10099.com.cn app.10099.com.cn www.10099.com.cn"
           ROUNDS=20
-
+      
           rm -f ips.txt
           touch ips.txt
-
+      
           for i in $(seq 1 $ROUNDS); do
             for d in $DOMAINS; do
-              dig $d A +short | grep -E '^[0-9.]+' >> ips.txt
+              dig @1.1.1.1 $d A +short | grep -E '^[0-9.]+' >> ips.txt
             done
             sleep 1
           done
-
+      
           sort -u ips.txt -o ips.txt
-
+      
           echo "=== Collected IPs ==="
           cat ips.txt
           echo "Total IPs: $(wc -l < ips.txt)"
