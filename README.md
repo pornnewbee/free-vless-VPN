@@ -4,6 +4,7 @@ subscribe link: 订阅长期有效。
 ```https://sub.pusytroller.gq/?url=freenodes```
 ```https://sub.pusytroller.cf/?url=freenodes```
 
+公共X-UI面板 admin ```https://freexui.pusytroller.cf```  搭配cf tunnel创建面板使用 ```https://cloudflared-tunnel-agent.pusytroller.gq/```
 ## 客户端下载与使用教程
 
 | 操作系统         | 客户端下载链接                                                                                                   |
