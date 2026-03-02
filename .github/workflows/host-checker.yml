@@ -2,6 +2,8 @@ name: WS Host + DNS IP + GFW Test
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
 
 jobs:
   test:
