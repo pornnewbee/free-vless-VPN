@@ -1,0 +1,225 @@
+name: WS Host + DNS IP + GFW Test (Multi-Host)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # =========================
+      # STEP 0: 拉取目标仓库 nodes
+      # =========================
+      - name: Clone nodes repo
+        run: |
+          git clone https://github.com/femboyenjoy/free-vless-VPN.git repo
+          mkdir nodes
+          cp repo/nodes/*.yml nodes/ || true
+          ls -l nodes
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml httpx
+
+      # =========================
+      # STEP 1: WS 测试（多 host）
+      # =========================
+      - name: Step 1 - WS handshake test (multi-host)
+        shell: python
+        run: |
+          import yaml, httpx, base64, os, json
+          from pathlib import Path
+
+          NODE_DIR = "nodes"
+          OUT_FILE = "ws_results.json"
+
+          results = {}
+          all_hosts = set()
+
+          def ws_handshake(host):
+              key = base64.b64encode(os.urandom(16)).decode()
+              headers = {
+                  "Host": host,
+                  "Connection": "Upgrade",
+                  "Upgrade": "websocket",
+                  "Sec-WebSocket-Version": "13",
+                  "Sec-WebSocket-Key": key,
+                  "User-Agent": "ws-check"
+              }
+              url = "http://cloudflare-dns.com:2095/"
+              try:
+                  with httpx.Client(timeout=5) as c:
+                      r = c.get(url, headers=headers)
+                      return r.status_code
+              except Exception as e:
+                  return f"error: {e}"
+
+          print("=== Extracting hosts ===")
+
+          for yml in sorted(Path(NODE_DIR).glob("*.yml")):
+              try:
+                  data = yaml.safe_load(open(yml, encoding="utf-8"))
+              except Exception as e:
+                  print(f"[YAML ERROR] {yml.name}: {e}")
+                  continue
+
+              proxies = data.get("proxies", [])
+
+              for p in proxies:
+                  host = p.get("ws-opts", {}).get("headers", {}).get("Host")
+                  if host:
+                      all_hosts.add(host)
+
+          print(f"Total unique hosts: {len(all_hosts)}")
+
+          print("\n=== WS handshake results ===")
+
+          for host in sorted(all_hosts):
+              status = ws_handshake(host)
+
+              if status == 101:
+                  out = "✅ WS OK (101)"
+              elif status == 403:
+                  out = "❌ 403"
+              elif status == 429:
+                  out = "❌ 429"
+              else:
+                  out = f"❌ {status}"
+
+              print(f"{host} -> {out}")
+              results[host] = status
+
+          with open(OUT_FILE, "w") as f:
+              json.dump(results, f, indent=2)
+
+      # =========================
+      # STEP 2: 收集 A 记录 IP
+      # =========================
+      - name: Step 2 - Collect A record IPs
+        run: |
+          DOMAINS="m.10099.com.cn app.10099.com.cn www.10099.com.cn"
+          ROUNDS=5
+      
+          rm -f ips.txt
+          touch ips.txt
+      
+          for i in $(seq 1 $ROUNDS); do
+            for d in $DOMAINS; do
+              dig @1.1.1.1 $d A +short | grep -E '^[0-9.]+' >> ips.txt
+            done
+            sleep 1
+          done
+      
+          sort -u ips.txt -o ips.txt
+      
+          echo "=== Collected IPs ==="
+          cat ips.txt
+          echo "Total IPs: $(wc -l < ips.txt)"
+
+      # =========================
+      # STEP 3: Host + IP 实测
+      # =========================
+      - name: Step 3 - Host with random IP test (multi-host)
+        shell: python
+        run: |
+          import random, socket, time, json
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+      
+          TEST_TIMES = 5
+          PORT = 80
+          PATH = "/"
+          TIMEOUT = 5
+          MAX_THREADS = 20
+      
+          ws_results = json.load(open("ws_results.json"))
+          ips = [i.strip() for i in open("ips.txt") if i.strip()]
+      
+          if not ips:
+              raise RuntimeError("No IPs available")
+      
+          print("=== Step 3: Host + random IP HTTP/TCP test ===")
+      
+          def http_tcp_test(host, ip):
+              try:
+                  s = socket.create_connection((ip, PORT), timeout=TIMEOUT)
+                  req = (
+                      f"GET {PATH} HTTP/1.1\r\n"
+                      f"Host: {host}\r\n"
+                      f"User-Agent: gfw-test\r\n"
+                      f"Connection: close\r\n\r\n"
+                  )
+                  s.sendall(req.encode())
+                  data = s.recv(128)
+                  s.close()
+      
+                  if not data:
+                      return "no_response"
+                  if b"HTTP/" in data:
+                      return "success"
+                  return "unknown"
+      
+              except (ConnectionRefusedError, ConnectionResetError):
+                  return "tcp_rst"
+              except socket.timeout:
+                  return "timeout"
+              except Exception as e:
+                  return f"error:{e}"
+      
+          def test_host(host, ip):
+              results = []
+      
+              for i in range(TEST_TIMES):
+                  r = http_tcp_test(host, ip)
+                  results.append(r)
+                  time.sleep(1)
+      
+                  if i == 0 and r != "success":
+                      break
+      
+              success_count = results.count("success")
+      
+              if success_count == TEST_TIMES:
+                  final = "success_all"
+                  icon = "🟢"
+              elif success_count >= 1:
+                  final = "partial"
+                  icon = "🟡"
+              else:
+                  final = "blocked"
+                  icon = "🔴"
+      
+              print(f"{icon} {host} @ {ip}: {final}")
+      
+              return host, {
+                  "ip": ip,
+                  "status": final,
+                  "tries": results
+              }
+      
+          final_results = {}
+      
+          with ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+              futures = []
+      
+              for host, ws_status in ws_results.items():
+                  if ws_status == 403:
+                      continue
+      
+                  ip = random.choice(ips)
+                  futures.append(executor.submit(test_host, host, ip))
+      
+              for f in as_completed(futures):
+                  host, result = f.result()
+                  final_results[host] = result
+      
+          with open("host_test_results.json", "w") as f:
+              json.dump(final_results, f, indent=2)
+      
+          print("\nSaved results to host_test_results.json")
