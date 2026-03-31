@@ -6,7 +6,11 @@
 https://sub.pusytroller.gq/?url=freenodes
 https://sub.pusytroller.cf/?url=freenodes
 ```
-公共X-UI面板 admin ```https://xui.pusytroller.gq```  搭配cf tunnel创建面板使用 ```https://cloudflared-tunnel-agent.pusytroller.gq/```
+V2ray/v2RayTun format 
+```text
+[https://sub.pusytroller.gq/?url=freenodes
+https://sub.pusytroller.cf/?url=freenodes](https://raw.githubusercontent.com/femboyenjoy/free-vless-VPN/refs/heads/main/vless.txt)
+```
 ## 客户端下载与使用教程
 
 | 操作系统         | 客户端下载链接                                                                                                   |
