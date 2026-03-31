@@ -1,0 +1,42 @@
+name: Run searchcfcnnodes
+
+on:
+  workflow_dispatch:    # 可以手动触发
+  push:
+    paths:
+      - "scripts/searchcfcnnodes.py"
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ 安装 Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      # 3️⃣ 安装依赖
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      # 4️⃣ 执行脚本
+      - name: Run searchcfcnnodes.py
+        run: |
+          python scripts/searchcfcnnodes.py
+
+      # 5️⃣ 打包 artifacts
+      - name: Upload proxy files
+        uses: actions/upload-artifact@v3
+        with:
+          name: cfcn-proxies
+          path: |
+            http_proxy.txt
+            https_proxy.txt
