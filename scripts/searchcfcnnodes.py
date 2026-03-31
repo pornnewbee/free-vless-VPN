@@ -1,9 +1,16 @@
 import csv
 import subprocess
+import requests
 from concurrent.futures import ThreadPoolExecutor
 
-INPUT_FILE = "data.csv"
 THREADS = 50
+
+def fetch_csv(url):
+    print(f"[+] 下载CSV: {url}")
+    resp = requests.get(url, timeout=10)
+    resp.raise_for_status()
+    lines = resp.text.splitlines()
+    return list(csv.DictReader(lines))
 
 def check(row):
     ip = row["ip"]
@@ -33,9 +40,11 @@ def check(row):
         print(f"[!] 错误: {ip}:{port}")
 
 def main():
-    with open(INPUT_FILE, newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        rows = list(reader)
+    url = input("请输入CSV链接: ").strip()
+
+    rows = fetch_csv(url)
+
+    print(f"[+] 共 {len(rows)} 条数据，开始检测...\n")
 
     with ThreadPoolExecutor(max_workers=THREADS) as pool:
         pool.map(check, rows)
