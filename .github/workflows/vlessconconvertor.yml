@@ -2,6 +2,9 @@ name: Extract VLESS Links
 
 on:
   workflow_dispatch:
+
+permissions:
+  contents: write   # 👈 关键
   
 jobs:
   build:
