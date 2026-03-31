@@ -4,7 +4,7 @@ import requests
 from concurrent.futures import ThreadPoolExecutor
 
 # ===== 配置区 =====
-CSV_URL = "https://example.com/data.csv"   # 👈 在这里填你的CSV链接
+CSV_URL = "https://raw.githubusercontent.com/femboyenjoy/free-vless-VPN/refs/heads/main/nodes/cfcn/202603311900%E8%B5%84%E4%BA%A7%E6%95%B0%E6%8D%AE.csv"
 THREADS = 50
 TIMEOUT = 5
 
@@ -49,18 +49,28 @@ def check(row):
         result = subprocess.check_output(cmd, stderr=subprocess.DEVNULL).decode()
 
         if "fl=" in result and "ip=" in result:
-            print(f"[✔] 反代: {ip}:{port} ({proto})")
+            # 提取返回的 ip
+            returned_ip = None
+            for line in result.splitlines():
+                if line.startswith("ip="):
+                    returned_ip = line.split("=", 1)[1]
+                    break
+
+            # 判断直连或中转
+            mode = "直连反代" if returned_ip == ip else "中转反代"
+
+            print(f"[✔] {mode}: {ip}:{port} ({proto})")
 
             # 写入对应文件
             file_path = HTTPS_FILE if proto == "https" else HTTP_FILE
             with open(file_path, "a") as f:
-                f.write(f"{ip}:{port}\n")
+                f.write(f"{ip}:{port} ({mode})\n")
 
         else:
             print(f"[✘] 无效: {ip}:{port} ({proto})")
 
-    except:
-        print(f"[!] 错误: {ip}:{port} ({proto})")
+    except Exception as e:
+        print(f"[!] 错误: {ip}:{port} ({proto}) - {e}")
 
 def main():
     rows = fetch_csv(CSV_URL)
