@@ -13,6 +13,7 @@ seen = set()
 # 输出文件
 HTTP_FILE = "http_proxy.txt"
 HTTPS_FILE = "https_proxy.txt"
+MIDDLE_PROXY_FILE = "middle_proxy.txt"  # 中转反代专用文件
 
 def fetch_csv(url):
     print(f"[+] 下载CSV: {url}")
@@ -49,6 +50,11 @@ def check(row):
         result = subprocess.check_output(cmd, stderr=subprocess.DEVNULL).decode()
 
         if "fl=" in result and "ip=" in result:
+            # 默认输出到原有文件
+            file_path = HTTPS_FILE if proto == "https" else HTTP_FILE
+            with open(file_path, "a") as f:
+                f.write(f"{ip}:{port}\n")
+
             # 提取返回的 ip
             returned_ip = None
             for line in result.splitlines():
@@ -56,15 +62,13 @@ def check(row):
                     returned_ip = line.split("=", 1)[1]
                     break
 
-            # 判断直连或中转
-            mode = "直连反代" if returned_ip == ip else "中转反代"
-
-            print(f"[✔] {mode}: {ip}:{port} ({proto})")
-
-            # 写入对应文件
-            file_path = HTTPS_FILE if proto == "https" else HTTP_FILE
-            with open(file_path, "a") as f:
-                f.write(f"{ip}:{port} ({mode})\n")
+            # 判断是否中转反代
+            if returned_ip and returned_ip != ip:
+                print(f"[✔] 中转反代: {ip}:{port} ({proto}) -> 落地IP: {returned_ip}")
+                with open(MIDDLE_PROXY_FILE, "a") as f:
+                    f.write(f"{ip}:{port} ({proto}) -> 落地IP: {returned_ip}\n")
+            else:
+                print(f"[✔] 反代: {ip}:{port} ({proto})")
 
         else:
             print(f"[✘] 无效: {ip}:{port} ({proto})")
@@ -80,6 +84,7 @@ def main():
     # 清空旧文件
     open(HTTP_FILE, "w").close()
     open(HTTPS_FILE, "w").close()
+    open(MIDDLE_PROXY_FILE, "w").close()
 
     with ThreadPoolExecutor(max_workers=THREADS) as pool:
         pool.map(check, rows)
@@ -87,6 +92,7 @@ def main():
     print("\n[+] 检测完成！")
     print(f"[+] HTTP反代已保存: {HTTP_FILE}")
     print(f"[+] HTTPS反代已保存: {HTTPS_FILE}")
+    print(f"[+] 中转反代已保存: {MIDDLE_PROXY_FILE}")
 
 if __name__ == "__main__":
     main()
