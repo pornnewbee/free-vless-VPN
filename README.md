@@ -1,9 +1,11 @@
-# 免费订阅 free-sub
+# 🚀 免费订阅 Free-Sub
 
-subscribe link: 订阅长期有效。
-```https://sub.pusytroller.gq/?url=freenodes```
-```https://sub.pusytroller.cf/?url=freenodes```
+> 📌 订阅链接（长期有效）
 
+```text
+https://sub.pusytroller.gq/?url=freenodes
+https://sub.pusytroller.cf/?url=freenodes
+```
 公共X-UI面板 admin ```https://xui.pusytroller.gq```  搭配cf tunnel创建面板使用 ```https://cloudflared-tunnel-agent.pusytroller.gq/```
 ## 客户端下载与使用教程
 
