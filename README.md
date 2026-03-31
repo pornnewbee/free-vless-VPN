@@ -1,6 +1,6 @@
 # 🚀 免费订阅 Free-Sub
 
-> 📌 订阅链接（长期有效）
+> 📌 订阅链接 Clash（长期有效）
 
 ```text
 https://sub.pusytroller.gq/?url=freenodes
