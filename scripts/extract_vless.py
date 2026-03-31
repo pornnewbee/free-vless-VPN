@@ -1,7 +1,7 @@
 import os
 import yaml
 import urllib.parse
-
+#把Clash订阅转换成vless标准链接
 OUTPUT_FILE = "vless.txt"
 NODES_DIR = "nodes"
 
