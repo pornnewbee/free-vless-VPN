@@ -2,9 +2,7 @@ name: Extract VLESS Links
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 */6 * * *"   # 每6小时跑一次（可改）
-
+  
 jobs:
   build:
     runs-on: ubuntu-latest
