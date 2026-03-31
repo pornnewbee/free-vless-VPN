@@ -2,6 +2,10 @@ name: Extract VLESS Links
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "nodes/**/*.yml"
+      - "nodes/**/*.yaml"
 
 permissions:
   contents: write   # 👈 关键
