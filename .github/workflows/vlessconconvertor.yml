@@ -23,7 +23,7 @@ jobs:
         run: pip install pyyaml
 
       - name: Run script
-        run: python extract_vless.py
+        run: python scripts/extract_vless.py
 
       - name: Commit result
         run: |
