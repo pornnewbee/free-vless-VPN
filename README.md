@@ -8,8 +8,7 @@ https://sub.pusytroller.cf/?url=freenodes
 ```
 V2ray/v2RayTun format 
 ```text
-[https://sub.pusytroller.gq/?url=freenodes
-https://sub.pusytroller.cf/?url=freenodes](https://raw.githubusercontent.com/femboyenjoy/free-vless-VPN/refs/heads/main/vless.txt)
+https://raw.githubusercontent.com/femboyenjoy/free-vless-VPN/refs/heads/main/vless.txt
 ```
 ## 客户端下载与使用教程
 
