@@ -3,7 +3,12 @@ import subprocess
 import requests
 from concurrent.futures import ThreadPoolExecutor
 
+# ===== 配置区 =====
+CSV_URL = "https://example.com/data.csv"   # 👈 在这里填你的CSV链接
 THREADS = 50
+TIMEOUT = 5
+
+seen = set()
 
 def fetch_csv(url):
     print(f"[+] 下载CSV: {url}")
@@ -13,16 +18,25 @@ def fetch_csv(url):
     return list(csv.DictReader(lines))
 
 def check(row):
-    ip = row["ip"]
-    port = row["port"]
-    proto = row["protocol"]
+    ip = row.get("ip", "").strip()
+    port = row.get("port", "").strip()
+    proto = row.get("protocol", "").strip()
+
+    if not ip or not port or not proto:
+        return
+
+    key = f"{ip}:{port}"
+    if key in seen:
+        return
+    seen.add(key)
 
     url = f"{proto}://www.visa.cn:{port}/cdn-cgi/trace"
 
     cmd = [
         "curl",
         "-s",
-        "--max-time", "5",
+        "--max-time", str(TIMEOUT),
+        "--connect-timeout", "3",
         "--resolve", f"www.visa.cn:{port}:{ip}",
         url
     ]
@@ -32,7 +46,6 @@ def check(row):
 
         if "fl=" in result and "ip=" in result:
             print(f"[✔] 反代: {ip}:{port}")
-            return ip, port
         else:
             print(f"[✘] 无效: {ip}:{port}")
 
@@ -40,9 +53,7 @@ def check(row):
         print(f"[!] 错误: {ip}:{port}")
 
 def main():
-    url = input("请输入CSV链接: ").strip()
-
-    rows = fetch_csv(url)
+    rows = fetch_csv(CSV_URL)
 
     print(f"[+] 共 {len(rows)} 条数据，开始检测...\n")
 
