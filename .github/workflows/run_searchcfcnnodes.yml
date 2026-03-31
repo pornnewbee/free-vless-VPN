@@ -32,9 +32,9 @@ jobs:
         run: |
           python scripts/searchcfcnnodes.py
 
-      # 5️⃣ 打包 artifacts
+      # 5️⃣ 上传 artifacts（新版 v4）
       - name: Upload proxy files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cfcn-proxies
           path: |
