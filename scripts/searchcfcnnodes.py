@@ -4,7 +4,7 @@ import requests
 from concurrent.futures import ThreadPoolExecutor
 
 # ===== 配置区 =====
-CSV_URL = "https://raw.githubusercontent.com/femboyenjoy/free-vless-VPN/refs/heads/main/nodes/cfcn/202603311900%E8%B5%84%E4%BA%A7%E6%95%B0%E6%8D%AE.csv"
+CSV_URL = "https://github.com/femboyenjoy/free-vless-VPN/raw/refs/heads/main/nodes/cfcn/raw/202604011044%E8%B5%84%E4%BA%A7%E6%95%B0%E6%8D%AE.csv"
 THREADS = 50
 TIMEOUT = 5
 
