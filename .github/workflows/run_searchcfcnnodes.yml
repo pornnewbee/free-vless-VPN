@@ -40,3 +40,4 @@ jobs:
           path: |
             http_proxy.txt
             https_proxy.txt
+            middle_proxy.txt
