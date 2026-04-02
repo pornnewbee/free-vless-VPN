@@ -97,13 +97,19 @@ def fetch_one(url):
 def fetch():
     all_rows = []
 
+    # 并发下载多个 URL
     with ThreadPoolExecutor(max_workers=10) as pool:
         results = pool.map(fetch_one, INPUT_URLS)
 
+    # 合并
     for rows in results:
         all_rows.extend(rows)
 
-    print(f"[+] 合并后总条目: {len(all_rows)}")
+    # ===== 多源去重 =====
+    # 保留 (ip, port, proto) 唯一
+    all_rows = list(set((ip, port, proto) for ip, port, proto in all_rows))
+
+    print(f"[+] 合并后总条目（去重后）: {len(all_rows)}")
     return all_rows
 
 
