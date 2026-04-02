@@ -9,6 +9,16 @@ INPUT_URL = "你的地址"
 THREADS = 100
 TIMEOUT = 5
 
+# ===== IP 查询接口（2选1） =====
+
+# 方式1：IPIP btapi（推荐）
+IP_API = "https://btapi.ipip.net/v2/trace"
+IP_TOKEN = "你的token"
+
+# 方式2：你自己的 Worker（如果你之前搭了）
+# IP_API = "https://你的worker地址"
+# IP_TOKEN = None
+
 # 输出文件
 HTTP_FILE = "http_proxy.txt"
 HTTPS_FILE = "https_proxy.txt"
