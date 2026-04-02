@@ -35,7 +35,6 @@ checked = 0
 ok = 0
 middle = 0
 
-
 # ===== 数据解析 =====
 def parse_text(text):
     rows = []
@@ -58,7 +57,6 @@ def parse_text(text):
             rows.append((ip, port, "https"))
     return rows
 
-
 def parse_csv(text):
     rows = []
     reader = csv.DictReader(text.splitlines())
@@ -75,45 +73,67 @@ def parse_csv(text):
             rows.append((ip, port, "https"))
     return rows
 
+def parse_middle_text(text):
+    """
+    解析中转落地 IP 格式：
+    103.44.255.90:443 (https) -> 落地IP: 154.23.128.6
+    返回 (源IP, 端口, 协议, 落地IP)
+    """
+    rows = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or "->" not in line:
+            continue
+        src, dst = line.split("->", 1)
+        ip_port_proto = src.strip()
+        if "(" in ip_port_proto and ")" in ip_port_proto:
+            ip_port, proto = ip_port_proto.split("(")
+            proto = proto.replace(")", "").strip().lower()
+        else:
+            ip_port = ip_port_proto
+            proto = "http"
+        if ":" not in ip_port:
+            continue
+        ip, port = ip_port.split(":", 1)
+        dst_ip = dst.split(":")[-1].strip()
+        rows.append((ip, port, proto, dst_ip))
+    return rows
 
+# ===== 下载与解析 =====
 def fetch_one(url):
     try:
         print(f"[+] 下载: {url}")
         text = requests.get(url, timeout=10).text
-
         if not text.strip():
             return []
 
-        # 判断格式
-        if "ip" in text.splitlines()[0].lower():
+        if "->" in text and "落地IP" in text:
+            return parse_middle_text(text)
+        elif "ip" in text.splitlines()[0].lower():
             return parse_csv(text)
         else:
             return parse_text(text)
     except Exception as e:
-        print(f"[ERR] 下载失败: {url}")
+        print(f"[ERR] 下载失败: {url} | {e}")
         return []
-
 
 def fetch():
     all_rows = []
-
-    # 并发下载多个 URL
     with ThreadPoolExecutor(max_workers=10) as pool:
         results = pool.map(fetch_one, INPUT_URLS)
-
-    # 合并
     for rows in results:
         all_rows.extend(rows)
 
-    # ===== 多源去重 =====
-    # 保留 (ip, port, proto) 唯一
-    all_rows = list(set((ip, port, proto) for ip, port, proto in all_rows))
+    # 去重
+    if all_rows and len(all_rows[0]) == 4:
+        all_rows = list(set(all_rows))  # (ip, port, proto, returned_ip)
+    else:
+        all_rows = list(set(all_rows))  # (ip, port, proto)
 
     print(f"[+] 合并后总条目（去重后）: {len(all_rows)}")
     return all_rows
 
-
-# ===== IP 查询函数（去重 + 缓存） =====
+# ===== IP 查询函数（缓存） =====
 def query_ip_info(ip):
     with ipinfo_lock:
         if ip in ipinfo_cache:
@@ -136,7 +156,6 @@ def query_ip_info(ip):
         ipinfo_cache[ip] = result
     return result
 
-
 # ===== 中转 IP 异步查询 =====
 def async_query_middle(ip, port, proto, returned_ip):
     info = query_ip_info(returned_ip)
@@ -147,11 +166,15 @@ def async_query_middle(ip, port, proto, returned_ip):
             f.write(f"{ip}:{port} ({proto}) -> {returned_ip} [{info}]\n")
         print(f"[中转] {ip}:{port} ({proto}) -> {returned_ip} | {info}")
 
-
 # ===== 检测逻辑 =====
 def check(task):
     global checked, ok
-    ip, port, proto = task
+    if len(task) == 4:
+        ip, port, proto, returned_ip = task
+    else:
+        ip, port, proto = task
+        returned_ip = None
+
     key = f"{ip}:{port}:{proto}"
     with lock:
         if key in seen:
@@ -171,22 +194,20 @@ def check(task):
     try:
         result = subprocess.check_output(cmd, stderr=subprocess.DEVNULL).decode()
         if "fl=" in result and "ip=" in result:
-            returned_ip = None
+            returned_ip_detected = None
             for line in result.splitlines():
                 if line.startswith("ip="):
-                    returned_ip = line.split("=")[1]
+                    returned_ip_detected = line.split("=")[1]
                     break
 
             with lock:
                 ok += 1
-                # 分类写入
                 file_path = HTTPS_FILE if proto == "https" else HTTP_FILE
                 with open(file_path, "a") as f:
                     f.write(f"{ip}:{port}\n")
 
-            # 中转反代立即查询
-            if returned_ip and returned_ip != ip:
-                t = threading.Thread(target=async_query_middle, args=(ip, port, proto, returned_ip))
+            if returned_ip_detected and returned_ip_detected != ip:
+                t = threading.Thread(target=async_query_middle, args=(ip, port, proto, returned_ip_detected))
                 t.start()
             else:
                 print(f"[OK] {ip}:{port} ({proto})")
@@ -200,12 +221,10 @@ def check(task):
             checked += 1
             show_progress()
 
-
 # ===== 进度条 =====
 def show_progress():
     percent = (checked / total) * 100
     print(f"\r进度: {checked}/{total} | 成功: {ok} | 中转: {middle} | {percent:.1f}%", end="")
-
 
 # ===== 主函数 =====
 def main():
@@ -226,7 +245,6 @@ def main():
     print(f"HTTP: {HTTP_FILE}")
     print(f"HTTPS: {HTTPS_FILE}")
     print(f"中转: {MIDDLE_FILE}")
-
 
 if __name__ == "__main__":
     main()
