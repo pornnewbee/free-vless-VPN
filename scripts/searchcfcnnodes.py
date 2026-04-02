@@ -164,6 +164,37 @@ def check(task):
             checked += 1
             show_progress()
 
+def query_ip_info(ip):
+    # 👉 缓存（非常重要，避免重复查）
+    with ipinfo_lock:
+        if ip in ipinfo_cache:
+            return ipinfo_cache[ip]
+
+    try:
+        headers = {}
+        if IP_TOKEN:
+            headers["token"] = IP_TOKEN
+
+        resp = requests.get(IP_API, params={"ip": ip}, headers=headers, timeout=5)
+        data = resp.json()
+
+        area = data.get("area", "")
+        isp = data.get("isp_domain", "")
+
+        # 👉 清洗 area（去掉经纬度）
+        if area:
+            parts = area.split("\t")
+            area = "\t".join(parts[:5])  # 保留到运营商
+
+        result = f"{area} | {isp}".strip(" |")
+
+    except:
+        result = "查询失败"
+
+    with ipinfo_lock:
+        ipinfo_cache[ip] = result
+
+    return result
 
 # ===== 进度条 =====
 
