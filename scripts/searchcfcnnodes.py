@@ -11,7 +11,7 @@ TIMEOUT = 5
 
 # ===== IP 查询接口 =====
 IP_API = "https://btapi.ipip.net/v2/trace"
-IP_TOKEN = "你的token"
+IP_TOKEN = "068f269ea236dc57215574f3542c8161e27fbf70"
 
 # 输出文件
 HTTP_FILE = "http_proxy.txt"
