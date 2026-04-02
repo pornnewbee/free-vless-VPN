@@ -5,7 +5,11 @@ import threading
 from concurrent.futures import ThreadPoolExecutor
 
 # ===== 配置 =====
-INPUT_URL = "你的地址"
+INPUT_URLS = [
+    "https://example1.com/ip.txt",
+    "https://example2.com/data.csv",
+    "https://example3.com/list.txt"
+]
 THREADS = 100
 TIMEOUT = 5
 
@@ -72,15 +76,35 @@ def parse_csv(text):
     return rows
 
 
+def fetch_one(url):
+    try:
+        print(f"[+] 下载: {url}")
+        text = requests.get(url, timeout=10).text
+
+        if not text.strip():
+            return []
+
+        # 判断格式
+        if "ip" in text.splitlines()[0].lower():
+            return parse_csv(text)
+        else:
+            return parse_text(text)
+    except Exception as e:
+        print(f"[ERR] 下载失败: {url}")
+        return []
+
+
 def fetch():
-    print(f"[+] 下载数据: {INPUT_URL}")
-    text = requests.get(INPUT_URL, timeout=10).text
-    if "ip" in text.splitlines()[0].lower():
-        print("[+] CSV格式")
-        return parse_csv(text)
-    else:
-        print("[+] 文本格式")
-        return parse_text(text)
+    all_rows = []
+
+    with ThreadPoolExecutor(max_workers=10) as pool:
+        results = pool.map(fetch_one, INPUT_URLS)
+
+    for rows in results:
+        all_rows.extend(rows)
+
+    print(f"[+] 合并后总条目: {len(all_rows)}")
+    return all_rows
 
 
 # ===== IP 查询函数（去重 + 缓存） =====
