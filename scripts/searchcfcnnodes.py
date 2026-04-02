@@ -218,7 +218,6 @@ def check(task):
         print(f"[ERR] {ip}:{port} ({proto})")
     finally:
         with lock:
-            global checked
             checked += 1
             show_progress()
 
