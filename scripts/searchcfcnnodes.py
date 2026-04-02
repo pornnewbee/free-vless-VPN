@@ -1,39 +1,107 @@
 import csv
 import subprocess
 import requests
+import threading
 from concurrent.futures import ThreadPoolExecutor
 
-# ===== 配置区 =====
-CSV_URL = "https://github.com/femboyenjoy/free-vless-VPN/raw/refs/heads/main/nodes/cfcn/raw/202604011044%E8%B5%84%E4%BA%A7%E6%95%B0%E6%8D%AE.csv"
-THREADS = 50
+# ===== 配置 =====
+INPUT_URL = "你的地址"
+THREADS = 100
 TIMEOUT = 5
-
-seen = set()
 
 # 输出文件
 HTTP_FILE = "http_proxy.txt"
 HTTPS_FILE = "https_proxy.txt"
-MIDDLE_PROXY_FILE = "middle_proxy.txt"  # 中转反代专用文件
+MIDDLE_FILE = "middle_proxy.txt"
 
-def fetch_csv(url):
-    print(f"[+] 下载CSV: {url}")
-    resp = requests.get(url, timeout=10)
-    resp.raise_for_status()
-    lines = resp.text.splitlines()
-    return list(csv.DictReader(lines))
+# 全局变量
+seen = set()
+lock = threading.Lock()
 
-def check(row):
-    ip = row.get("ip", "").strip()
-    port = row.get("port", "").strip()
-    proto = row.get("protocol", "").strip().lower()  # 强制小写
+total = 0
+checked = 0
+ok = 0
+middle = 0
 
-    if not ip or not port or not proto:
-        return
 
-    key = f"{ip}:{port}"
-    if key in seen:
-        return
-    seen.add(key)
+# ===== 数据解析 =====
+
+def parse_text(text):
+    rows = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+
+        parts = line.split()
+        ip_port = parts[0]
+
+        if ":" not in ip_port:
+            continue
+
+        ip, port = ip_port.split(":", 1)
+
+        # 有协议
+        if len(parts) > 1:
+            proto = parts[1].lower()
+            if proto not in ("http", "https"):
+                proto = "http"
+
+            rows.append((ip, port, proto))
+
+        # 无协议 → 双测
+        else:
+            rows.append((ip, port, "http"))
+            rows.append((ip, port, "https"))
+
+    return rows
+
+
+def parse_csv(text):
+    rows = []
+    reader = csv.DictReader(text.splitlines())
+
+    for r in reader:
+        ip = r.get("ip", "").strip()
+        port = r.get("port", "").strip()
+        proto = r.get("protocol", "").strip().lower()
+
+        if not ip or not port:
+            continue
+
+        if proto in ("http", "https"):
+            rows.append((ip, port, proto))
+        else:
+            rows.append((ip, port, "http"))
+            rows.append((ip, port, "https"))
+
+    return rows
+
+
+def fetch():
+    print(f"[+] 下载数据: {INPUT_URL}")
+    text = requests.get(INPUT_URL, timeout=10).text
+
+    if "ip" in text.splitlines()[0].lower():
+        print("[+] CSV格式")
+        return parse_csv(text)
+    else:
+        print("[+] 文本格式")
+        return parse_text(text)
+
+
+# ===== 检测逻辑 =====
+
+def check(task):
+    global checked, ok, middle
+
+    ip, port, proto = task
+    key = f"{ip}:{port}:{proto}"
+
+    with lock:
+        if key in seen:
+            return
+        seen.add(key)
 
     url = f"{proto}://www.visa.cn:{port}/cdn-cgi/trace"
 
@@ -50,49 +118,73 @@ def check(row):
         result = subprocess.check_output(cmd, stderr=subprocess.DEVNULL).decode()
 
         if "fl=" in result and "ip=" in result:
-            # 默认输出到原有文件
-            file_path = HTTPS_FILE if proto == "https" else HTTP_FILE
-            with open(file_path, "a") as f:
-                f.write(f"{ip}:{port}\n")
-
-            # 提取返回的 ip
             returned_ip = None
             for line in result.splitlines():
                 if line.startswith("ip="):
-                    returned_ip = line.split("=", 1)[1]
+                    returned_ip = line.split("=")[1]
                     break
 
-            # 判断是否中转反代
-            if returned_ip and returned_ip != ip:
-                print(f"[✔] 中转反代: {ip}:{port} ({proto}) -> 落地IP: {returned_ip}")
-                with open(MIDDLE_PROXY_FILE, "a") as f:
-                    f.write(f"{ip}:{port} ({proto}) -> 落地IP: {returned_ip}\n")
-            else:
-                print(f"[✔] 反代: {ip}:{port} ({proto})")
+            with lock:
+                ok += 1
+
+                # 分类写入
+                if proto == "https":
+                    open(HTTPS_FILE, "a").write(f"{ip}:{port}\n")
+                else:
+                    open(HTTP_FILE, "a").write(f"{ip}:{port}\n")
+
+                # 中转反代
+                if returned_ip and returned_ip != ip:
+                    middle += 1
+                    open(MIDDLE_FILE, "a").write(
+                        f"{ip}:{port} ({proto}) -> {returned_ip}\n"
+                    )
+                    print(f"[中转] {ip}:{port} ({proto}) -> {returned_ip}")
+                else:
+                    print(f"[OK] {ip}:{port} ({proto})")
 
         else:
-            print(f"[✘] 无效: {ip}:{port} ({proto})")
+            print(f"[FAIL] {ip}:{port} ({proto})")
 
-    except Exception as e:
-        print(f"[!] 错误: {ip}:{port} ({proto}) - {e}")
+    except:
+        print(f"[ERR] {ip}:{port} ({proto})")
+
+    finally:
+        with lock:
+            checked += 1
+            show_progress()
+
+
+# ===== 进度条 =====
+
+def show_progress():
+    percent = (checked / total) * 100
+    print(f"\r进度: {checked}/{total} | 成功: {ok} | 中转: {middle} | {percent:.1f}%", end="")
+
+
+# ===== 主函数 =====
 
 def main():
-    rows = fetch_csv(CSV_URL)
+    global total
 
-    print(f"[+] 共 {len(rows)} 条数据，开始检测...\n")
+    tasks = fetch()
+    total = len(tasks)
 
-    # 清空旧文件
+    print(f"[+] 总任务: {total}")
+
+    # 清空文件
     open(HTTP_FILE, "w").close()
     open(HTTPS_FILE, "w").close()
-    open(MIDDLE_PROXY_FILE, "w").close()
+    open(MIDDLE_FILE, "w").close()
 
     with ThreadPoolExecutor(max_workers=THREADS) as pool:
-        pool.map(check, rows)
+        pool.map(check, tasks)
 
-    print("\n[+] 检测完成！")
-    print(f"[+] HTTP反代已保存: {HTTP_FILE}")
-    print(f"[+] HTTPS反代已保存: {HTTPS_FILE}")
-    print(f"[+] 中转反代已保存: {MIDDLE_PROXY_FILE}")
+    print("\n\n[+] 完成")
+    print(f"HTTP: {HTTP_FILE}")
+    print(f"HTTPS: {HTTPS_FILE}")
+    print(f"中转: {MIDDLE_FILE}")
+
 
 if __name__ == "__main__":
     main()
