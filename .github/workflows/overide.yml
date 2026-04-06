@@ -1,0 +1,30 @@
+name: Overwrite B repository
+
+on:
+  workflow_dispatch:
+
+jobs:
+  overwrite-b:
+    runs-on: ubuntu-latest
+    steps:
+      # 1️⃣ Checkout仓库内容
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # 拉取完整历史
+
+      # 2️⃣ 设置 Git 用户信息
+      - name: Set Git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      # 3️⃣ 添加 B 仓库 remote
+      - name: Add B repository remote
+        run: git remote add B https://x-access-token:${{ secrets.B_TOKEN }}@github.com/<B账户>/B.git
+
+
+      # 5️⃣ 强制推送 A 内容覆盖 B
+      - name: Force push A content to B
+        run: |
+          git push B main --force
