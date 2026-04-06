@@ -7,7 +7,7 @@ jobs:
   overwrite-b:
     runs-on: ubuntu-latest
     steps:
-      # 1️⃣ Checkout仓库内容
+      # 1️⃣ Checkout A 仓库内容
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
@@ -19,12 +19,12 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      # 3️⃣ 添加 B 仓库 remote
+      # 3️⃣ 添加 B 仓库 remote（仓库地址在 Secrets 里）
       - name: Add B repository remote
-        run: git remote add B https://x-access-token:${{ secrets.B_TOKEN }}@github.com/<B账户>/B.git
+        run: |
+          git remote add target https://${{ secrets.B_REPO_TOKEN }}@github.com/${{ secrets.B_REPO_FULL_NAME }}.git
 
-
-      # 5️⃣ 强制推送 A 内容覆盖 B
+      # 4️⃣ 强制推送 A 内容覆盖 B
       - name: Force push A content to B
         run: |
-          git push B main --force
+          git push target main --force
