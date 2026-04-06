@@ -2,6 +2,7 @@ import csv
 import subprocess
 import requests
 import threading
+import re
 from concurrent.futures import ThreadPoolExecutor
 
 # ===== 配置 =====
