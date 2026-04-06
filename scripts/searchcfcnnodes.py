@@ -65,7 +65,7 @@ def parse_scan_text(text):
     rows = []
 
     # 按 https:// 切块
-    blocks = re.split(r'\n(?=https?://)', text)
+    blocks = re.split(r'(?=https?://)', text)
 
     for block in blocks:
         block = block.strip()
