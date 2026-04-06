@@ -73,7 +73,7 @@ def parse_scan_text(text):
             continue
 
         # ✅ 关键：必须包含 Cf-Ray
-        if "Cf-Ray:" not in block:
+        if "cf-ray" not in block.lower():
             continue
 
         # 提取 URL
