@@ -57,6 +57,38 @@ def parse_text(text):
             rows.append((ip, port, "https"))
     return rows
 
+def parse_scan_text(text):
+    """
+    解析扫描日志（仅保留带 Cf-Ray 的）
+    """
+    rows = []
+
+    # 按 https:// 切块
+    blocks = re.split(r'\n(?=https?://)', text)
+
+    for block in blocks:
+        block = block.strip()
+        if not block:
+            continue
+
+        # ✅ 关键：必须包含 Cf-Ray
+        if "Cf-Ray:" not in block:
+            continue
+
+        # 提取 URL
+        m = re.search(r'(https?)://([\d\.]+)(?::(\d+))?', block)
+        if not m:
+            continue
+
+        proto, ip, port = m.groups()
+
+        if not port:
+            port = "443" if proto == "https" else "80"
+
+        rows.append((ip, port, proto))
+
+    return rows
+
 def parse_csv(text):
     rows = []
     reader = csv.DictReader(text.splitlines())
@@ -107,12 +139,22 @@ def fetch_one(url):
         if not text.strip():
             return []
 
+        # ✅ 中转格式（优先）
         if "->" in text and "落地IP" in text:
             return parse_middle_text(text)
+
+        # ✅ CSV
         elif "ip" in text.splitlines()[0].lower():
             return parse_csv(text)
+
+        # ✅ 扫描日志（必须含 Cf-Ray）
+        elif "Cf-Ray:" in text:
+            return parse_scan_text(text)
+
+        # ✅ 普通文本
         else:
             return parse_text(text)
+
     except Exception as e:
         print(f"[ERR] 下载失败: {url} | {e}")
         return []
