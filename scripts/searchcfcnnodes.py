@@ -201,14 +201,29 @@ def query_ip_info(ip):
 
 # ===== 中转 IP 异步查询 =====
 def async_query_middle(ip, port, proto, returned_ip):
-    global middle  # ✅ 放函数开头
+    global middle
 
-    info = query_ip_info(returned_ip)
+    # ✅ 查询入口IP + 落地IP
+    src_info = query_ip_info(ip)
+    dst_info = query_ip_info(returned_ip)
+
+    # 👉 可选：把 \t 换成空格（更美观）
+    src_info = src_info.replace("\t", " ")
+    dst_info = dst_info.replace("\t", " ")
+
     with lock:
         middle += 1
         with open(MIDDLE_FILE, "a") as f:
-            f.write(f"{ip}:{port} ({proto}) -> {returned_ip} [{info}]\n")
-        print(f"[中转] {ip}:{port} ({proto}) -> {returned_ip} | {info}")
+            # ✅ 第一行（结构行）
+            f.write(f"{ip}:{port} ({proto}) -> 落地IP: {returned_ip}\n")
+
+            # ✅ 第二行（合并信息行）
+            f.write(f"入口IP: {src_info} | 落地IP: {dst_info}\n\n")
+
+        print(
+            f"[中转] {ip}:{port} ({proto}) -> {returned_ip}\n"
+            f"        入口: {src_info} | 落地: {dst_info}"
+        )
 
 # ===== 检测逻辑 =====
 def check(task):
