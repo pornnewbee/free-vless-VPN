@@ -22,12 +22,6 @@
 101.34.191.4:443 (https) -> 落地IP: 115.159.220.141
 入口IP: 中国 上海 上海  电信/联通/移动 | tencent.com | 落地IP: 中国 上海 上海  电信/联通/移动 | tencent.com
 
-185.242.247.178:443 (https) -> 落地IP: 2a05:541:108:63::1
-入口IP: 芬兰 新地区 赫尔辛基  rapidseedbox.com | rapidseedbox.com | 落地IP: 芬兰 新地区 赫尔辛基  noc.su | noc.su
-
-185.242.247.178:8443 (https) -> 落地IP: 2a05:541:108:63::1
-入口IP: 芬兰 新地区 赫尔辛基  rapidseedbox.com | rapidseedbox.com | 落地IP: 芬兰 新地区 赫尔辛基  noc.su | noc.su
-
 103.44.244.161:443 (https) -> 落地IP: 154.23.128.15
 入口IP: 中国 广东 深圳  电信 | niaoyun.com | 落地IP: 中国 香港   cogentco.com | cogentco.com
 
