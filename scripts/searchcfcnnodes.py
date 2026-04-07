@@ -120,6 +120,9 @@ def parse_middle_text(text):
         line = line.strip()
         if not line or "->" not in line:
             continue
+        # ✅ 只处理 IP:PORT 开头的行
+        if not re.match(r"\d+\.\d+\.\d+\.\d+:\d+", line):
+        continue
         src, dst = line.split("->", 1)
         ip_port_proto = src.strip()
         if "(" in ip_port_proto and ")" in ip_port_proto:
