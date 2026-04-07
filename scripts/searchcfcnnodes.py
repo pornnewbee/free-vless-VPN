@@ -64,7 +64,7 @@ def parse_scan_text(text):
     """
     rows = []
 
-    # 按 https:// 切块
+    # 按 http(s) 分块
     blocks = re.split(r'(?=https?://)', text)
 
     for block in blocks:
@@ -72,8 +72,8 @@ def parse_scan_text(text):
         if not block:
             continue
 
-        # ✅ 关键：必须包含 Cf-Ray
-        elif "cf-ray" in text.lower():
+        # ✅ 只保留含 Cf-Ray 的块
+        if "cf-ray" not in block.lower():
             continue
 
         # 提取 URL
@@ -83,6 +83,7 @@ def parse_scan_text(text):
 
         proto, ip, port = m.groups()
 
+        # 默认端口
         if not port:
             port = "443" if proto == "https" else "80"
 
@@ -149,7 +150,7 @@ def fetch_one(url):
             return parse_csv(text)
 
         # ✅ 扫描日志（必须含 Cf-Ray）
-        elif "Cf-Ray:" in text:
+        elif "cf-ray" in text.lower():
             return parse_scan_text(text)
 
         # ✅ 普通文本
