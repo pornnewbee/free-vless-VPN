@@ -35,25 +35,44 @@ ok = 0
 middle = 0
 
 # ===== 数据解析 =====
-def parse_text(text):
+def parse_messy_text(text):
     rows = []
-    for line in text.splitlines():
-        line = line.strip()
-        if not line:
-            continue
-        parts = line.split()
-        ip_port = parts[0]
-        if ":" not in ip_port:
-            continue
-        ip, port = ip_port.split(":", 1)
-        if len(parts) > 1:
-            proto = parts[1].lower()
-            if proto not in ("http", "https"):
-                proto = "http"
-            rows.append((ip, port, proto))
-        else:
+    lines = [l.strip() for l in text.splitlines() if l.strip()]
+
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+
+        # ✅ 情况1：IP:PORT
+        if re.match(r"^\d+\.\d+\.\d+\.\d+:\d+$", line):
+            ip, port = line.split(":")
             rows.append((ip, port, "http"))
             rows.append((ip, port, "https"))
+            i += 1
+            continue
+
+        # ✅ 情况2：纯 IP
+        if re.match(r"^\d+\.\d+\.\d+\.\d+$", line):
+            ip = line
+            port = None
+
+            # 向后找端口（最多找3行，防污染）
+            for j in range(1, 4):
+                if i + j >= len(lines):
+                    break
+                next_line = lines[i + j]
+
+                # 找到纯数字端口
+                if re.match(r"^\d{2,5}$", next_line):
+                    port = next_line
+                    break
+
+            if port:
+                rows.append((ip, port, "http"))
+                rows.append((ip, port, "https"))
+
+        i += 1
+
     return rows
 
 def parse_scan_text(text):
@@ -151,13 +170,17 @@ def fetch_one(url):
         elif "ip" in text.splitlines()[0].lower():
             return parse_csv(text)
 
-        # ✅ 扫描日志（必须含 Cf-Ray）
+        # ✅ 新格式：块扫描数据（优先）
+        elif re.search(r"\n\d{1,3}(\.\d{1,3}){3}\n", text):
+            return parse_block_text(text)
+
+        # ✅ 老扫描日志
         elif "cf-ray" in text.lower():
             return parse_scan_text(text)
 
         # ✅ 普通文本
         else:
-            return parse_text(text)
+            return parse_messy_text(text)
 
     except Exception as e:
         print(f"[ERR] 下载失败: {url} | {e}")
@@ -175,6 +198,68 @@ def fetch():
 
     print(f"[+] 合并后总条目（去重后）: {len(all_rows)}")
     return all_rows
+
+def is_ip(line):
+    return re.match(r'^\d{1,3}(\.\d{1,3}){3}$', line)
+
+def split_blocks(lines):
+    blocks = []
+    current = []
+
+    for line in lines:
+        if is_ip(line):
+            if current:
+                blocks.append(current)
+            current = [line]
+        else:
+            current.append(line)
+
+    if current:
+        blocks.append(current)
+
+    return blocks
+
+
+def parse_block_text(text):
+    """
+    解析你这种“扫描块数据”
+    规则：遇到IP就是新块
+    """
+    rows = []
+    lines = [l.strip() for l in text.splitlines() if l.strip()]
+
+    blocks = split_blocks(lines)
+
+    for block in blocks:
+        if not block:
+            continue
+
+        ip = block[0]
+        port = None
+
+        # 在块内找端口（前5行优先）
+        for line in block[1:6]:
+            if re.match(r'^\d{2,5}$', line):
+                port = line
+                break
+
+        if not port:
+            continue
+
+        # 👉 可选：只要 Cloudflare 的
+        is_cf = any("cloudflare" in l.lower() for l in block)
+        if not is_cf:
+            continue
+
+        # 👉 可选：必须有 HTTP 响应
+        has_http = any("http/" in l.lower() for l in block)
+        if not has_http:
+            continue
+
+        rows.append((ip, port, "http"))
+        rows.append((ip, port, "https"))
+
+    return rows
 
 # ===== IP 查询函数（缓存） =====
 def query_ip_info(ip):
