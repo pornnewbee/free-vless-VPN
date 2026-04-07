@@ -120,22 +120,23 @@ def parse_middle_text(text):
         line = line.strip()
         if not line or "->" not in line:
             continue
-        # ✅ 只处理 IP:PORT 开头的行
-        if not re.match(r"\d+\.\d+\.\d+\.\d+:\d+", line):
+        # 只处理 IP:PORT 开头的行
+        if not re.match(r"^\d+\.\d+\.\d+\.\d+:\d+", line):
             continue
-        src, dst = line.split("->", 1)
-        ip_port_proto = src.strip()
-        if "(" in ip_port_proto and ")" in ip_port_proto:
-            ip_port, proto = ip_port_proto.split("(")
-            proto = proto.replace(")", "").strip().lower()
-        else:
-            ip_port = ip_port_proto
-            proto = "http"
-        if ":" not in ip_port:
-            continue
-        ip, port = ip_port.split(":", 1)
-        dst_ip = dst.split(":")[-1].strip()
-        rows.append((ip, port, proto, dst_ip))
+        try:
+            src, dst = line.split("->", 1)
+            ip_port_proto = src.strip()
+            if "(" in ip_port_proto and ")" in ip_port_proto:
+                ip_port, proto = ip_port_proto.split("(")
+                proto = proto.replace(")", "").strip().lower()
+            else:
+                ip_port = ip_port_proto
+                proto = "http"
+            ip, port = ip_port.split(":", 1)
+            dst_ip = dst.split(":")[-1].strip()
+            rows.append((ip, port, proto, dst_ip))
+        except Exception as e:
+            print(f"[WARN] 解析中转行失败: {line} | {e}")
     return rows
 
 # ===== 下载与解析 =====
