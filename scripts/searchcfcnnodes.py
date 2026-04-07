@@ -73,7 +73,7 @@ def parse_scan_text(text):
             continue
 
         # ✅ 关键：必须包含 Cf-Ray
-        if "cf-ray" not in block.lower():
+        elif "cf-ray" in text.lower():
             continue
 
         # 提取 URL
@@ -168,10 +168,7 @@ def fetch():
         all_rows.extend(rows)
 
     # 去重
-    if all_rows and len(all_rows[0]) == 4:
-        all_rows = list(set(all_rows))  # (ip, port, proto, returned_ip)
-    else:
-        all_rows = list(set(all_rows))  # (ip, port, proto)
+    all_rows = list(set(all_rows))
 
     print(f"[+] 合并后总条目（去重后）: {len(all_rows)}")
     return all_rows
@@ -251,8 +248,7 @@ def check(task):
                     f.write(f"{ip}:{port}\n")
 
             if returned_ip_detected and returned_ip_detected != ip:
-                t = threading.Thread(target=async_query_middle, args=(ip, port, proto, returned_ip_detected))
-                t.start()
+                async_query_middle(ip, port, proto, returned_ip_detected)
             else:
                 print(f"[OK] {ip}:{port} ({proto})")
         else:
