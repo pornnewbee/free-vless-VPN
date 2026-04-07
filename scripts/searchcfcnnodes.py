@@ -7,11 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 # ===== 配置 =====
 INPUT_URLS = [
-    "https://github.com/femboyenjoy/free-vless-VPN/raw/refs/heads/main/nodes/cfcn/raw/202603311900%E8%B5%84%E4%BA%A7%E6%95%B0%E6%8D%AE.csv",
-    "https://github.com/femboyenjoy/free-vless-VPN/raw/refs/heads/main/nodes/cfcn/raw/202604011044%E8%B5%84%E4%BA%A7%E6%95%B0%E6%8D%AE.csv",
-    "https://github.com/femboyenjoy/free-vless-VPN/raw/refs/heads/main/nodes/cfcn/raw/fofa1.txt",
-    "https://github.com/femboyenjoy/free-vless-VPN/raw/refs/heads/main/nodes/cfcn/raw/fofa2.txt",
-    "https://github.com/femboyenjoy/free-vless-VPN/raw/refs/heads/main/nodes/cfcn/raw/middle_proxy.txt",
+    "https://github.com/femboyenjoy/free-vless-VPN/raw/refs/heads/main/nodes/cfcn/raw/http1.txt"
 ]
 THREADS = 100
 TIMEOUT = 5
