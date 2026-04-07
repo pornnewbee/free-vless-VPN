@@ -35,44 +35,25 @@ ok = 0
 middle = 0
 
 # ===== 数据解析 =====
-def parse_messy_text(text):
+def parse_text(text):
     rows = []
-    lines = [l.strip() for l in text.splitlines() if l.strip()]
-
-    i = 0
-    while i < len(lines):
-        line = lines[i]
-
-        # ✅ 情况1：IP:PORT
-        if re.match(r"^\d+\.\d+\.\d+\.\d+:\d+$", line):
-            ip, port = line.split(":")
+    for line in text.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        parts = line.split()
+        ip_port = parts[0]
+        if ":" not in ip_port:
+            continue
+        ip, port = ip_port.split(":", 1)
+        if len(parts) > 1:
+            proto = parts[1].lower()
+            if proto not in ("http", "https"):
+                proto = "http"
+            rows.append((ip, port, proto))
+        else:
             rows.append((ip, port, "http"))
             rows.append((ip, port, "https"))
-            i += 1
-            continue
-
-        # ✅ 情况2：纯 IP
-        if re.match(r"^\d+\.\d+\.\d+\.\d+$", line):
-            ip = line
-            port = None
-
-            # 向后找端口（最多找3行，防污染）
-            for j in range(1, 4):
-                if i + j >= len(lines):
-                    break
-                next_line = lines[i + j]
-
-                # 找到纯数字端口
-                if re.match(r"^\d{2,5}$", next_line):
-                    port = next_line
-                    break
-
-            if port:
-                rows.append((ip, port, "http"))
-                rows.append((ip, port, "https"))
-
-        i += 1
-
     return rows
 
 def parse_scan_text(text):
@@ -176,7 +157,7 @@ def fetch_one(url):
 
         # ✅ 普通文本
         else:
-            return parse_messy_text(text)
+            return parse_text(text)
 
     except Exception as e:
         print(f"[ERR] 下载失败: {url} | {e}")
