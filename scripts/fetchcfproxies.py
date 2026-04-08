@@ -11,18 +11,18 @@ THREADS = 50
 TIMEOUT = 5
 
 # ===== 核心解析函数 =====
-def parse_fofa_text(text):
+def parse_block_text(text):
+    """
+    解析每块文本，保留旧版和新版格式，必须含 cf-ray
+    """
     rows = []
 
     # 按 IP 开头分块
     blocks = re.split(r'\n(?=\d{1,3}(?:\.\d{1,3}){3})', text)
 
     for block in blocks:
-        block_lower = block.lower()
-
-        # 必须含 cf-ray
-        if "cf-ray" not in block_lower:
-            continue
+        if "cf-ray" not in block.lower():
+            continue  # 没有 cf-ray 的块直接跳过
 
         ip = None
         port = None
@@ -35,7 +35,7 @@ def parse_fofa_text(text):
             rows.append((ip, port, proto))
             continue
 
-        # IP:PORT
+        # IP:PORT 直接格式
         m = re.search(r'(\d{1,3}(?:\.\d{1,3}){3}):(\d+)', block)
         if m:
             ip, port = m.groups()
@@ -50,25 +50,19 @@ def parse_fofa_text(text):
             if m_port:
                 port = m_port.group(1)
 
-        if not ip or not port:
-            continue
-
-        # 协议判断
-        if "https://" in block_lower or "http/2" in block_lower:
-            proto = "https"
-        else:
-            proto = "http"
-
-        rows.append((ip, port, proto))
+        # 带额外标识符（如 +EFhuSBtoOyNwL3Lb+gPGw==999+）也解析
+        if ip and port:
+            proto = "https" if "https://" in block.lower() or "http/2" in block.lower() else "http"
+            rows.append((ip, port, proto))
 
     return rows
 
-# ===== 下载单个 URL =====
+# ===== 下载并解析单个 URL =====
 def fetch_url(url):
     try:
         resp = requests.get(url, timeout=TIMEOUT)
         if resp.status_code == 200:
-            return parse_fofa_text(resp.text)
+            return parse_block_text(resp.text)
     except Exception as e:
         print(f"[ERROR] {url} -> {e}")
     return []
@@ -87,7 +81,7 @@ def main():
     # 去重
     all_rows = list(set(all_rows))
 
-    # 输出
+    # 输出，保持旧版格式兼容
     for ip, port, proto in all_rows:
         print(f"{ip}:{port}:{proto}")
 
