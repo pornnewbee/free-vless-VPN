@@ -8,12 +8,70 @@ INPUT_URLS = [
     "https://github.com/femboyenjoy/free-vless-VPN/raw/refs/heads/main/nodes/cfcn/raw/http1.txt"
 ]
 
-THREADS = 10
-TIMEOUT = 10
+FETCH_THREADS = 10
+FETCH_TIMEOUT = 10
 
 OUTPUT_FILE = "ips.txt"
 
-# ================== 解析 ==================
+# ================== FOFA 专用解析 ==================
+
+def parse_fofa_text(text):
+    rows = []
+
+    blocks = re.split(r'\n(?=\d{1,3}(?:\.\d{1,3}){3}[:\n])', text)
+
+    for block in blocks:
+        block_lower = block.lower()
+
+        if "cloudflare" not in block_lower:
+            continue
+
+        ip = None
+        port = None
+        proto = None
+
+        # https://ip:port
+        m = re.search(r'(https?)://(\d{1,3}(?:\.\d{1,3}){3}):(\d+)', block)
+        if m:
+            proto, ip, port = m.groups()
+            rows.append((ip, port, proto))
+            continue
+
+        # ip:port
+        m = re.search(r'(\d{1,3}(?:\.\d{1,3}){3}):(\d+)', block)
+        if m:
+            ip, port = m.groups()
+
+        # ip + 换行 port
+        if not ip:
+            m_ip = re.search(r'\b(\d{1,3}(?:\.\d{1,3}){3})\b', block)
+            if m_ip:
+                ip = m_ip.group(1)
+
+        if ip and not port:
+            m_port = re.search(r'\n(\d{2,5})(?:\n|$)', block)
+            if m_port:
+                port = m_port.group(1)
+
+        if not ip or not port:
+            continue
+
+        # 协议判断
+        if "https://" in block_lower or "http/2" in block_lower:
+            proto = "https"
+        elif "http/1.1" in block_lower:
+            proto = "http"
+        elif re.search(r'\d+(http|https)', block_lower):
+            proto = "http"
+        else:
+            proto = "http"
+
+        rows.append((ip, port, proto))
+
+    return rows
+
+
+# ================== 通用解析 ==================
 
 def smart_extract(text):
     rows = []
@@ -34,27 +92,6 @@ def smart_extract(text):
             rows.append((ip, port, "https"))
         else:
             rows.append((ip, port, proto))
-
-    return rows
-
-
-def parse_scan_text(text):
-    rows = []
-    blocks = re.split(r'(?=https?://)', text)
-
-    for block in blocks:
-        if "cf-ray" not in block.lower():
-            continue
-
-        m = re.search(r'(https?)://([\d\.]+)(?::(\d+))?', block)
-        if not m:
-            continue
-
-        proto, ip, port = m.groups()
-        if not port:
-            port = "443" if proto == "https" else "80"
-
-        rows.append((ip, port, proto))
 
     return rows
 
@@ -105,20 +142,49 @@ def parse_csv(text):
     return rows
 
 
+def parse_scan_text(text):
+    rows = []
+    blocks = re.split(r'(?=https?://)', text)
+
+    for block in blocks:
+        if "cf-ray" not in block.lower():
+            continue
+
+        m = re.search(r'(https?)://([\d\.]+)(?::(\d+))?', block)
+        if not m:
+            continue
+
+        proto, ip, port = m.groups()
+        if not port:
+            port = "443" if proto == "https" else "80"
+
+        rows.append((ip, port, proto))
+
+    return rows
+
+
 # ================== 下载 ==================
 
 def fetch_one(url):
     try:
         print(f"[+] 下载: {url}")
-        text = requests.get(url, timeout=TIMEOUT).text
+        text = requests.get(url, timeout=FETCH_TIMEOUT).text
+
+        text_lower = text.lower()
+
+        # ===== FOFA 优先 =====
+        if "cloudflare" in text_lower and "cf-ray" in text_lower:
+            rows = parse_fofa_text(text)
+            if rows:
+                return rows
 
         if "->" in text:
             return parse_middle_text(text)
 
-        if "ip" in text.splitlines()[0].lower():
+        if text.splitlines() and "ip" in text.splitlines()[0].lower():
             return parse_csv(text)
 
-        if "cf-ray" in text.lower():
+        if "cf-ray" in text_lower:
             rows = parse_scan_text(text)
             if rows:
                 return rows
@@ -130,10 +196,12 @@ def fetch_one(url):
         return []
 
 
+# ================== 主函数 ==================
+
 def main():
     all_rows = []
 
-    with ThreadPoolExecutor(max_workers=THREADS) as pool:
+    with ThreadPoolExecutor(max_workers=FETCH_THREADS) as pool:
         results = pool.map(fetch_one, INPUT_URLS)
 
     for r in results:
@@ -144,7 +212,6 @@ def main():
 
     print(f"[+] 总条目: {len(all_rows)}")
 
-    # 输出
     with open(OUTPUT_FILE, "w") as f:
         for ip, port, proto in sorted(all_rows):
             f.write(f"{ip}:{port}:{proto}\n")
