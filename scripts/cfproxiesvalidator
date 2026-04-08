@@ -1,0 +1,153 @@
+import subprocess
+import requests
+import threading
+import re
+from concurrent.futures import ThreadPoolExecutor
+
+# ===== 配置 =====
+INPUT_FILE = "ips.txt"
+
+THREADS = 100
+TIMEOUT = 5
+
+IP_API = "https://btapi.ipip.net/v2/trace"
+IP_TOKEN = "068f269ea236dc57215574f3542c8161e27fbf70"
+
+HTTP_FILE = "http_proxy.txt"
+HTTPS_FILE = "https_proxy.txt"
+MIDDLE_FILE = "middle_proxy.txt"
+
+seen = set()
+lock = threading.Lock()
+
+ipinfo_cache = {}
+ipinfo_lock = threading.Lock()
+
+total = checked = ok = middle = 0
+
+# ================== 读取 ==================
+
+def load_tasks():
+    tasks = []
+    with open(INPUT_FILE) as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+
+            try:
+                ip, port, proto = line.split(":")
+                tasks.append((ip, port, proto))
+            except:
+                continue
+
+    return tasks
+
+
+# ================== IP 查询 ==================
+
+def query_ip_info(ip):
+    with ipinfo_lock:
+        if ip in ipinfo_cache:
+            return ipinfo_cache[ip]
+
+    try:
+        headers = {"token": IP_TOKEN}
+        r = requests.get(IP_API, params={"ip": ip}, headers=headers, timeout=5)
+        d = r.json()
+
+        area = d.get("area", "").split("\t")[:5]
+        area = " ".join(area)
+        isp = d.get("isp_domain", "")
+
+        result = f"{area} | {isp}".strip(" |")
+    except:
+        result = "查询失败"
+
+    with ipinfo_lock:
+        ipinfo_cache[ip] = result
+
+    return result
+
+
+# ================== 中转 ==================
+
+def async_query_middle(ip, port, proto, returned_ip):
+    global middle
+
+    src = query_ip_info(ip)
+    dst = query_ip_info(returned_ip)
+
+    with lock:
+        middle += 1
+        with open(MIDDLE_FILE, "a") as f:
+            f.write(f"{ip}:{port} ({proto}) -> 落地IP: {returned_ip}\n")
+            f.write(f"入口IP: {src} | 落地IP: {dst}\n\n")
+
+        print(f"[中转] {ip}:{port} -> {returned_ip}")
+
+
+# ================== 检测 ==================
+
+def check(task):
+    global checked, ok
+
+    ip, port, proto = task
+
+    key = f"{ip}:{port}:{proto}"
+
+    with lock:
+        if key in seen:
+            return
+        seen.add(key)
+
+    cmd = [
+        "curl", "-s",
+        "--max-time", str(TIMEOUT),
+        "--resolve", f"www.visa.cn:{port}:{ip}",
+        f"{proto}://www.visa.cn:{port}/cdn-cgi/trace"
+    ]
+
+    try:
+        result = subprocess.check_output(cmd).decode()
+
+        if "ip=" in result:
+            returned_ip = re.search(r'ip=(.+)', result).group(1)
+
+            with lock:
+                ok += 1
+                f = HTTPS_FILE if proto == "https" else HTTP_FILE
+                open(f, "a").write(f"{ip}:{port}\n")
+
+            if returned_ip != ip:
+                async_query_middle(ip, port, proto, returned_ip)
+
+    except:
+        pass
+
+    finally:
+        with lock:
+            checked += 1
+            print(f"\r进度: {checked}/{total} 成功:{ok} 中转:{middle}", end="")
+
+
+# ================== 主函数 ==================
+
+def main():
+    global total
+
+    tasks = load_tasks()
+    total = len(tasks)
+
+    open(HTTP_FILE, "w").close()
+    open(HTTPS_FILE, "w").close()
+    open(MIDDLE_FILE, "w").close()
+
+    with ThreadPoolExecutor(max_workers=THREADS) as pool:
+        pool.map(check, tasks)
+
+    print("\n完成")
+
+
+if __name__ == "__main__":
+    main()
