@@ -2,9 +2,6 @@ name: Run searchcfcnnodes
 
 on:
   workflow_dispatch:    # 可以手动触发
-  push:
-    paths:
-      - "scripts/searchcfcnnodes.py"
 
 jobs:
   run-script:
