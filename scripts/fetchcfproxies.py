@@ -16,41 +16,77 @@ TIMEOUT = 5
 
 def parse_block_text(text):
     """
-    解析块状文本（旧版格式 + cf-ray 过滤）
+    强化版块解析（带统计）
     """
     rows = []
+
+    total_blocks = 0          # 总块数
+    cf_blocks = 0             # 含 cf-ray 的块
+    parsed_blocks = 0         # 成功解析出 IP:PORT 的块
+
+    # 按 IP 开头切块
     blocks = re.split(r'\n(?=\d{1,3}(?:\.\d{1,3}){3})', text)
+
     for block in blocks:
+        block = block.strip()
+        if not block:
+            continue
+
+        total_blocks += 1
+
+        # 是否含 CF-Ray
         if "cf-ray" not in block.lower():
             continue
 
-        ip = port = proto = None
+        cf_blocks += 1
 
-        # https://IP:PORT
-        m = re.search(r'(https?)://(\d{1,3}(?:\.\d{1,3}){3}):(\d+)', block)
-        if m:
-            proto, ip, port = m.groups()
-            rows.append((ip, port, proto))
-            continue
+        lines = [l.strip() for l in block.splitlines() if l.strip()]
 
-        # IP:PORT 直接格式
+        ip = None
+        port = None
+        proto = "http"
+
+        # ===== 1. 优先匹配 IP:PORT =====
         m = re.search(r'(\d{1,3}(?:\.\d{1,3}){3}):(\d+)', block)
         if m:
             ip, port = m.groups()
 
-        # IP + 下一行 PORT
+        # ===== 2. 找 IP =====
         if not ip:
-            m_ip = re.search(r'\b(\d{1,3}(?:\.\d{1,3}){3})\b', block)
-            if m_ip:
-                ip = m_ip.group(1)
-        if ip and not port:
-            m_port = re.search(r'\n(\d{2,5})(?:\n|$)', block)
-            if m_port:
-                port = m_port.group(1)
+            for line in lines:
+                if re.match(r'^\d{1,3}(?:\.\d{1,3}){3}$', line):
+                    ip = line
+                    break
 
+        # ===== 3. 找端口 =====
+        if ip and not port:
+            ip_index = None
+
+            for i, line in enumerate(lines):
+                if line == ip:
+                    ip_index = i
+                    break
+
+            if ip_index is not None:
+                for line in lines[ip_index + 1:]:
+                    if re.match(r'^\d{2,5}$', line):
+                        p = int(line)
+                        if 1 <= p <= 65535:
+                            port = line
+                            break
+
+        # ===== 4. 协议判断 =====
+        if "https://" in block.lower() or "http/2" in block.lower():
+            proto = "https"
+
+        # ===== 5. 成功解析 =====
         if ip and port:
-            proto = "https" if "https://" in block.lower() or "http/2" in block.lower() else "http"
             rows.append((ip, port, proto))
+            parsed_blocks += 1
+
+    # ===== 输出统计 =====
+    print(f"[parse_block_text] 总块数: {total_blocks} | 含CF-Ray: {cf_blocks} | 成功解析: {parsed_blocks}")
+
     return rows
 
 def parse_scan_text(text):
