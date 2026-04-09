@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
     # ===== 输出 =====
     for i in data:
-        with open("result.txt", "w", encoding="utf-8") as f:
+        with open("ips.txt", "w", encoding="utf-8") as f:
             for i in data:
                 line = f'{i["ip"]}:{i["port"]} | AS{i["asn"]} | {i["org"]}\n'
                 f.write(line)
