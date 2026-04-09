@@ -16,16 +16,19 @@ TIMEOUT = 5
 
 def parse_block_text(text):
     """
-    强化版块解析（带统计）
+    强化版块解析（端口白名单过滤 + 统计）
     """
     rows = []
 
-    total_blocks = 0          # 总块数
-    cf_blocks = 0             # 含 cf-ray 的块
-    parsed_blocks = 0         # 成功解析出 IP:PORT 的块
+    ALLOWED_PORTS = {"8080", "8880", "80", "2095", "2086", "2052", "2082"}
 
-    # 按 IP 开头切块
-    blocks = re.split(r'\n(?=\d{1,3}(?:\.\d{1,3}){3})', text)
+    total_blocks = 0
+    cf_blocks = 0
+    parsed_blocks = 0
+    filtered_blocks = 0  # 被端口过滤掉的
+
+    # 更稳的切块方式
+    blocks = re.split(r'(?m)^(?=\d{1,3}(?:\.\d{1,3}){3})', text)
 
     for block in blocks:
         block = block.strip()
@@ -34,7 +37,6 @@ def parse_block_text(text):
 
         total_blocks += 1
 
-        # 是否含 CF-Ray
         if "cf-ray" not in block.lower():
             continue
 
@@ -46,7 +48,7 @@ def parse_block_text(text):
         port = None
         proto = "http"
 
-        # ===== 1. 优先匹配 IP:PORT =====
+        # ===== 1. 优先 IP:PORT =====
         m = re.search(r'(\d{1,3}(?:\.\d{1,3}){3}):(\d+)', block)
         if m:
             ip, port = m.groups()
@@ -79,13 +81,26 @@ def parse_block_text(text):
         if "https://" in block.lower() or "http/2" in block.lower():
             proto = "https"
 
-        # ===== 5. 成功解析 =====
+        # ===== 5. 白名单端口过滤（核心新增）=====
         if ip and port:
+            if port not in ALLOWED_PORTS:
+                filtered_blocks += 1
+                print(f"[过滤] 非目标端口: {ip}:{port}")
+                continue
+
             rows.append((ip, port, proto))
             parsed_blocks += 1
+        else:
+            if ip:
+                print(f"[异常] 未找到端口: {ip}")
 
-    # ===== 输出统计 =====
-    print(f"[parse_block_text] 总块数: {total_blocks} | 含CF-Ray: {cf_blocks} | 成功解析: {parsed_blocks}")
+    # ===== 统计 =====
+    print(
+        f"[parse_block_text] 总块: {total_blocks} | "
+        f"CF块: {cf_blocks} | "
+        f"成功: {parsed_blocks} | "
+        f"过滤: {filtered_blocks}"
+    )
 
     return rows
 
