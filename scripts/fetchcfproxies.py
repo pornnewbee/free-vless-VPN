@@ -156,7 +156,7 @@ def main():
     all_rows = list(set(all_rows))
 
     # 输出到文件
-    with open("all.txt", "w") as f:
+    with open("ips.txt", "w") as f:
         for row in all_rows:
             # 统一格式 IP:PORT:PROTO
             if len(row) == 3:
