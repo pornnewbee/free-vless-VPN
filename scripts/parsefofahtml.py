@@ -4,8 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 # ===== 配置 =====
 URLS = [
-    "https://example.com/page1.html",
-    "https://example.com/page2.html"
+    "https://github.com/femboyenjoy/free-vless-VPN/raw/refs/heads/main/nodes/cfcn/raw/http1.txt",
 ]
 
 THREADS = 5
