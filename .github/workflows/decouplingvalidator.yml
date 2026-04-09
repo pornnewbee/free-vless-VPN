@@ -35,7 +35,7 @@ jobs:
         with:
           name: cfcn-proxies
           path: |
-            all.txt
+            ips.txt
             http_proxy.txt
             https_proxy.txt
             middle_proxy.txt
