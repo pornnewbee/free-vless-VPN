@@ -16,18 +16,17 @@ TIMEOUT = 5
 
 def parse_block_text(text):
     """
-    强化版块解析（端口白名单过滤 + 统计）
+    结构优先端口提取（严格按行位置，不全局扫描）
     """
-    rows = []
 
-    ALLOWED_PORTS = {"8080", "8880", "80", "2095", "2086", "2052", "2082"}
+    rows = []
 
     total_blocks = 0
     cf_blocks = 0
     parsed_blocks = 0
-    filtered_blocks = 0  # 被端口过滤掉的
+    failed_blocks = 0
 
-    # 更稳的切块方式
+    # 更稳切块：以 IP 开头
     blocks = re.split(r'(?m)^(?=\d{1,3}(?:\.\d{1,3}){3})', text)
 
     for block in blocks:
@@ -37,6 +36,7 @@ def parse_block_text(text):
 
         total_blocks += 1
 
+        # 必须是 CF
         if "cf-ray" not in block.lower():
             continue
 
@@ -46,60 +46,63 @@ def parse_block_text(text):
 
         ip = None
         port = None
-        proto = "http"
 
-        # ===== 1. 优先 IP:PORT =====
-        m = re.search(r'(\d{1,3}(?:\.\d{1,3}){3}):(\d+)', block)
+        # =========================
+        # ✅ 1. 第一行：IP:PORT
+        # =========================
+        first = lines[0]
+
+        m = re.match(r'^(\d{1,3}(?:\.\d{1,3}){3}):(\d+)', first)
         if m:
             ip, port = m.groups()
 
-        # ===== 2. 找 IP =====
-        if not ip:
-            for line in lines:
-                if re.match(r'^\d{1,3}(?:\.\d{1,3}){3}$', line):
-                    ip = line
-                    break
+        # =========================
+        # ✅ 2. 第一行是 IP
+        # =========================
+        if not ip and re.match(r'^\d{1,3}(?:\.\d{1,3}){3}$', first):
+            ip = first
 
-        # ===== 3. 找端口 =====
-        if ip and not port:
-            ip_index = None
+            # ===== 第二行找端口 =====
+            if len(lines) > 1:
+                line2 = lines[1]
 
-            for i, line in enumerate(lines):
-                if line == ip:
-                    ip_index = i
-                    break
+                # 80 / 8880 / 80http
+                m = re.match(r'^(\d{2,5})', line2)
+                if m:
+                    port = m.group(1)
 
-            if ip_index is not None:
-                for line in lines[ip_index + 1:]:
-                    if re.match(r'^\d{2,5}$', line):
-                        p = int(line)
-                        if 1 <= p <= 65535:
-                            port = line
-                            break
+            # ===== 第三行兜底 =====
+            if not port and len(lines) > 2:
+                line3 = lines[2]
 
-        # ===== 4. 协议判断 =====
-        if "https://" in block.lower() or "http/2" in block.lower():
-            proto = "https"
+                # 跳过 token 行（含字母/符号）
+                if re.match(r'^\d{2,5}$', line3):
+                    port = line3
 
-        # ===== 5. 白名单端口过滤（核心新增）=====
+        # =========================
+        # ❌ 不再做全块扫描端口（避免误判）
+        # =========================
+
+        # =========================
+        # ✅ 成功
+        # =========================
         if ip and port:
-            if port not in ALLOWED_PORTS:
-                filtered_blocks += 1
-                print(f"[过滤] 非目标端口: {ip}:{port}")
-                continue
-
-            rows.append((ip, port, proto))
+            rows.append((ip, port, "http"))
+            rows.append((ip, port, "https"))
             parsed_blocks += 1
         else:
+            failed_blocks += 1
             if ip:
-                print(f"[异常] 未找到端口: {ip}")
+                print(f"[失败] 无法提取端口: {ip}")
 
-    # ===== 统计 =====
+    # =========================
+    # 📊 统计
+    # =========================
     print(
-        f"[parse_block_text] 总块: {total_blocks} | "
-        f"CF块: {cf_blocks} | "
-        f"成功: {parsed_blocks} | "
-        f"过滤: {filtered_blocks}"
+        f"[parse_block_text] 总块:{total_blocks} | "
+        f"CF块:{cf_blocks} | "
+        f"成功:{parsed_blocks} | "
+        f"失败:{failed_blocks}"
     )
 
     return rows
