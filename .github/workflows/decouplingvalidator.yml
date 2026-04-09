@@ -28,7 +28,7 @@ jobs:
       - name: Run searchcfcnnodes.py
         run: |
           python scripts/fetchcfproxies.py
-          python scripts/cfproxiesvalidator
+      #    python scripts/cfproxiesvalidator
 
       # 5️⃣ 上传 artifacts（新版 v4）
       - name: Upload proxy files
