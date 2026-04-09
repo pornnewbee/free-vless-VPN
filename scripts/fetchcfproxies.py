@@ -154,9 +154,19 @@ def main():
     # 去重
     all_rows = list(set(all_rows))
 
-    # 输出
+    # 输出到终端
     for row in all_rows:
         print(row)
+
+    # ✅ 输出到文件 all.txt，只写 IP:PORT 协议格式
+    with open("all.txt", "w", encoding="utf-8") as f:
+        for row in all_rows:
+            # 支持 parse_middle_text 的四元组，如果有第四个元素，写成 源IP:端口 协议
+            if len(row) == 4:
+                ip, port, proto, _ = row
+            else:
+                ip, port, proto = row
+            f.write(f"{ip}:{port} {proto}\n")
 
 if __name__ == "__main__":
     main()
