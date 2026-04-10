@@ -5,6 +5,7 @@ import re
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 
+# 支持IP:PORT格式，只检测noTLS
 # ===== 配置 =====
 INPUT_URL = "https://example.com/ips.txt"
 
