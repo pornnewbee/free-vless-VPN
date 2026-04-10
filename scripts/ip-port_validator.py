@@ -3,9 +3,10 @@ import requests
 import threading
 import re
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime
 
 # ===== 配置 =====
-INPUT_URL = "https://example.com/ips.txt"  # 远程输入（每行 ip:port）
+INPUT_URL = "https://example.com/ips.txt"
 
 THREADS = 100
 TIMEOUT = 5
@@ -38,7 +39,6 @@ def load_tasks():
         if not line:
             continue
 
-        # 只接受 ip:port
         if ":" not in line:
             continue
 
@@ -67,7 +67,7 @@ def query_ip_info(ip):
         area = " ".join(area)
         isp = d.get("isp_domain", "")
 
-        result = f"{area} | {isp}".strip(" |")
+        result = f"{area} {isp}".strip()
     except:
         result = "查询失败"
 
@@ -77,19 +77,24 @@ def query_ip_info(ip):
     return result
 
 
-# ================== 中转 ==================
+# ================== 中转记录（核心输出） ==================
 
 def async_query_middle(ip, port, returned_ip):
     global middle
 
-    src = query_ip_info(ip)
-    dst = query_ip_info(returned_ip)
+    entry_info = query_ip_info(ip)
+    exit_info = query_ip_info(returned_ip)
+
+    time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    status = "OK" if returned_ip else "FAIL"
+
+    line = f"{ip}:{port} | {entry_info} | {ip} | {returned_ip} | {exit_info} | {status} | {time_now}\n"
 
     with lock:
         middle += 1
-        with open(MIDDLE_FILE, "a") as f:
-            f.write(f"{ip}:{port} -> 落地IP: {returned_ip}\n")
-            f.write(f"入口IP: {src} | 落地IP: {dst}\n\n")
+        with open(MIDDLE_FILE, "a", encoding="utf-8") as f:
+            f.write(line)
 
         print(f"[中转] {ip}:{port} -> {returned_ip}")
 
@@ -122,7 +127,7 @@ def check(task):
 
             with lock:
                 ok += 1
-                with open(HTTP_FILE, "a") as f:
+                with open(HTTP_FILE, "a", encoding="utf-8") as f:
                     f.write(f"{ip}:{port}\n")
 
             if returned_ip != ip:
@@ -146,7 +151,7 @@ def main():
     total = len(tasks)
 
     open(HTTP_FILE, "w").close()
-    open(MIDDLE_FILE, "w").close()
+    open(MIDDLE_FILE, "w", encoding="utf-8").close()
 
     with ThreadPoolExecutor(max_workers=THREADS) as pool:
         pool.map(check, tasks)
