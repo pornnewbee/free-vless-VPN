@@ -1,0 +1,43 @@
+name: validator
+
+on:
+  workflow_dispatch:    # 可以手动触发
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ 安装 Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      # 3️⃣ 安装依赖
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+          pip install bs4
+
+      # 4️⃣ 执行脚本
+      - name: Run searchcfcnnodes.py
+        run: |
+          python scripts/parsefofahtml.py
+      #    python scripts/cfproxiesvalidator
+
+      # 5️⃣ 上传 artifacts（新版 v4）
+      - name: Upload proxy files
+        uses: actions/upload-artifact@v4
+        with:
+          name: cfcn-proxies
+          path: |
+            ips.txt
+            http_proxy.txt
+            https_proxy.txt
+            middle_proxy.txt
