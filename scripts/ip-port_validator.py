@@ -7,7 +7,7 @@ from datetime import datetime
 
 # 支持IP:PORT格式，只检测noTLS
 # ===== 配置 =====
-INPUT_URL = "https://example.com/ips.txt"
+INPUT_URL = "https://raw.githubusercontent.com/femboyenjoy/free-vless-VPN/refs/heads/main/nodes/cfcn/raw/ip-port.txt"
 
 THREADS = 100
 TIMEOUT = 5
