@@ -6,7 +6,11 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 
 # ===== 配置 =====
-INPUT_URL = "https://example.com/your_input.txt"
+INPUT_URLS = [
+    "https://example.com/your_input.txt",
+    "https://example.com/your_input2.txt",
+    "https://example.com/your_input3.txt"
+]
 
 THREADS = 100
 TIMEOUT = 5
@@ -70,12 +74,18 @@ def parse_line(line):
 
 
 def load_tasks():
-    r = requests.get(INPUT_URL, timeout=10)
-    lines = r.text.splitlines()
-
     tasks = []
-    for line in lines:
-        tasks.extend(parse_line(line))
+
+    for url in INPUT_URLS:
+        try:
+            r = requests.get(url, timeout=10)
+            lines = r.text.splitlines()
+
+            for line in lines:
+                tasks.extend(parse_line(line))
+
+        except Exception as e:
+            print(f"[错误] 读取失败: {url} -> {e}")
 
     return tasks
 
