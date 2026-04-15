@@ -37,8 +37,7 @@ def parse_line(line):
     if not line:
         return []
 
-    # ===== 兼容中转输出格式 =====
-    # proto:ip:port | ...
+    # 兼容中转格式
     if "|" in line:
         left = line.split("|")[0].strip()
         if left.count(":") == 2:
@@ -48,7 +47,7 @@ def parse_line(line):
             except:
                 return []
 
-    # ===== 指定协议 =====
+    # 指定协议
     if line.startswith("http:") or line.startswith("https:"):
         try:
             proto, ip, port = line.split(":")
@@ -56,7 +55,7 @@ def parse_line(line):
         except:
             return []
 
-    # ===== IP:PORT → 双测 =====
+    # 无协议 → 双测
     if ":" in line:
         try:
             ip, port = line.split(":")[:2]
@@ -81,7 +80,7 @@ def load_tasks():
     return tasks
 
 
-# ================== IP 查询 ==================
+# ================== IP 查询（只给中转用） ==================
 
 def query_ip_info(ip):
     with ipinfo_lock:
@@ -116,9 +115,8 @@ def record_middle(proto, ip, port, returned_ip):
     exit_info = query_ip_info(returned_ip)
 
     time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    status = "OK" if returned_ip else "FAIL"
+    status = "OK"
 
-    # ⚠️ 这个格式就是“可复检输入格式”
     line = f"{proto}:{ip}:{port} | {entry_info} | {ip} | {returned_ip} | {exit_info} | {status} | {time_now}\n"
 
     with lock:
@@ -165,15 +163,22 @@ def check(task):
 
             with lock:
                 ok += 1
-                if proto == "https":
-                    with open(HTTPS_FILE, "a") as f:
-                        f.write(f"{ip}:{port}\n")
-                else:
-                    with open(HTTP_FILE, "a") as f:
-                        f.write(f"{ip}:{port}\n")
 
+            # ===== 中转 =====
             if returned_ip != ip:
                 record_middle(proto, ip, port, returned_ip)
+
+            # ===== 直连 =====
+            else:
+                with lock:
+                    if proto == "https":
+                        with open(HTTPS_FILE, "a") as f:
+                            f.write(f"{ip}:{port}\n")
+                    else:
+                        with open(HTTP_FILE, "a") as f:
+                            f.write(f"{ip}:{port}\n")
+
+                print(f"[直连] {proto}:{ip}:{port}")
 
     except:
         pass
