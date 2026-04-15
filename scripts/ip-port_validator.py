@@ -5,17 +5,17 @@ import re
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 
-# 支持IP:PORT格式，只检测noTLS
 # ===== 配置 =====
-INPUT_URL = "https://raw.githubusercontent.com/femboyenjoy/free-vless-VPN/refs/heads/main/nodes/cfcn/raw/ip-port.txt"
+INPUT_URL = "https://example.com/your_input.txt"
 
 THREADS = 100
 TIMEOUT = 5
 
 IP_API = "https://btapi.ipip.net/v2/trace"
-IP_TOKEN = "068f269ea236dc57215574f3542c8161e27fbf70"
+IP_TOKEN = "你的token"
 
 HTTP_FILE = "http_proxy.txt"
+HTTPS_FILE = "https_proxy.txt"
 MIDDLE_FILE = "middle_proxy.txt"
 
 seen = set()
@@ -24,30 +24,59 @@ lock = threading.Lock()
 ipinfo_cache = {}
 ipinfo_lock = threading.Lock()
 
-total = checked = ok = middle = 0
+total = 0
+checked = 0
+ok = 0
+middle = 0
 
 
-# ================== 读取远程 ==================
+# ================== 解析输入 ==================
+
+def parse_line(line):
+    line = line.strip()
+    if not line:
+        return []
+
+    # ===== 兼容中转输出格式 =====
+    # proto:ip:port | ...
+    if "|" in line:
+        left = line.split("|")[0].strip()
+        if left.count(":") == 2:
+            try:
+                proto, ip, port = left.split(":")
+                return [(proto, ip, port)]
+            except:
+                return []
+
+    # ===== 指定协议 =====
+    if line.startswith("http:") or line.startswith("https:"):
+        try:
+            proto, ip, port = line.split(":")
+            return [(proto, ip, port)]
+        except:
+            return []
+
+    # ===== IP:PORT → 双测 =====
+    if ":" in line:
+        try:
+            ip, port = line.split(":")[:2]
+            return [
+                ("http", ip, port),
+                ("https", ip, port)
+            ]
+        except:
+            return []
+
+    return []
+
 
 def load_tasks():
     r = requests.get(INPUT_URL, timeout=10)
     lines = r.text.splitlines()
 
     tasks = []
-
     for line in lines:
-        line = line.strip()
-        if not line:
-            continue
-
-        if ":" not in line:
-            continue
-
-        try:
-            ip, port = line.split(":")[:2]
-            tasks.append((ip, port))
-        except:
-            continue
+        tasks.extend(parse_line(line))
 
     return tasks
 
@@ -78,47 +107,55 @@ def query_ip_info(ip):
     return result
 
 
-# ================== 中转记录（核心输出） ==================
+# ================== 中转记录 ==================
 
-def async_query_middle(ip, port, returned_ip):
+def record_middle(proto, ip, port, returned_ip):
     global middle
 
     entry_info = query_ip_info(ip)
     exit_info = query_ip_info(returned_ip)
 
     time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
     status = "OK" if returned_ip else "FAIL"
 
-    line = f"{ip}:{port} | {entry_info} | {ip} | {returned_ip} | {exit_info} | {status} | {time_now}\n"
+    # ⚠️ 这个格式就是“可复检输入格式”
+    line = f"{proto}:{ip}:{port} | {entry_info} | {ip} | {returned_ip} | {exit_info} | {status} | {time_now}\n"
 
     with lock:
         middle += 1
         with open(MIDDLE_FILE, "a", encoding="utf-8") as f:
             f.write(line)
 
-        print(f"[中转] {ip}:{port} -> {returned_ip}")
+        print(f"[中转] {proto}:{ip}:{port} -> {returned_ip}")
 
 
-# ================== noTLS 检测 ==================
+# ================== 检测 ==================
 
 def check(task):
     global checked, ok
 
-    ip, port = task
-    key = f"{ip}:{port}"
+    proto, ip, port = task
+    key = f"{proto}:{ip}:{port}"
 
     with lock:
         if key in seen:
             return
         seen.add(key)
 
-    cmd = [
-        "curl", "-s",
-        "--max-time", str(TIMEOUT),
-        "--resolve", f"www.visa.cn:{port}:{ip}",
-        f"http://www.visa.cn:{port}/cdn-cgi/trace"
-    ]
+    if proto == "https":
+        cmd = [
+            "curl", "-s",
+            "--max-time", str(TIMEOUT),
+            "--resolve", f"www.visa.cn:{port}:{ip}",
+            f"https://www.visa.cn:{port}/cdn-cgi/trace"
+        ]
+    else:
+        cmd = [
+            "curl", "-s",
+            "--max-time", str(TIMEOUT),
+            "--resolve", f"www.visa.cn:{port}:{ip}",
+            f"http://www.visa.cn:{port}/cdn-cgi/trace"
+        ]
 
     try:
         result = subprocess.check_output(cmd).decode()
@@ -128,11 +165,15 @@ def check(task):
 
             with lock:
                 ok += 1
-                with open(HTTP_FILE, "a", encoding="utf-8") as f:
-                    f.write(f"{ip}:{port}\n")
+                if proto == "https":
+                    with open(HTTPS_FILE, "a") as f:
+                        f.write(f"{ip}:{port}\n")
+                else:
+                    with open(HTTP_FILE, "a") as f:
+                        f.write(f"{ip}:{port}\n")
 
             if returned_ip != ip:
-                async_query_middle(ip, port, returned_ip)
+                record_middle(proto, ip, port, returned_ip)
 
     except:
         pass
@@ -152,6 +193,7 @@ def main():
     total = len(tasks)
 
     open(HTTP_FILE, "w").close()
+    open(HTTPS_FILE, "w").close()
     open(MIDDLE_FILE, "w", encoding="utf-8").close()
 
     with ThreadPoolExecutor(max_workers=THREADS) as pool:
