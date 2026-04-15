@@ -88,8 +88,15 @@ def query_ip_info(ip):
             return ipinfo_cache[ip]
 
     try:
-        headers = {"token": IP_TOKEN}
-        r = requests.get(IP_API, params={"ip": ip}, headers=headers, timeout=5)
+        url = f"https://btapi.ipip.net/v2/trace?ip={ip}"
+
+        headers = {
+            "token": IP_TOKEN,
+            "Accept": "*/*",
+            "User-Agent": "Best NetTools/iOS V1.53"
+        }
+
+        r = requests.get(url, headers=headers, timeout=5)
         d = r.json()
 
         area = d.get("area", "").split("\t")[:5]
@@ -97,6 +104,7 @@ def query_ip_info(ip):
         isp = d.get("isp_domain", "")
 
         result = f"{area} {isp}".strip()
+
     except:
         result = "查询失败"
 
