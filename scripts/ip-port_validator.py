@@ -7,15 +7,15 @@ from datetime import datetime
 
 # ===== 配置 =====
 INPUT_URLS = [
-    "https://example.com/your_input.txt",
-    "https://example.com/your_input2.txt",
-    "https://example.com/your_input3.txt"
+    "https://raw.githubusercontent.com/femboyenjoy/free-vless-VPN/refs/heads/main/nodes/cfcn/raw/ip-port.txt",
+    "https://raw.githubusercontent.com/femboyenjoy/free-vless-VPN/refs/heads/main/nodes/cfcn/middle_proxy.txt",
+    #"https://example.com/your_input3.txt"
 ]
 
 THREADS = 100
 TIMEOUT = 5
 
-IP_API = "https://btapi.ipip.net/v2/trace"
+IP_API = "https://btapi.ipip.net/v2/trace" # 兼容备用（实际使用URL拼接）
 IP_TOKEN = "068f269ea236dc57215574f3542c8161e27fbf70"  # 兼容备用（实际使用URL拼接）
 
 HTTP_FILE = "http_proxy.txt"
