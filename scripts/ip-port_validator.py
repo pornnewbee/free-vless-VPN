@@ -12,7 +12,7 @@ THREADS = 100
 TIMEOUT = 5
 
 IP_API = "https://btapi.ipip.net/v2/trace"
-IP_TOKEN = "068f269ea236dc57215574f3542c8161e27fbf70"
+IP_TOKEN = "068f269ea236dc57215574f3542c8161e27fbf70"  # 兼容备用（实际使用URL拼接）
 
 HTTP_FILE = "http_proxy.txt"
 HTTPS_FILE = "https_proxy.txt"
