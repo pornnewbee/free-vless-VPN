@@ -1,9 +1,13 @@
 name: Deduplicate Raw CF IP Port
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'nodes/cfcn/raw/ip-port.txt'
+
+permissions:
+  contents: write
 
 jobs:
   dedupe:
