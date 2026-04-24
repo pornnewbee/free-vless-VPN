@@ -1,0 +1,42 @@
+name: Deduplicate Raw CF IP Port
+
+on:
+  push:
+    paths:
+      - 'nodes/cfcn/raw/ip-port.txt'
+
+jobs:
+  dedupe:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deduplicate file
+        run: |
+          FILE="nodes/cfcn/raw/ip-port.txt"
+
+          if [ ! -f "$FILE" ]; then
+            echo "File not found"
+            exit 1
+          fi
+
+          # 去重（严格按整行）
+          awk '!seen[$0]++' "$FILE" > tmp.txt
+
+          mv tmp.txt "$FILE"
+
+      - name: Commit & Push if changed
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+          git add nodes/cfcn/raw/ip-port.txt
+
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Auto dedupe ip-port.txt"
+            git push
+          fi
