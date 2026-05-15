@@ -9,7 +9,7 @@ from datetime import datetime
 INPUT_URLS = [
     "https://raw.githubusercontent.com/femboyenjoy/free-vless-VPN/refs/heads/main/nodes/cfcn/raw/ip-port.txt",
     "https://raw.githubusercontent.com/femboyenjoy/free-vless-VPN/refs/heads/main/nodes/cfcn/middle_proxy.txt",
-    #"https://example.com/your_input3.txt"
+    "https://github.com/pornnewbee/free-vless-VPN/raw/refs/heads/main/nodes/cfcn/raw/cfraw.txt",
 ]
 
 THREADS = 100
