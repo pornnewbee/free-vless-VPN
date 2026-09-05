@@ -1,96 +1,211 @@
-mixed-port: 7890
+port: 7890
+socks-port: 7891
 allow-lan: true
 mode: Rule
 log-level: info
 external-controller: :9090
+dns:
+  enable: true
+  nameserver:
+    - 119.29.29.29
+    - 223.5.5.5
+  fallback:
+    - 8.8.8.8
+    - 8.8.4.4
+    - tls://1.0.0.1:853
+    - tls://dns.google:853
 proxies:
-  - {name: 223.85.21.55 TLS, server: 223.85.21.55, port: 8443, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: true, skip-cert-verify: true, servername: fuckingxijinping.alt-00e.workers.dev, network: ws, ws-opts: {path: /, headers: {Host: fuckingxijinping.alt-00e.workers.dev}}, tfo: false}
-  - {name: 223.85.21.73 TLS, server: 223.85.21.73, port: 8443, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: true, skip-cert-verify: true, servername: fuckingxijinping.alt-00e.workers.dev, network: ws, ws-opts: {path: /, headers: {Host: fuckingxijinping.alt-00e.workers.dev}}, tfo: false}
-  - {name: 218.80.64.80 TLS, server: 218.80.64.80, port: 28017, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: true, skip-cert-verify: true, servername: fuckingxijinping.alt-00e.workers.dev, network: ws, ws-opts: {path: /, headers: {Host: fuckingxijinping.alt-00e.workers.dev}}, tfo: false}
-  - {name: 116.62.19.209, server: 116.62.19.209, port: 8880, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, skip-cert-verify: true, servername: fuckingxijinping.alt-00e.workers.dev, network: ws, ws-opts: {path: /, headers: {Host: fuckingxijinping.alt-00e.workers.dev}}, tfo: false}
-  - {name: 116.62.19.209 2, server: 116.62.19.209, port: 2052, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, skip-cert-verify: true, servername: fuckingxijinping.alt-00e.workers.dev, network: ws, ws-opts: {path: /, headers: {Host: fuckingxijinping.alt-00e.workers.dev}}, tfo: false}
-  - {name: 47.97.96.18, server: 47.97.96.18, port: 2082, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, skip-cert-verify: true, servername: fuckingxijinping.alt-00e.workers.dev, network: ws, ws-opts: {path: /, headers: {Host: fuckingxijinping.alt-00e.workers.dev}}, tfo: false}
+  - {name: 自动优选订阅可公开分享, server: cf.090227.xyz, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: Cloudflare DNS, server: cloudflare-dns.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: Temu, server: www.temu.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: Cloudflare Docs, server: docs.cloudflare.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: itarmy.com.ua, server: itarmy.com.ua, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: Shopify, server: www.shopify.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: FBI, server: www.fbi.gov, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: WTO, server: www.wto.org, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: Epicgames, server: www.epicgames.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: Cloudflare Support, server: support.cloudflare.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: Cloudflare blog, server: blog.cloudflare.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: Cloudflare ns, server: ns.cloudflare.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: Cloudflare Developers, server: developers.cloudflare.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: openai, server: openai.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: whatismyip, server: www.whatismyip.net, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: npmjs, server: www.npmjs.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: Cdnjs, server: cdnjs.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: Udemy, server: www.udemy.com, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
+  - {name: Csgo, server: www.csgo.net, port: 2095, client-fingerprint: randomized, type: vless, uuid: 86c50e3a-5b87-49dd-bd20-03c7f2735e40, tls: false, tfo: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: fuckingfangbinxing.asshole.eu.cc}}}
 proxy-groups:
   - name: 🚀 节点选择
     type: select
     proxies:
       - ♻️ 自动选择
       - DIRECT
-      - 223.85.21.55 TLS
-      - 223.85.21.73 TLS
-      - 218.80.64.80 TLS
-      - 116.62.19.209
-      - 116.62.19.209 2
-      - 47.97.96.18
+      - 自动优选订阅可公开分享
+      - Cloudflare DNS
+      - Temu
+      - Cloudflare Docs
+      - itarmy.com.ua
+      - Shopify
+      - FBI
+      - WTO
+      - Epicgames
+      - Cloudflare Support
+      - Cloudflare blog
+      - Cloudflare ns
+      - Cloudflare Developers
+      - openai
+      - whatismyip
+      - npmjs
+      - Cdnjs
+      - Udemy
+      - Csgo
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
     proxies:
-      - 223.85.21.55 TLS
-      - 223.85.21.73 TLS
-      - 218.80.64.80 TLS
-      - 116.62.19.209
-      - 116.62.19.209 2
-      - 47.97.96.18
+      - 自动优选订阅可公开分享
+      - Cloudflare DNS
+      - Temu
+      - Cloudflare Docs
+      - itarmy.com.ua
+      - Shopify
+      - FBI
+      - WTO
+      - Epicgames
+      - Cloudflare Support
+      - Cloudflare blog
+      - Cloudflare ns
+      - Cloudflare Developers
+      - openai
+      - whatismyip
+      - npmjs
+      - Cdnjs
+      - Udemy
+      - Csgo
   - name: 🌍 国外媒体
     type: select
     proxies:
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🎯 全球直连
-      - 223.85.21.55 TLS
-      - 223.85.21.73 TLS
-      - 218.80.64.80 TLS
-      - 116.62.19.209
-      - 116.62.19.209 2
-      - 47.97.96.18
+      - 自动优选订阅可公开分享
+      - Cloudflare DNS
+      - Temu
+      - Cloudflare Docs
+      - itarmy.com.ua
+      - Shopify
+      - FBI
+      - WTO
+      - Epicgames
+      - Cloudflare Support
+      - Cloudflare blog
+      - Cloudflare ns
+      - Cloudflare Developers
+      - openai
+      - whatismyip
+      - npmjs
+      - Cdnjs
+      - Udemy
+      - Csgo
   - name: 📲 电报信息
     type: select
     proxies:
       - 🚀 节点选择
       - 🎯 全球直连
-      - 223.85.21.55 TLS
-      - 223.85.21.73 TLS
-      - 218.80.64.80 TLS
-      - 116.62.19.209
-      - 116.62.19.209 2
-      - 47.97.96.18
+      - 自动优选订阅可公开分享
+      - Cloudflare DNS
+      - Temu
+      - Cloudflare Docs
+      - itarmy.com.ua
+      - Shopify
+      - FBI
+      - WTO
+      - Epicgames
+      - Cloudflare Support
+      - Cloudflare blog
+      - Cloudflare ns
+      - Cloudflare Developers
+      - openai
+      - whatismyip
+      - npmjs
+      - Cdnjs
+      - Udemy
+      - Csgo
   - name: Ⓜ️ 微软服务
     type: select
     proxies:
       - 🎯 全球直连
       - 🚀 节点选择
-      - 223.85.21.55 TLS
-      - 223.85.21.73 TLS
-      - 218.80.64.80 TLS
-      - 116.62.19.209
-      - 116.62.19.209 2
-      - 47.97.96.18
+      - 自动优选订阅可公开分享
+      - Cloudflare DNS
+      - Temu
+      - Cloudflare Docs
+      - itarmy.com.ua
+      - Shopify
+      - FBI
+      - WTO
+      - Epicgames
+      - Cloudflare Support
+      - Cloudflare blog
+      - Cloudflare ns
+      - Cloudflare Developers
+      - openai
+      - whatismyip
+      - npmjs
+      - Cdnjs
+      - Udemy
+      - Csgo
   - name: 🍎 苹果服务
     type: select
     proxies:
       - 🚀 节点选择
       - 🎯 全球直连
-      - 223.85.21.55 TLS
-      - 223.85.21.73 TLS
-      - 218.80.64.80 TLS
-      - 116.62.19.209
-      - 116.62.19.209 2
-      - 47.97.96.18
+      - 自动优选订阅可公开分享
+      - Cloudflare DNS
+      - Temu
+      - Cloudflare Docs
+      - itarmy.com.ua
+      - Shopify
+      - FBI
+      - WTO
+      - Epicgames
+      - Cloudflare Support
+      - Cloudflare blog
+      - Cloudflare ns
+      - Cloudflare Developers
+      - openai
+      - whatismyip
+      - npmjs
+      - Cdnjs
+      - Udemy
+      - Csgo
   - name: 📢 谷歌FCM
     type: select
     proxies:
       - 🚀 节点选择
       - 🎯 全球直连
       - ♻️ 自动选择
-      - 223.85.21.55 TLS
-      - 223.85.21.73 TLS
-      - 218.80.64.80 TLS
-      - 116.62.19.209
-      - 116.62.19.209 2
-      - 47.97.96.18
+      - 自动优选订阅可公开分享
+      - Cloudflare DNS
+      - Temu
+      - Cloudflare Docs
+      - itarmy.com.ua
+      - Shopify
+      - FBI
+      - WTO
+      - Epicgames
+      - Cloudflare Support
+      - Cloudflare blog
+      - Cloudflare ns
+      - Cloudflare Developers
+      - openai
+      - whatismyip
+      - npmjs
+      - Cdnjs
+      - Udemy
+      - Csgo
   - name: 🎯 全球直连
     type: select
     proxies:
@@ -113,17 +228,29 @@ proxy-groups:
       - 🚀 节点选择
       - 🎯 全球直连
       - ♻️ 自动选择
-      - 223.85.21.55 TLS
-      - 223.85.21.73 TLS
-      - 218.80.64.80 TLS
-      - 116.62.19.209
-      - 116.62.19.209 2
-      - 47.97.96.18
+      - 自动优选订阅可公开分享
+      - Cloudflare DNS
+      - Temu
+      - Cloudflare Docs
+      - itarmy.com.ua
+      - Shopify
+      - FBI
+      - WTO
+      - Epicgames
+      - Cloudflare Support
+      - Cloudflare blog
+      - Cloudflare ns
+      - Cloudflare Developers
+      - openai
+      - whatismyip
+      - npmjs
+      - Cdnjs
+      - Udemy
+      - Csgo
 rules:
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
   - DOMAIN-SUFFIX,ip6-localhost,🎯 全球直连
   - DOMAIN-SUFFIX,ip6-loopback,🎯 全球直连
-  - DOMAIN-SUFFIX,internal,🎯 全球直连
   - DOMAIN-SUFFIX,lan,🎯 全球直连
   - DOMAIN-SUFFIX,local,🎯 全球直连
   - DOMAIN-SUFFIX,localhost,🎯 全球直连
@@ -131,7 +258,6 @@ rules:
   - IP-CIDR,10.0.0.0/8,🎯 全球直连,no-resolve
   - IP-CIDR,100.64.0.0/10,🎯 全球直连,no-resolve
   - IP-CIDR,127.0.0.0/8,🎯 全球直连,no-resolve
-  - IP-CIDR,169.254.0.0/16,🎯 全球直连,no-resolve
   - IP-CIDR,172.16.0.0/12,🎯 全球直连,no-resolve
   - IP-CIDR,192.168.0.0/16,🎯 全球直连,no-resolve
   - IP-CIDR,198.18.0.0/16,🎯 全球直连,no-resolve
@@ -505,6 +631,7 @@ rules:
   - DOMAIN-SUFFIX,scupio.com,🛑 全球拦截
   - DOMAIN-SUFFIX,shuiguo.com,🛑 全球拦截
   - DOMAIN-SUFFIX,shuzilm.cn,🛑 全球拦截
+  - DOMAIN-SUFFIX,similarweb.com,🛑 全球拦截
   - DOMAIN-SUFFIX,sitemeter.com,🛑 全球拦截
   - DOMAIN-SUFFIX,sitescout.com,🛑 全球拦截
   - DOMAIN-SUFFIX,sitetag.us,🛑 全球拦截
@@ -1356,7 +1483,9 @@ rules:
   - DOMAIN-SUFFIX,log.mix.sina.com.cn,🍃 应用净化
   - DOMAIN-SUFFIX,mobileads.dx.cn,🍃 应用净化
   - DOMAIN-SUFFIX,newspush.sinajs.cn,🍃 应用净化
+  - DOMAIN-SUFFIX,pay.mobile.sina.cn,🍃 应用净化
   - DOMAIN-SUFFIX,sax.mobile.sina.cn,🍃 应用净化
+  - DOMAIN-SUFFIX,sax.sina.com.cn,🍃 应用净化
   - DOMAIN-SUFFIX,saxd.sina.com.cn,🍃 应用净化
   - DOMAIN-SUFFIX,sdkapp.mobile.sina.cn,🍃 应用净化
   - DOMAIN-SUFFIX,sdkapp.uve.weibo.com,🍃 应用净化
@@ -1757,6 +1886,7 @@ rules:
   - DOMAIN-SUFFIX,dol.tianyaui.cn,🍃 应用净化
   - DOMAIN-SUFFIX,dw.xcar.com.cn,🍃 应用净化
   - DOMAIN-SUFFIX,e.nexac.com,🍃 应用净化
+  - DOMAIN-SUFFIX,eq.10jqka.com.cn,🍃 应用净化
   - DOMAIN-SUFFIX,exp.17wo.cn,🍃 应用净化
   - DOMAIN-SUFFIX,game.51yund.com,🍃 应用净化
   - DOMAIN-SUFFIX,ganjituiguang.ganji.com,🍃 应用净化
@@ -1773,6 +1903,7 @@ rules:
   - DOMAIN-SUFFIX,mobileads.msn.com,🍃 应用净化
   - DOMAIN-SUFFIX,n.cosbot.cn,🍃 应用净化
   - DOMAIN-SUFFIX,newton-api.ele.me,🍃 应用净化
+  - DOMAIN-SUFFIX,ozone.10jqka.com.cn,🍃 应用净化
   - DOMAIN-SUFFIX,pdl.gionee.com,🍃 应用净化
   - DOMAIN-SUFFIX,pica-juicy.picacomic.com,🍃 应用净化
   - DOMAIN-SUFFIX,pixel.wp.com,🍃 应用净化
@@ -1785,6 +1916,7 @@ rules:
   - DOMAIN-SUFFIX,res.gwifi.com.cn,🍃 应用净化
   - DOMAIN-SUFFIX,ssp.kssws.ks-cdn.com,🍃 应用净化
   - DOMAIN-SUFFIX,sta.ganji.com,🍃 应用净化
+  - DOMAIN-SUFFIX,stat.10jqka.com.cn,🍃 应用净化
   - DOMAIN-SUFFIX,stat.it168.com,🍃 应用净化
   - DOMAIN-SUFFIX,stats.chinaz.com,🍃 应用净化
   - DOMAIN-SUFFIX,stats.developingperspective.com,🍃 应用净化
@@ -1792,6 +1924,7 @@ rules:
   - DOMAIN-SUFFIX,tracker.yhd.com,🍃 应用净化
   - DOMAIN-SUFFIX,tralog.ganji.com,🍃 应用净化
   - DOMAIN-SUFFIX,up.qingdaonews.com,🍃 应用净化
+  - DOMAIN-SUFFIX,vaserviece.10jqka.com.cn,🍃 应用净化
   - DOMAIN,alt1-mtalk.google.com,📢 谷歌FCM
   - DOMAIN,alt2-mtalk.google.com,📢 谷歌FCM
   - DOMAIN,alt3-mtalk.google.com,📢 谷歌FCM
@@ -2008,7 +2141,6 @@ rules:
   - DOMAIN,copilot-proxy.githubusercontent.com,🌍 国外媒体
   - DOMAIN,gemini.google.com,🌍 国外媒体
   - DOMAIN,generativelanguage.googleapis.com,🌍 国外媒体
-  - DOMAIN,notebooklm.google.com,🌍 国外媒体
   - DOMAIN,sydney.bing.com,🌍 国外媒体
   - DOMAIN-SUFFIX,ai.azure.com,🌍 国外媒体
   - DOMAIN-SUFFIX,anthropic.com,🌍 国外媒体
@@ -2016,7 +2148,6 @@ rules:
   - DOMAIN-SUFFIX,bard.google.com,🌍 国外媒体
   - DOMAIN-SUFFIX,chatgpt.com,🌍 国外媒体
   - DOMAIN-SUFFIX,claude.ai,🌍 国外媒体
-  - DOMAIN-SUFFIX,claude.com,🌍 国外媒体
   - DOMAIN-SUFFIX,claudeusercontent.com,🌍 国外媒体
   - DOMAIN-SUFFIX,client-api.arkoselabs.com,🌍 国外媒体
   - DOMAIN-SUFFIX,copilot.cloud.microsoft,🌍 国外媒体
@@ -2031,7 +2162,6 @@ rules:
   - DOMAIN-SUFFIX,identrust.com,🌍 国外媒体
   - DOMAIN-SUFFIX,intercom.io,🌍 国外媒体
   - DOMAIN-SUFFIX,intercomcdn.com,🌍 国外媒体
-  - DOMAIN-SUFFIX,jetbrains.ai,🌍 国外媒体
   - DOMAIN-SUFFIX,makersuite.google.com,🌍 国外媒体
   - DOMAIN-SUFFIX,meta.ai,🌍 国外媒体
   - DOMAIN-SUFFIX,mistral.ai,🌍 国外媒体
@@ -2041,7 +2171,6 @@ rules:
   - DOMAIN-SUFFIX,openaiapi-site.azureedge.net,🌍 国外媒体
   - DOMAIN-SUFFIX,perplexity.ai,🌍 国外媒体
   - DOMAIN-SUFFIX,sora.com,🌍 国外媒体
-  - DOMAIN-SUFFIX,x.ai,🌍 国外媒体
   - DOMAIN-KEYWORD,abematv.akamaized.net,🌍 国外媒体
   - DOMAIN-SUFFIX,abema.io,🌍 国外媒体
   - DOMAIN-SUFFIX,abema.tv,🌍 国外媒体
@@ -2604,7 +2733,6 @@ rules:
   - DOMAIN-SUFFIX,1e100.net,🚀 节点选择
   - DOMAIN-SUFFIX,2mdn.net,🚀 节点选择
   - DOMAIN-SUFFIX,app-measurement.net,🚀 节点选择
-  - DOMAIN-SUFFIX,c.gle,🚀 节点选择
   - DOMAIN-SUFFIX,g.co,🚀 节点选择
   - DOMAIN-SUFFIX,ggpht.com,🚀 节点选择
   - DOMAIN-SUFFIX,goo.gl,🚀 节点选择
@@ -2684,7 +2812,6 @@ rules:
   - DOMAIN-SUFFIX,spoprod-a.akamaihd.net,🚀 节点选择
   - DOMAIN-SUFFIX,storage.live.com,🚀 节点选择
   - DOMAIN-SUFFIX,storage.msn.com,🚀 节点选择
-  - DOMAIN-SUFFIX,microsoftpersonalcontent.com,🚀 节点选择
   - DOMAIN-KEYWORD,porn,🚀 节点选择
   - DOMAIN-SUFFIX,8teenxxx.com,🚀 节点选择
   - DOMAIN-SUFFIX,ahcdn.com,🚀 节点选择
@@ -2848,7 +2975,6 @@ rules:
   - DOMAIN-SUFFIX,aliapp.org,🎯 全球直连
   - DOMAIN-SUFFIX,alibaba.com,🎯 全球直连
   - DOMAIN-SUFFIX,alibabacloud.com,🎯 全球直连
-  - DOMAIN-SUFFIX,alibabachengdun.com,🎯 全球直连
   - DOMAIN-SUFFIX,alibabausercontent.com,🎯 全球直连
   - DOMAIN-SUFFIX,alicdn.com,🎯 全球直连
   - DOMAIN-SUFFIX,alicloudccp.com,🎯 全球直连
@@ -2867,7 +2993,6 @@ rules:
   - DOMAIN-SUFFIX,autonavi.com,🎯 全球直连
   - DOMAIN-SUFFIX,dingtalk.com,🎯 全球直连
   - DOMAIN-SUFFIX,ele.me,🎯 全球直连
-  - DOMAIN-SUFFIX,elemecdn.com,🎯 全球直连
   - DOMAIN-SUFFIX,hichina.com,🎯 全球直连
   - DOMAIN-SUFFIX,mmstat.com,🎯 全球直连
   - DOMAIN-SUFFIX,mxhichina.com,🎯 全球直连
@@ -2875,7 +3000,6 @@ rules:
   - DOMAIN-SUFFIX,taobao.com,🎯 全球直连
   - DOMAIN-SUFFIX,taobaocdn.com,🎯 全球直连
   - DOMAIN-SUFFIX,tbcache.com,🎯 全球直连
-  - DOMAIN-SUFFIX,tbcdn.cn,🎯 全球直连
   - DOMAIN-SUFFIX,tbcdn.com,🎯 全球直连
   - DOMAIN-SUFFIX,tmall.com,🎯 全球直连
   - DOMAIN-SUFFIX,tmall.hk,🎯 全球直连
@@ -3205,7 +3329,6 @@ rules:
   - DOMAIN-SUFFIX,air-matters.io,🎯 全球直连
   - DOMAIN-SUFFIX,aixifan.com,🎯 全球直连
   - DOMAIN-SUFFIX,algocasts.io,🎯 全球直连
-  - DOMAIN-SUFFIX,asklink.com,🎯 全球直连
   - DOMAIN-SUFFIX,babytree.com,🎯 全球直连
   - DOMAIN-SUFFIX,babytreeimg.com,🎯 全球直连
   - DOMAIN-SUFFIX,baicizhan.com,🎯 全球直连
@@ -3639,3 +3762,11 @@ rules:
   - IP-CIDR,101.199.196.0/22,🎯 全球直连,no-resolve
   - GEOIP,CN,🎯 全球直连
   - MATCH,🐟 漏网之鱼
+
+
+
+
+
+
+
+
