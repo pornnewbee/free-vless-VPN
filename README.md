@@ -3,8 +3,7 @@
 > 📌 订阅链接 Clash（长期有效）
 
 ```text
-https://sub.pusytroller.gq/?url=freenodes
-https://sub.pusytroller.cf/?url=freenodes
+https://uwu.femboy67.dpdns.org/?url=freenodes
 ```
 V2ray/v2RayTun format 
 ```text
