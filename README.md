@@ -3,7 +3,7 @@
 > 📌 订阅链接 Clash（长期有效）
 
 ```text
-https://uwu.femboy67.dpdns.org/?url=freenodes
+https://sub.femboy.us.ci/?url=freenodes
 ```
 V2ray/v2RayTun format 
 ```text
