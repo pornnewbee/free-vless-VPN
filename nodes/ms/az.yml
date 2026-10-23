@@ -56,7 +56,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: Cloudflare DNS
   server: cloudflare-dns.com
   port: 2095
@@ -98,7 +98,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: Temu
   server: www.temu.com
   port: 2095
@@ -140,7 +140,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: Cloudflare Docs
   server: docs.cloudflare.com
   port: 2095
@@ -182,7 +182,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: itarmy.com.ua
   server: itarmy.com.ua
   port: 2095
@@ -224,7 +224,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: Shopify
   server: www.shopify.com
   port: 2095
@@ -266,7 +266,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: FBI
   server: www.fbi.gov
   port: 2095
@@ -308,7 +308,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: WTO
   server: www.wto.org
   port: 2095
@@ -350,7 +350,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: Epicgames
   server: www.epicgames.com
   port: 2095
@@ -392,7 +392,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: Cloudflare Support
   server: support.cloudflare.com
   port: 2095
@@ -434,7 +434,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: Cloudflare blog
   server: blog.cloudflare.com
   port: 2095
@@ -476,7 +476,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: Cloudflare ns
   server: ns.cloudflare.com
   port: 2095
@@ -518,7 +518,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: Cloudflare Developers
   server: developers.cloudflare.com
   port: 2095
@@ -560,7 +560,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: openai
   server: openai.com
   port: 2095
@@ -602,7 +602,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: whatismyip
   server: www.whatismyip.net
   port: 2095
@@ -644,7 +644,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: npmjs
   server: www.npmjs.com
   port: 2095
@@ -686,7 +686,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: Cdnjs
   server: cdnjs.com
   port: 2095
@@ -728,7 +728,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: Udemy
   server: www.udemy.com
   port: 2095
@@ -770,7 +770,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 - name: Csgo
   server: www.csgo.net
   port: 2095
@@ -812,7 +812,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: 4a2f-8c1b-3d9e.trycloudflare.com
+      Host: sheer-individual-westminster-atomic.trycloudflare.com
 proxy-groups:
 - name: 🚀 节点选择
   type: select
