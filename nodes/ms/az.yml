@@ -42,7 +42,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: 自动优选-2
   server: cf.090227.xyz
   port: 2095
@@ -84,7 +84,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: Cloudflare DNS-2
   server: cloudflare-dns.com
   port: 2095
@@ -126,7 +126,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: Temu-2
   server: www.temu.com
   port: 2095
@@ -168,7 +168,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: Cloudflare Docs-2
   server: docs.cloudflare.com
   port: 2095
@@ -210,7 +210,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: itarmy.com.ua-2
   server: itarmy.com.ua
   port: 2095
@@ -252,7 +252,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: Shopify-2
   server: www.shopify.com
   port: 2095
@@ -294,7 +294,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: FBI-2
   server: www.fbi.gov
   port: 2095
@@ -336,7 +336,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: WTO-2
   server: www.wto.org
   port: 2095
@@ -378,7 +378,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: Epicgames-2
   server: www.epicgames.com
   port: 2095
@@ -420,7 +420,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: Cloudflare Support-2
   server: support.cloudflare.com
   port: 2095
@@ -462,7 +462,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: Cloudflare blog-2
   server: blog.cloudflare.com
   port: 2095
@@ -504,7 +504,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: Cloudflare ns-2
   server: ns.cloudflare.com
   port: 2095
@@ -546,7 +546,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: Cloudflare Developers-2
   server: developers.cloudflare.com
   port: 2095
@@ -588,7 +588,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: openai-2
   server: openai.com
   port: 2095
@@ -630,7 +630,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: whatismyip-2
   server: www.whatismyip.net
   port: 2095
@@ -672,7 +672,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: npmjs-2
   server: www.npmjs.com
   port: 2095
@@ -714,7 +714,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: Cdnjs-2
   server: cdnjs.com
   port: 2095
@@ -756,7 +756,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: Udemy-2
   server: www.udemy.com
   port: 2095
@@ -798,7 +798,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: million-segments-astronomy-oak.trycloudflare.com
+      Host: win-wall-brian-hardcover.trycloudflare.com
 - name: Csgo-2
   server: www.csgo.net
   port: 2095
