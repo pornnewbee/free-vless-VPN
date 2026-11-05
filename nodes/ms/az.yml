@@ -28,7 +28,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: 自动优选-1
   server: cf.090227.xyz
   port: 2095
@@ -70,7 +70,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: Cloudflare DNS-1
   server: cloudflare-dns.com
   port: 2095
@@ -112,7 +112,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: Temu-1
   server: www.temu.com
   port: 2095
@@ -154,7 +154,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: Cloudflare Docs-1
   server: docs.cloudflare.com
   port: 2095
@@ -196,7 +196,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: itarmy.com.ua-1
   server: itarmy.com.ua
   port: 2095
@@ -238,7 +238,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: Shopify-1
   server: www.shopify.com
   port: 2095
@@ -280,7 +280,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: FBI-1
   server: www.fbi.gov
   port: 2095
@@ -322,7 +322,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: WTO-1
   server: www.wto.org
   port: 2095
@@ -364,7 +364,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: Epicgames-1
   server: www.epicgames.com
   port: 2095
@@ -406,7 +406,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: Cloudflare Support-1
   server: support.cloudflare.com
   port: 2095
@@ -448,7 +448,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: Cloudflare blog-1
   server: blog.cloudflare.com
   port: 2095
@@ -490,7 +490,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: Cloudflare ns-1
   server: ns.cloudflare.com
   port: 2095
@@ -532,7 +532,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: Cloudflare Developers-1
   server: developers.cloudflare.com
   port: 2095
@@ -574,7 +574,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: openai-1
   server: openai.com
   port: 2095
@@ -616,7 +616,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: whatismyip-1
   server: www.whatismyip.net
   port: 2095
@@ -658,7 +658,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: npmjs-1
   server: www.npmjs.com
   port: 2095
@@ -700,7 +700,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: Cdnjs-1
   server: cdnjs.com
   port: 2095
@@ -742,7 +742,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: Udemy-1
   server: www.udemy.com
   port: 2095
@@ -784,7 +784,7 @@ proxies:
   ws-opts:
     path: /
     headers:
-      Host: openapi-6.whatcanisay.us.ci
+      Host: openapi-7.whatcanisay.us.ci
 - name: Csgo-1
   server: www.csgo.net
   port: 2095
